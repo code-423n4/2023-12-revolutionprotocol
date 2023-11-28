@@ -1,32 +1,3 @@
-# ✨ So you want to run an audit
-
-This `README.md` contains a set of checklists for our audit collaboration.
-
-Your audit will use two repos: 
-- **an _audit_ repo** (this one), which is used for scoping your audit and for providing information to wardens
-- **a _findings_ repo**, where issues are submitted (shared with you after the audit) 
-
-Ultimately, when we launch the audit, this repo will be made public and will contain the smart contracts to be reviewed and all the information needed for audit participants. The findings repo will be made public after the audit report is published and your team has mitigated the identified issues.
-
-Some of the checklists in this doc are for **C4 (🐺)** and some of them are for **you as the audit sponsor (⭐️)**.
-
----
-
-# Audit setup
-
-## 🐺 C4: Set up repos
-- [ ] Create a new private repo named `YYYY-MM-sponsorname` using this repo as a template.
-- [ ] Rename this repo to reflect audit date (if applicable)
-- [ ] Rename auditt H1 below
-- [ ] Update pot sizes
-- [ ] Fill in start and end times in audit bullets below
-- [ ] Add link to submission form in audit details below
-- [ ] Add the information from the scoping form to the "Scoping Details" section at the bottom of this readme.
-- [ ] Add matching info to the Code4rena site
-- [ ] Add sponsor to this private repo with 'maintain' level access.
-- [ ] Send the sponsor contact the url for this repo to follow the instructions below and add contracts here. 
-- [ ] Delete this checklist.
-
 # Repo setup
 
 ## ⭐️ Sponsor: Add code to this repo
@@ -57,28 +28,27 @@ Some of the checklists in this doc are for **C4 (🐺)** and some of them are fo
 
 ---
 
-# Sponsorname audit details
-- Total Prize Pool: XXX XXX USDC (Notion: Total award pool)
-  - HM awards: XXX XXX USDC (Notion: HM (main) pool)
-  - Analysis awards: XXX XXX USDC (Notion: Analysis pool)
-  - QA awards: XXX XXX USDC (Notion: QA pool)
-  - Bot Race awards: XXX XXX USDC (Notion: Bot Race pool)
-  - Gas awards: XXX XXX USDC (Notion: Gas pool)
-  - Judge awards: XXX XXX USDC (Notion: Judge Fee)
-  - Lookout awards: XXX XXX USDC (Notion: Sum of Pre-sort fee + Pre-sort early bonus)
-  - Scout awards: $500 USDC (Notion: Scout fee - but usually $500 USDC)
-  - (this line can be removed if there is no mitigation) Mitigation Review: XXX XXX USDC (*Opportunity goes to top 3 certified wardens based on placement in this audit.*)
+# Collective audit details
+- Total Prize Pool: $36,500 USDC
+  - HM awards: $24,750 USDC
+  - Analysis awards: $1,500 USDC
+  - QA awards: $750 USDC
+  - Bot Race awards: $2,250 USDC
+  - Gas awards: $750 USDC
+  - Judge awards: $3,600 USDC
+  - Lookout awards: $2,400 USDC
+  - Scout awards: $500 USD
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/YYYY-MM-AuditName/submit)
+- Submit findings [using the C4 form](https://code4rena.com/2023-12-collective/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts TBD XXX XXX XX 20:00 UTC (ex. `Starts March 22, 2023 20:00 UTC`)
-- Ends TBD XXX XXX XX 20:00 UTC (ex. `Ends March 30, 2023 20:00 UTC`)
+- Starts December 4, 20:00 UTC
+- Ends December 14, 20:00 UTC
 
 ## Automated Findings / Publicly Known Issues
 
-The 4naly3er report can be found [here](https://github.com/code-423n4/YYYY-MM-contest-candidate/blob/main/4naly3er-report.md).
+The 4naly3er report can be found [here](https://github.com/code-423n4/2023-12-collective/blob/main/4naly3er-report.md).
 
-Automated findings output for the audit can be found [here](https://github.com/code-423n4/YYYY-MM-contest-candidate/blob/main/bot-report.md) within 24 hours of audit opening.
+Automated findings output for the audit can be found [here](https://github.com/code-423n4/2023-12-collectiveblob/main/bot-report.md) within 24 hours of audit opening.
 
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
 
@@ -139,21 +109,21 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 [ ⭐️ SPONSORS: please confirm/edit the information below. ]
 
 ```
-- If you have a public code repo, please share it here:  
-- How many contracts are in scope?:   
-- Total SLoC for these contracts?:  
-- How many external imports are there?:  
-- How many separate interfaces and struct definitions are there for the contracts within scope?:  
-- Does most of your code generally use composition or inheritance?:   
-- How many external calls?:   
-- What is the overall line coverage percentage provided by your tests?:
-- Is this an upgrade of an existing system?:
-- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): 
-- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:   
+- If you have a public code repo, please share it here: https://github.com/collectivexyz/revolution-protocol/tree/main/packages/revolution-contracts, https://github.com/collectivexyz/revolution-protocol/tree/main/packages/protocol-rewards 
+- How many contracts are in scope?: 11   
+- Total SLoC for these contracts?: 1000  
+- How many external imports are there?: 13  
+- How many separate interfaces and struct definitions are there for the contracts within scope?: 13  
+- Does most of your code generally use composition or inheritance?: Inheritance   
+- How many external calls?: 1   
+- What is the overall line coverage percentage provided by your tests?: 73
+- Is this an upgrade of an existing system?: True - We're upgrading Nouns DAO so that the auction item is a piece of community created media, voted on by the community. Additionally, we are issuing an ERC20 governance token to the creator and splitting the auction proceeds with the creator.
+- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): NFT, Uses L2, ERC-20 Tokeen
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?: False  
 - Please describe required context:   
-- Does it use an oracle?:  
-- Describe any novel or unique curve logic or mathematical models your code uses: 
-- Is this either a fork of or an alternate implementation of another project?:   
+- Does it use an oracle?: No
+- Describe any novel or unique curve logic or mathematical models your code uses: We use a continuous VRGDA function, built by Paradigm (https://www.paradigm.xyz/2022/08/vrgda). It enables a linear emission of ERC20 tokens over time. 
+- Is this either a fork of or an alternate implementation of another project?: True  
 - Does it use a side-chain?:
 - Describe any specific areas you would like addressed:
 ```
