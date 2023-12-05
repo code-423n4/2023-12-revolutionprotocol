@@ -65,6 +65,7 @@ Revolution seeks to make governance token ownership more accessible to creators 
 
 The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement.
 
+## overview
 In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. The top piece is auctioned off every day via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). 
 
 A portion of the auction proceeds is split with the creator of the art piece, and the rest is sent to the DAO treasury. The winner of the auction receives the ERC721 of the art piece, and the creator receives an amount of ERC20 gov tokens and Ether. Both the ERC721 and the ERC20 governance token have voting power to vote on art pieces in the **CultureIndex**. 
