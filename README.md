@@ -28,7 +28,7 @@
 
 ---
 
-# Revolution Protocol audit details
+# Collective audit details
 - Total Prize Pool: $36,500 USDC
   - HM awards: $24,750 USDC
   - Analysis awards: $1,500 USDC
@@ -46,9 +46,9 @@
 
 ## Automated Findings / Publicly Known Issues
 
-The 4naly3er report can be found [here](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/4naly3er-report.md).
+The 4naly3er report can be found [here](https://github.com/code-423n4/2023-12-collective/blob/main/4naly3er-report.md).
 
-Automated findings output for the audit can be found [here](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/bot-report.md) within 24 hours of audit opening.
+Automated findings output for the audit can be found [here](https://github.com/code-423n4/2023-12-collectiveblob/main/bot-report.md) within 24 hours of audit opening.
 
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
 
@@ -58,20 +58,45 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 # Overview
 ## the Revolution protocol ⌐◨-◨
 
-### intro
+## intro
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury. 
 
 Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
 
 The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement.
 
-In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. The top piece is auctioned off every day via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). A portion of the auction proceeds is split with the creator of the art piece in the form of governance and Ether, and the rest is sent to the DAO treasury. The winner of the auction receives the ERC721 of the art piece, and the creator receives an amount of governance tokens and Ether. Both the ERC721 and the governance token have voting power to vote on art pieces in the **CultureIndex**. 
+In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. The top piece is auctioned off every day via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). 
 
-### AuctionHouse creator payment
+A portion of the auction proceeds is split with the creator of the art piece, and the rest is sent to the DAO treasury. The winner of the auction receives the ERC721 of the art piece, and the creator receives an amount of ERC20 gov tokens and Ether. Both the ERC721 and the ERC20 governance token have voting power to vote on art pieces in the **CultureIndex**. 
+
+## relevant contracts
+
+### CultureIndex
+[**CultureIndex.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add to. Owners of a specific ERC721 or ERC20 can vote on any given art piece. The art piece vote ranking data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) a heap datastructure to enable O(1) lookups of the highest voted piece. 
+
+The contract has a function called **dropTopVotedPiece**, only callable by the owner, which pops (removes) the top voted item from the **MaxHeap** and returns it. 
+
+### VerbsToken
+**[VerbsToken.sol]**(https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) is a fork of the [NounsToken](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsToken.sol) contract. **VerbsToken** owns the **CultureIndex**. When calling **mint()** on the **VerbsToken**, the contract calls **dropTopVotedPiece** on a **CultureIndex** contract, and creates the ERC721 metadata based on the returned data from the CultureIndex. 
+
+### AuctionHouse
+**[VerbsAuctionHouse.sol]**(https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits proceeds of the auction (the amount paid by the winning bidder) with the creator of the art piece that was minted.
+
+#### Creator payment
 The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator of the art piece, called the _creator's share_. The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in Ether. The remaining amount of the _creator's share_ is sent to the [TokenEmitter](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) contract's **buyToken** function to buy the creator governance tokens, according to a targeted linear emission schedule [VRGDA](https://www.paradigm.xyz/2022/08/vrgda). 
 
-### TokenEmitter contract
+### TokenEmitter
+**[TokenEmitter.sol](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol)** is a linear VRGDA that mints an ERC20 token when the payable **buyToken** function is called, and enables anyone to purchase the ERC20 governance token at any time.
 
+You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view their implementation for NFTs [here](https://github.com/transmissions11/VRGDAs). The Token Emitter utilizes a continuous VRGDA or VRGDAC to support ERC20 token purchases, originally implemented [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd). 
+
+Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. You can read more about the implementation on Paradigm's site, and the relevant integrals for the VRGDAC are [here](https://www.desmos.com/calculator/im67z1tate). 
+
+#### Creator payment
+The contract has a **creatorRateBps** and **entropyRateBps** that function the same as the **AuctionHouse** contract's. Whenever a **buyToken** purchase of governance tokens is made, a **creatorRateBps** portion of the proceeds is split with the **creatorsAddress** set in the contract, with direct payment calculated according to the **entropyRateBps**.
+
+#### Protocol rewards
+A fixed percentage of the value sent to the **buyToken** function is paid to the **TokenEmitterRewards** contract. The rewards setup is modeled after Zora's _fixed_ [protocol rewards](https://github.com/ourzora/zora-protocol/tree/main/packages/protocol-rewards). The key difference is that instead of a _fixed_ amount of ETH being split between the creator, builder, referrer, and architect, the **TokenEmitterRewards** system splits a percentage of the value to relevant parties. 
 
 
 The DAO logic and executor contracts are outside the scope of this audit. 
