@@ -1,0 +1,39 @@
+name: slither revolution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  analyze_revolution_contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
+      - name: Update Dependencies
+        run: |
+          pnpm install
+
+      - uses: crytic/slither-action@v0.3.0
+        with:
+          fail-on: "medium"
+          target: "packages/revolution-contracts/src"
+          slither-config: "../config/slither.config.json"
+          slither-args: --solc-remaps "ds-test=packages/revolution-contracts/node_modules/ds-test/src forge-std=packages/revolution-contracts/node_modules/forge-std/src @openzeppelin/contracts=packages/revolution-contracts/node_modules/@openzeppelin/contracts @openzeppelin/contracts-upgradeable=packages/revolution-contracts/node_modules/@openzeppelin/contracts-upgradeable solmate=packages/revolution-contracts/node_modules/solmate/src @collectivexyz/protocol-rewards=packages/protocol-rewards" --checklist --filter-paths "@openzeppelin|ERC721|Votes.sol"

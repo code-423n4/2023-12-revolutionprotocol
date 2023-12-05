@@ -1,0 +1,34 @@
+[profile.default]
+fs_permissions = [
+  { access = "read", path = "./package.json" },
+]
+libs = ['node_modules']
+allow_paths = ["node_modules/@collectivexyz/protocol-rewards", "../../node_modules"]
+optimizer = true
+optimizer_runs = 50
+via_ir = true
+solc_version = '0.8.22'
+out = 'out'
+src = 'src'
+
+[profile.dev]
+optimizer = false
+optimizer_runs = 0
+via_ir = false
+
+[rpc_endpoints]
+goerli = "https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}"
+mainnet = "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}"
+# for optimism, since we are just using this for deployment/fork testing,
+# we can use these since they're lower volume.
+base = "https://base-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}"
+base_goerli = "https://base-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}"
+optimism = "https://opt-mainnet.g.alchemy.com/v2/${ALCHEMY_KEY}"
+optimism_goerli = "https://opt-goerli.g.alchemy.com/v2/${ALCHEMY_KEY}"
+pgn = "https://rpc.publicgoods.network"
+pgn_sepolia = "https://sepolia.publicgoods.network"
+zora = "https://rpc.zora.energy"
+zora_goerli = "https://testnet.rpc.zora.energy"
+zora_sepolia = "https://sepolia.rpc.zora.energy"
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
