@@ -101,10 +101,6 @@ The contract has a **creatorRateBps** and **entropyRateBps** that function the s
 A fixed percentage of the value sent to the **buyToken** function is paid to the **TokenEmitterRewards** contract. The rewards setup is modeled after Zora's _fixed_ [protocol rewards](https://github.com/ourzora/zora-protocol/tree/main/packages/protocol-rewards). The key difference is that instead of a _fixed_ amount of ETH being split between the creator, builder, referrer, deployer, and architect, the **TokenEmitterRewards** system splits a percentage of the value to relevant parties. 
 
 
-The DAO logic and executor contracts are outside the scope of this audit. 
-
-
-
 ## Links
 
 - **Previous audits:** 
@@ -141,7 +137,8 @@ N/A
 
 ## Out of scope
 
-*List any files/contracts that are out of scope for this audit.*
+All the contracts not mentioned in scope including all test files
+
 
 # Additional Context
 
