@@ -1,3 +1,4 @@
+
 # Repo setup
 
 ## ⭐️ Sponsor: Add code to this repo
@@ -61,7 +62,7 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 ## intro
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury. 
 
-Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
+Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
 
 The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement.
 
@@ -73,31 +74,31 @@ A portion of the auction proceeds is split with the creator(s) of the art piece,
 ## relevant contracts
 
 ### CultureIndex
-[**CultureIndex.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add to. Owners of a specific ERC721 or ERC20 can vote on any given art piece. The art piece vote ranking data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) a heap datastructure to enable O(1) lookups of the highest voted piece. 
+[**CultureIndex.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of a specific ERC721 or ERC20 can vote on any given art piece. The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol), a heap datastructure to enable O(1) lookups of the highest voted art piece. 
 
 The contract has a function called **dropTopVotedPiece**, only callable by the owner, which pops (removes) the top voted item from the **MaxHeap** and returns it. 
 
 ### VerbsToken
-[**VerbsToken.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) is a fork of the [NounsToken](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsToken.sol) contract. **VerbsToken** owns the **CultureIndex**. When calling **mint()** on the **VerbsToken**, the contract calls **dropTopVotedPiece** on a **CultureIndex** contract, and creates the ERC721 metadata based on the returned data from the CultureIndex. 
+[**VerbsToken.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) is a fork of the [NounsToken](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsToken.sol) contract. **VerbsToken** owns the **CultureIndex**. When calling **mint()** on the **VerbsToken**, the contract calls **dropTopVotedPiece** on **CultureIndex**, and creates the ERC721 metadata based on the returned data from the CultureIndex. 
 
 ### AuctionHouse
-[**VerbsAuctionHouse.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits proceeds of the auction (the amount paid by the winning bidder) with the creator(s) of the art piece that was minted.
+[**VerbsAuctionHouse.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits proceeds of the auction (the amount paid by the winning bidder) with the creator(s) of the art piece that is minted.
 
 #### Creator payment
-The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator(s) of the art piece, called the _creator's share_. The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in Ether. The remaining amount of the _creator's share_ is sent to the [TokenEmitter](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) contract's **buyToken** function to buy the creator governance tokens, according to a targeted linear emission schedule [VRGDA](https://www.paradigm.xyz/2022/08/vrgda). 
+The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator(s) of the art piece, called the _creator's share_. The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in Ether. The remaining amount of the _creator's share_ is sent to the [TokenEmitter](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) contract's **buyToken** function to buy the creator governance tokens, according to a linear token emission schedule.
 
 ### TokenEmitter
 **[TokenEmitter.sol](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol)** is a linear VRGDA that mints an ERC20 token when the payable **buyToken** function is called, and enables anyone to purchase the ERC20 governance token at any time.
 
-You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view their implementation for NFTs [here](https://github.com/transmissions11/VRGDAs). The Token Emitter utilizes a continuous VRGDA or VRGDAC to support ERC20 token purchases, originally implemented [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd). 
+You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view their implementation for NFTs [here](https://github.com/transmissions11/VRGDAs). The Token Emitter utilizes a continuous VRGDA (VRGDAC) to facilitate ERC20 token purchases. The original VRGDAC  implementation is [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd). 
 
-Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. You can read more about the implementation on Paradigm's site, and the relevant integrals for the VRGDAC are [here](https://www.desmos.com/calculator/im67z1tate). 
+Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. You can read more about the implementation on [Paradigm's site](https://www.paradigm.xyz/2022/08/vrgda), and the relevant integrals for the VRGDAC are [here](https://www.desmos.com/calculator/im67z1tate). 
 
 #### Creator payment
-The contract has a **creatorRateBps** and **entropyRateBps** that function the same as the **AuctionHouse** contract's. Whenever a **buyToken** purchase of governance tokens is made, a **creatorRateBps** portion of the proceeds is split with the **creatorsAddress** set in the contract, with direct payment calculated according to the **entropyRateBps**.
+The contract has a **creatorRateBps** and **entropyRateBps** that function the same as the **AuctionHouse** contract's. Whenever a **buyToken** purchase of governance tokens is made, a **creatorRateBps** portion of the proceeds is reserved for the **creatorsAddress** set in the contract, with direct payment calculated according to the **entropyRateBps**.
 
 #### Protocol rewards
-A fixed percentage of the value sent to the **buyToken** function is paid to the **TokenEmitterRewards** contract. The rewards setup is modeled after Zora's _fixed_ [protocol rewards](https://github.com/ourzora/zora-protocol/tree/main/packages/protocol-rewards). The key difference is that instead of a _fixed_ amount of ETH being split between the creator, builder, referrer, and architect, the **TokenEmitterRewards** system splits a percentage of the value to relevant parties. 
+A fixed percentage of the value sent to the **buyToken** function is paid to the **TokenEmitterRewards** contract. The rewards setup is modeled after Zora's _fixed_ [protocol rewards](https://github.com/ourzora/zora-protocol/tree/main/packages/protocol-rewards). The key difference is that instead of a _fixed_ amount of ETH being split between the creator, builder, referrer, deployer, and architect, the **TokenEmitterRewards** system splits a percentage of the value to relevant parties. 
 
 
 The DAO logic and executor contracts are outside the scope of this audit. 
@@ -107,11 +108,9 @@ The DAO logic and executor contracts are outside the scope of this audit.
 ## Links
 
 - **Previous audits:** 
-- **Documentation:**
-
+N/A
 - **Twitter:**
-- https://twitter.com/collectivexyz
-- **Discord:** 
+[@collectivexyz](https://twitter.com/collectivexyz) and [@vrbsdao](https://twitter.com/vrbsdao)
 
 
 # Scope
@@ -127,7 +126,15 @@ The DAO logic and executor contracts are outside the scope of this audit.
 
 | Contract | SLOC | Purpose | Libraries used |  
 | ----------- | ----------- | ----------- | ----------- |
-| [contracts/folder/sample.sol](https://github.com/code-423n4/repo-name/blob/contracts/folder/sample.sol) | 123 | This contract does XYZ | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| [MaxHeap.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) | 68 | Implements a [MaxHeap](https://www.geeksforgeeks.org/introduction-to-max-heap-data-structure/) data structure for O(1) max value retrieval | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) |
+| [CultureIndex.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) | 203 | Creation and weighted token voting of community art pieces | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/erc20/ERC20Votes.sol) [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/ERC721Checkpointable.sol) |
+| [NontransferableERC20Votes.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/NontransferableERC20Votes.sol) | 41 | A nontransferable ERC20 Votes token | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/erc20/ERC20Votes.sol) |
+| [TokenEmitter.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) | 120 | Continuous linear VRGDA for purchasing ERC20 tokens with ether | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`VRGDAC`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol) [`TokenEmitterRewards`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/TokenEmitter/TokenEmitterRewards.sol) [`SignedWadMath`](https://github.com/transmissions11/solmate/blob/main/src/utils/SignedWadMath.sol)  |
+| [VerbsAuctionHouse.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) | 167 | AuctionHouse for selling ERC721s and paying creators | [`@openzeppelin/contracts-upgradeable`](https://openzeppelin.com/contracts/)|
+| [VerbsDescriptor.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsDescriptor.sol) | 63 | Token metadata library | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) |
+| [VerbsToken.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) | 131 | The ERC721 that mints from the top *CultureIndex* art piece | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/ERC721Checkpointable.sol) |
+| [libs/VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol) | 49 | The continuous linear VRGDA used for ERC20 token emission | [`SignedWadMath`](https://github.com/transmissions11/solmate/blob/main/src/utils/SignedWadMath.sol) |
+
 
 ## Out of scope
 
