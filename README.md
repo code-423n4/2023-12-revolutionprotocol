@@ -56,15 +56,35 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 
 
 # Overview
+## the Revolution protocol ⌐◨-◨
 
-[ ⭐️ SPONSORS: add info here ]
+### intro
+Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury. 
+
+Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
+
+The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement.
+
+In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. The top piece is auctioned off every day via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). A portion of the auction proceeds is split with the creator of the art piece in the form of governance and Ether, and the rest is sent to the DAO treasury. The winner of the auction receives the ERC721 of the art piece, and the creator receives an amount of governance tokens and Ether. Both the ERC721 and the governance token have voting power to vote on art pieces in the **CultureIndex**. 
+
+### AuctionHouse creator payment
+The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator of the art piece, called the _creator's share_. The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in Ether. The remaining amount of the _creator's share_ is sent to the [TokenEmitter](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) contract's **buyToken** function to buy the creator governance tokens, according to a targeted linear emission schedule [VRGDA](https://www.paradigm.xyz/2022/08/vrgda). 
+
+### TokenEmitter contract
+
+
+
+The DAO logic and executor contracts are outside the scope of this audit. 
+
+
 
 ## Links
 
 - **Previous audits:** 
 - **Documentation:**
-- **Website:**
-- **Twitter:** 
+
+- **Twitter:**
+- https://twitter.com/collectivexyz
 - **Discord:** 
 
 
