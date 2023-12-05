@@ -28,7 +28,7 @@
 
 ---
 
-# Collective audit details
+# Revolution Protocol audit details
 - Total Prize Pool: $36,500 USDC
   - HM awards: $24,750 USDC
   - Analysis awards: $1,500 USDC
