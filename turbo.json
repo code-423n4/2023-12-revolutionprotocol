@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".dist/**"]
+    },
+    "build:contracts": {
+      "dependsOn": ["^build:contracts"],
+      "outputs": [".dist/**"]
+    },
+    "build:sizes": {
+      "dependsOn": ["^build:sizes"]
+    },
+    "clean": {
+      "dependsOn": ["^clean"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "test:js": {
+      "dependsOn": ["^test:js"]
+    },
+    "test:fork": {
+      "dependsOn": ["^test:fork"]
+    },
+    "prettier": {
+      "dependsOn": ["^prettier"]
+    },
+    "storage-inspect:check": {
+      "dependsOn": ["^storage-inspect:check"]
+    },
+    "prepack": {
+      "dependsOn": ["^prepack"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "update-contract-version": {
+      "dependsOn": ["^update-contract-version"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
