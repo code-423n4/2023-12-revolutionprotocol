@@ -195,7 +195,9 @@ Ethereum
 
 
 ## DOS
-- [ ] In the event of a DOS, could you outline a minimum duration after which you would consider a finding to be valid? This question is asked in the context of most systems' capacity to handle DoS attacks gracefully for a certain period.
+- [ ] Minimum duration after which we would consider a finding to be valid?
+DOS on CultureIndex: 20m
+
 
 ## EIP conformity
   - [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol): Should comply with `ERC721`
@@ -203,6 +205,7 @@ Ethereum
 
 ## Attack ideas (Where to look for bugs)
 *List specific areas to address - see [this blog post](https://medium.com/code4rena/the-security-council-elections-within-the-arbitrum-dao-a-comprehensive-guide-aa6d001aae60#9adb) for an example*
+
 
 ## Main invariants
 *Describe the project's main invariants (properties that should NEVER EVER be broken).*
