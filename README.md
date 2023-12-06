@@ -56,7 +56,6 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 [ ⭐️ SPONSORS: Are there any known issues or risks deemed acceptable that shouldn't lead to a valid finding? If so, list them here. ]
 
 
-# Overview
 # the Revolution protocol ⌐◨-◨
 
 ## intro
