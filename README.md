@@ -1,4 +1,5 @@
 
+
 # Repo setup
 
 ## ⭐️ Sponsor: Add code to this repo
@@ -228,8 +229,32 @@ Ethereum
 - Describe any specific areas you would like addressed:
 ```
 
-# Tests
+# Developer guide
 
 *Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
 
 *Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
+
+## Setup
+
+#### Node.js and pnpm
+`npm install -g pnpm`
+
+#### Turbo
+`npm install turbo --global`
+
+#### Foundry
+[Installation guide](https://book.getfoundry.sh/getting-started/installation)
+
+## Install dependencies
+
+`pnpm install`
+
+## Run tests
+
+Run tests for both Protocol Rewards and Revolution Contracts
+`turbo run test` 
+
+Run tests in dev mode for package
+`cd packages/revolution-contracts && pnpm run dev`
+
