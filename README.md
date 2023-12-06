@@ -163,7 +163,7 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 ### VRGDAC
 The Token Emitter utilizes a continuous VRGDA ([VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol)) to facilitate ERC20 token purchases. Given an amount of ether to pay, it will return the number of tokens to sell (`YtoX`), and given an amount of tokens to buy, will return the cost (`XtoY`) where X is the ERC20 token and Y is ether. The original VRGDAC implementation is [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd). 
 
-In order to get the amount of tokens to emit given a payment of ether (`YtoX` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol)), we first take the integral of the linear VRGDA pricing function p(x).
+In order to get the amount of tokens to emit given a payment of ether (`YtoX` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol)), we first take the integral of the linear VRGDA pricing function [p(x)](https://www.paradigm.xyz/2022/08/vrgda).
 
 <img width="487" alt="Screenshot 2023-12-05 at 9 21 59 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/9d49f577-d5cb-4e74-bf05-56ef8039085e">
 
