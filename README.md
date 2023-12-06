@@ -118,7 +118,8 @@ You can read more about the implementation on [Paradigm's site](https://www.para
 ## Links
 
 - **Previous audits:** 
-N/A
+- [NounsDAOV2](https://github.com/code-423n4/2022-08-nounsdao)
+- [NounsDAOV3 (fork)](https://github.com/code-423n4/2023-07-nounsdao)
 - **Twitter:**
 [@collectivexyz](https://twitter.com/collectivexyz) and [@vrbsdao](https://twitter.com/vrbsdao)
 
@@ -151,7 +152,7 @@ N/A
 
 ## Out of scope
 
-All the contracts not mentioned in scope including all test files
+All the contracts not mentioned in scope including all test files. Any issues that were raised in the previous 2 Nouns audits. Findings [here](https://github.com/code-423n4/2023-07-nounsdao-findings) and [here](https://github.com/code-423n4/2022-08-nounsdao-findings).
 
 Any issues or improvements on how we integrate with the out of scope contracts is in scope.
 
