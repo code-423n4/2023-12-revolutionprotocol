@@ -93,6 +93,7 @@ The **creatorRateBps** defines the proportion (in basis points) of the auction p
 You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view the implementation for NFTs [here](https://github.com/transmissions11/VRGDAs). Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. 
 
 <img width="903" alt="Screenshot 2023-12-05 at 8 31 54 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/86b23fbf-3095-41bd-b0f5-f885c46d1772">
+
 You can read more about the implementation on [Paradigm's site](https://www.paradigm.xyz/2022/08/vrgda). 
 
 The Token Emitter utilizes a continuous VRGDA (VRGDAC) to facilitate ERC20 token purchases. Given an amount of ether to pay, it can return the number of tokens to sell, and vice versa given an amount of tokens to buy, will return the cost. The original VRGDAC implementation is [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd). 
