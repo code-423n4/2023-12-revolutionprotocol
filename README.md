@@ -1,3 +1,4 @@
+![download (1)](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/6de95883-579e-4c21-9f2e-3d26cb8c22ba)
 
 # Repo setup
 
@@ -59,14 +60,21 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 # the Revolution protocol ⌐◨-◨
 
 ## intro
-Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury. 
+Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury.
+
+<img width="595" alt="Screenshot 2023-12-06 at 11 24 10 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/498af19d-7e01-4733-bab2-422b1b3c0e1f">
 
 Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
 
 The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement.
 
 ## overview
-In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). 
+In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
+
+<img width="1382" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/c0dd4d47-c4c9-46c0-80d7-68004c59338f">
+
+The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). 
+
 
 A portion of the auction proceeds is split with the creator(s) of the art piece, and the rest is sent to the owner of the auction contract. The winner of the auction receives an ERC721 of the art piece, and the creator receives an amount of ERC20 governance tokens and ether. 
 
@@ -75,6 +83,9 @@ The ERC20 tokens the creator receives is calculated by the [TokenEmitter](https:
 ## relevant contracts
 
 ### CultureIndex
+
+<img width="1517" alt="Screenshot 2023-12-06 at 11 26 49 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/ab4ffa8b-7b6e-4113-993b-cfe676efbb3a">
+
 [**CultureIndex.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of a specific ERC721 or ERC20 can vote on any given art piece. The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol), a heap datastructure that enables O(1) lookups of the highest voted art piece. 
 
 The contract has a function called **dropTopVotedPiece**, only callable by the owner, which pops (removes) the top voted item from the **MaxHeap** and returns it. 
