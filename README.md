@@ -43,8 +43,8 @@
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/2023-12-collective/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts December 11, 20:00 UTC
-- Ends December 20, 20:00 UTC
+- Starts December 13, 20:00 UTC
+- Ends December 21, 20:00 UTC
 
 ## Automated Findings / Publicly Known Issues
 
