@@ -70,10 +70,7 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 ## overview
 In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
 
-<img width="1382" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/c0dd4d47-c4c9-46c0-80d7-68004c59338f">
-
 The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). 
-
 
 A portion of the auction proceeds is split with the creator(s) of the art piece, and the rest is sent to the owner of the auction contract. The winner of the auction receives an ERC721 of the art piece, and the creator receives an amount of ERC20 governance tokens and ether. 
 
@@ -94,6 +91,8 @@ The contract has a function called **dropTopVotedPiece**, only callable by the o
 
 ### AuctionHouse
 [**VerbsAuctionHouse.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits auction proceeds (the winning bid) with the creator(s) of the art piece that is minted.
+
+<img width="1382" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/assets/20303031/c0dd4d47-c4c9-46c0-80d7-68004c59338f">
 
 #### Creator payment
 The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator(s) of the art piece, called the _creator's share_. The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in ether. The remaining amount of the _creator's share_ is sent to the [TokenEmitter](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) contract's **buyToken** function to buy the creator ERC20 governance tokens, according to a linear token emission schedule.
