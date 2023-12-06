@@ -118,7 +118,7 @@ You can read more about the implementation on [Paradigm's site](https://www.para
 
 ## Links
 
-- **Previous audits:** 
+- **Previous Nouns DAO audits:** 
 - [NounsDAOV2](https://github.com/code-423n4/2022-08-nounsdao)
 - [NounsDAOV3 (fork)](https://github.com/code-423n4/2023-07-nounsdao)
 - **Twitter:**
