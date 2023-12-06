@@ -65,7 +65,7 @@ Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/
 
 Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
 
-The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement.
+The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement. If this excites you, [build with us](mailto:rocketman@collective.xyz).
 
 ## overview
 In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
