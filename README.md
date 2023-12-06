@@ -238,23 +238,45 @@ Ethereum
 ## Setup
 
 #### Node.js and pnpm
-`npm install -g pnpm`
+```
+npm install -g pnpm
+```
 
 #### Turbo
-`npm install turbo --global`
+```
+npm install turbo --global
+```
 
 #### Foundry
 [Installation guide](https://book.getfoundry.sh/getting-started/installation)
 
 ## Install dependencies
 
-`pnpm install`
+```
+pnpm install
+```
 
 ## Run tests
 
 Run tests for both Protocol Rewards and Revolution Contracts
-`turbo run test` 
+```
+turbo run test
+```
 
 Run tests in dev mode for package
-`cd packages/revolution-contracts && pnpm run dev`
+```
+cd packages/revolution-contracts && pnpm run dev
+```
 
+
+## Slither
+
+#### Revolution contracts
+```
+slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
+```
+
+### Protocol rewards
+```
+slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
+```
