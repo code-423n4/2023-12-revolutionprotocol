@@ -46,6 +46,7 @@
 - Starts December 13, 20:00 UTC
 - Ends December 21, 20:00 UTC
 
+
 ## Automated Findings / Publicly Known Issues
 
 The 4naly3er report can be found [here](https://github.com/code-423n4/2023-12-collective/blob/main/4naly3er-report.md).
@@ -67,6 +68,58 @@ Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/
 Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
 
 The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement. If this excites you, [build with us](mailto:rocketman@collective.xyz).
+
+# Developer guide
+
+*Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
+
+*Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
+
+## Setup
+
+#### Node.js and pnpm
+```
+npm install -g pnpm
+```
+
+#### Turbo
+```
+npm install turbo --global
+```
+
+#### Foundry
+[Installation guide](https://book.getfoundry.sh/getting-started/installation)
+
+## Install dependencies
+
+```
+pnpm install
+```
+
+## Run tests
+
+Run tests for both Protocol Rewards and Revolution Contracts
+```
+turbo run test
+```
+
+Run tests in dev mode for package
+```
+cd packages/revolution-contracts && pnpm run dev
+```
+
+
+## Slither
+
+#### Revolution contracts
+```
+slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
+```
+
+#### Protocol rewards
+```
+slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
+```
 
 # overview
 In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
@@ -243,7 +296,7 @@ Ethereum
 
 
 ## DOS
-- [ ] Minimum duration after which we would consider a DOS finding to be valid?
+Minimum duration after which we would consider a DOS finding to be valid?
 
 DOS on CultureIndex: 20m
 
@@ -279,54 +332,3 @@ True - We're upgrading Nouns DAO so that the auction item is a piece of communit
 - Describe any specific areas you would like addressed:
 ```
 
-# Developer guide
-
-*Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
-
-*Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
-
-## Setup
-
-#### Node.js and pnpm
-```
-npm install -g pnpm
-```
-
-#### Turbo
-```
-npm install turbo --global
-```
-
-#### Foundry
-[Installation guide](https://book.getfoundry.sh/getting-started/installation)
-
-## Install dependencies
-
-```
-pnpm install
-```
-
-## Run tests
-
-Run tests for both Protocol Rewards and Revolution Contracts
-```
-turbo run test
-```
-
-Run tests in dev mode for package
-```
-cd packages/revolution-contracts && pnpm run dev
-```
-
-
-## Slither
-
-#### Revolution contracts
-```
-slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
-```
-
-#### Protocol rewards
-```
-slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
-```
