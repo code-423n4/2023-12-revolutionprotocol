@@ -256,7 +256,7 @@ The green line is the pricing function p(x) for a linear VRGDA. The red line is 
 
 ## Attack ideas (Where to look for bugs)
 
-The main complexity compared to vanilla Nouns DAO is that we auction off community created art instead of a generated PFP, and we pay creators a share of raised funds. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. Additionally, exploring creator payment or governance token accumulation attack vectors is a solid start.
+Compared to Nouns DAO, complexity arises from the auction of community created/voted art instead of a generated PFP, and payments to creators. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. Additionally, exploring creator payment or governance token accumulation attack vectors is a solid start.
 
 ### Where to start
 
@@ -265,6 +265,8 @@ Begin by examining the access control and permissions for these contracts that m
 ### [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) attacks
 
 Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure. 
+
+Ensuring nothing uploaded to CultureIndex could break or otherwise disrupt the minting functionality of the VerbsToken.
 
 ### [TokenEmitter](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) attacks
 
