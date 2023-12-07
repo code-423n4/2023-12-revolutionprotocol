@@ -256,11 +256,11 @@ The green line is the pricing function p(x) for a linear VRGDA. The red line is 
 
 ## Attack ideas (Where to look for bugs)
 
-Compared to Nouns DAO, complexity arises from the auction of community created/voted art instead of a generated PFP, and payments to creators. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. Additionally, exploring creator payment or governance token accumulation attack vectors is a solid start.
+Compared to Nouns DAO, complexity arises from the auction of community created/voted art, and direct payments to creators. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. Additionally, exploring creator governance token accumulation attack vectors is a solid start.
 
 ### Where to start
 
-Begin by examining the access control and permissions for these contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security. Also, the TokenEmitter contract's ownership and permissions to prevent takeover.
+Begin by examining the access control and permissions for contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security and continued operation. Also, review the TokenEmitter contract's ownership and permissions to prevent governance takeover.
 
 ### [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) attacks
 
