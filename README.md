@@ -55,7 +55,7 @@ Automated findings output for the audit can be found [here](https://github.com/c
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
 
 [ ⭐️ SPONSORS: Are there any known issues or risks deemed acceptable that shouldn't lead to a valid finding? If so, list them here. ]
-
+The AuctionHouse will fail to create a new auction if the CultureIndex is empty.
 
 # the Revolution protocol ⌐◨-◨
 
@@ -195,6 +195,30 @@ We can then solve for `x_bought` using a handy python [solver](https://github.co
 
 The green line is the pricing function p(x) for a linear VRGDA. The red line is the integral of p(x), and the purple line signifies the amount of ERC20 tokens you'd receive given a payment in ether (YtoX). The relevant functions and integrals for the VRGDAC are available here: https://www.desmos.com/calculator/im67z1tate.
 
+## Attack ideas (Where to look for bugs)
+
+*List specific areas to address - see [this blog post](https://medium.com/code4rena/the-security-council-elections-within-the-arbitrum-dao-a-comprehensive-guide-aa6d001aae60#9adb) for an example*
+
+The main difference between Revolution and Nouns DAO is that we auction off community created art instead of a generated PFP. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd is a good start. 
+
+### Where to start
+
+Begin by examining the access control and permissions for these contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security. 
+
+### [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) attacks
+
+Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure. 
+
+### [TokenEmitter](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) attacks
+
+The second biggest difference from Nouns is that there are 2 classes of governance shares, the ERC721 auction item (VerbsToken) and the nontransferable ERC20. These two tokens are used to vote on the CultureIndex and choose the next auction item, and in the future will be used to govern a DAO with a treasury. It is essential to explore potential ways in which the ERC20 emission from the TokenEmitter can be exploited to gain an outsized governance share. 
+
+### Creator rate attacks
+
+The system is further complicated by the creator payments on both the AuctionHouse and the TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and TokenEmitter. The CultureIndex voting setup and quorum determins the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the TokenEmitter. 
+
+## Main invariants
+*Describe the project's main invariants (properties that should NEVER EVER be broken).*
 
 ## Tokens used on launch and anticipated to interact with.
 
@@ -215,7 +239,8 @@ Ethereum
 
 
 ## DOS
-- [ ] Minimum duration after which we would consider a finding to be valid?
+- [ ] Minimum duration after which we would consider a DOS finding to be valid?
+
 DOS on CultureIndex: 20m
 
 
@@ -223,27 +248,24 @@ DOS on CultureIndex: 20m
   - [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol): Should comply with `ERC721`
   - [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/NontransferableERC20Votes.sol): Should comply with `ERC20`
 
-## Attack ideas (Where to look for bugs)
-*List specific areas to address - see [this blog post](https://medium.com/code4rena/the-security-council-elections-within-the-arbitrum-dao-a-comprehensive-guide-aa6d001aae60#9adb) for an example*
-
-
-## Main invariants
-*Describe the project's main invariants (properties that should NEVER EVER be broken).*
 
 ## Scoping Details 
 [ ⭐️ SPONSORS: please confirm/edit the information below. ]
 
 ```
 - If you have a public code repo, please share it here: https://github.com/collectivexyz/revolution-protocol/tree/main/packages/revolution-contracts, https://github.com/collectivexyz/revolution-protocol/tree/main/packages/protocol-rewards 
-- How many contracts are in scope?: 11   
+- How many contracts are in scope?: 10
 - Total SLoC for these contracts?: 1000  
 - How many external imports are there?: 13  
 - How many separate interfaces and struct definitions are there for the contracts within scope?: 13  
 - Does most of your code generally use composition or inheritance?: Inheritance   
 - How many external calls?: 1   
 - What is the overall line coverage percentage provided by your tests?: 73
-- Is this an upgrade of an existing system?: True - We're upgrading Nouns DAO so that the auction item is a piece of community created media, voted on by the community. Additionally, we are issuing an ERC20 governance token to the creator and splitting the auction proceeds with the creator.
-- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): NFT, Uses L2, ERC-20 Tokeen
+- Is this an upgrade of an existing system?:
+
+True - We're upgrading Nouns DAO so that the auction item is a piece of community created art, voted on by the community. Additionally, we are issuing an ERC20 governance token to the creator and splitting the auction proceeds with the creator of the art.
+
+- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): NFT, Uses L2, ERC-20 Token
 - Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?: False  
 - Please describe required context:   
 - Does it use an oracle?: No
