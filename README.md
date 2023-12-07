@@ -277,6 +277,8 @@ The system is further complicated by the creator payments on both the AuctionHou
 ## Main invariants
 *Describe the project's main invariants (properties that should NEVER EVER be broken).*
 
+Anything uploaded to the CultureIndex should be mintable by the VerbsToken contract.
+
 ## Tokens used on launch and anticipated to interact with.
 
 ### ERC20
