@@ -391,7 +391,7 @@ DOS on CultureIndex: 20m
 - How many separate interfaces and struct definitions are there for the contracts within scope?: 13  
 - Does most of your code generally use composition or inheritance?: Inheritance   
 - How many external calls?: 1   
-- What is the overall line coverage percentage provided by your tests?: 73
+- What is the overall line coverage percentage provided by your tests?: 92
 - Is this an upgrade of an existing system?:
 
 True - We're upgrading Nouns DAO so that the auction item is a piece of community created art, voted on by the community. Additionally, we are issuing an ERC20 governance token to the creator and splitting the auction proceeds with the creator of the art.
