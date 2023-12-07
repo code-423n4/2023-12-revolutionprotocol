@@ -203,11 +203,11 @@ The green line is the pricing function p(x) for a linear VRGDA. The red line is 
 
 ## Attack ideas (Where to look for bugs)
 
-The main difference between Revolution and Nouns DAO is that we auction off community created art instead of a generated PFP. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. 
+The main complexity compared to vanilla Nouns DAO is that we auction off community created art instead of a generated PFP, and we pay creators a share of raised funds. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. Additionally, exploring creator payment or governance token accumulation attack vectors is a solid start.
 
 ### Where to start
 
-Begin by examining the access control and permissions for these contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security. 
+Begin by examining the access control and permissions for these contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security. Also, the TokenEmitter contract's ownership and permissions to prevent takeover.
 
 ### [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) attacks
 
@@ -215,7 +215,7 @@ Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or c
 
 ### [TokenEmitter](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) attacks
 
-The second biggest difference from Nouns is that there are 2 classes of governance shares, the ERC721 auction item (VerbsToken) and the nontransferable ERC20. These two tokens are used to vote on the CultureIndex and choose the next auction item, and in the future will be used to govern a DAO with a treasury. It is essential to explore potential ways in which the ERC20 emission from the TokenEmitter can be exploited to gain an outsized governance share. 
+Another large distinction from Nouns is that there are 2 classes of governance shares, the ERC721 auction item (VerbsToken) and the nontransferable ERC20. These two tokens are used to vote on the CultureIndex and choose the next auction item, and in the future will be used to govern a DAO with a treasury. It is essential to explore potential ways in which the ERC20 emission from the TokenEmitter can be exploited to gain an outsized governance share. 
 
 ### Creator rate attacks
 
