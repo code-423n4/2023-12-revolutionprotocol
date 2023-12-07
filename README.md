@@ -236,6 +236,13 @@ All the contracts not mentioned in scope including all test files. Any issues th
 
 Any issues or improvements on how we integrate with the out of scope contracts is in scope.
 
+## Main invariants
+*Describe the project's main invariants (properties that should NEVER EVER be broken).*
+
+Anything uploaded to the CultureIndex should be mintable by the VerbsToken contract and not disrupt the token functionality in any way.
+
+
+
 
 # Additional Context
 
@@ -274,12 +281,7 @@ Another large distinction from Nouns is that there are 2 classes of governance s
 
 ### Creator rate attacks
 
-The system is further complicated by the creator payments on both the AuctionHouse and the TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and TokenEmitter. The CultureIndex voting setup and quorum determins the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the TokenEmitter. 
-
-## Main invariants
-*Describe the project's main invariants (properties that should NEVER EVER be broken).*
-
-Anything uploaded to the CultureIndex should be mintable by the VerbsToken contract.
+The system is further complicated by the creator payments on both the AuctionHouse and the TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and TokenEmitter. The CultureIndex voting setup and quorum determins the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the TokenEmitter. Given creators will be paid directly, ensure malicious creator contracts cannot disrupt the system.
 
 ## Tokens used on launch and anticipated to interact with.
 
