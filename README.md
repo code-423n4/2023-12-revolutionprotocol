@@ -73,7 +73,7 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 
 # Developer guide
 
-*Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
+*as well as steps to run the tests with a gas report.* 
 
 *Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
 
@@ -119,12 +119,12 @@ cd packages/revolution-contracts && pnpm run dev
 
 #### Revolution contracts
 ```
-slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
+cd packages/revolution-contracts && slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
 ```
 
 #### Protocol rewards
 ```
-slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
+cd packages/protocol-rewards && slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
 ```
 
 # revolution overview
