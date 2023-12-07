@@ -109,7 +109,7 @@ Run tests for both Protocol Rewards and Revolution Contracts
 turbo run test
 ```
 
-Run tests in dev mode for package
+Run tests in dev mode for a package w/gas logs
 ```
 cd packages/revolution-contracts && pnpm run dev
 ```
