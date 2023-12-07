@@ -239,22 +239,43 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 ## Main invariants
 *Describe the project's main invariants (properties that should NEVER EVER be broken).*
 
-The TokenEmitter should always pay creators.
-
-The AuctionHouse should always pay creators.
-
-Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
-
-The VerbsToken should only mint art pieces from the CultureIndex.
-
-The AuctionHouse should only auction off tokens from the VerbsToken.
+### Creator payments
+The TokenEmitter and AuctionHouse should always pay creators in accordance with the creatorRateBps and entropyRateBps.
 
 The AuctionHouse should always pay creator(s) of the CultureIndex art piece being auctioned.
 
 The TokenEmitter should always pay the `creatorsAddress`.
 
+### CultureIndex
+
+Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
+
+The voting process within the CultureIndex must be solely based on the ERC721 and ERC20 balance of the voter.
+
+Accounts should not be able to vote more than once with the same token in the CultureIndex.
+
+CultureIndex and MaxHeap, must be resilient to DoS attacks that could hinder voting, art creation, or auction processes.
+
+### VerbsToken
+
+VerbsToken should only mint art pieces from the CultureIndex.
+
+VerbsToken should always mint the top voted art piece in the CultureIndex.
+
+
+### AuctionHouse
+
+AuctionHouse should only auction off tokens from the VerbsToken.
+
+### VRGDA
+
 The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
 
+### TokenEmitter
+
+The treasury and creatorsAddress should not be able to buy tokens.
+
+The distribution of ERC20 governance tokens should be in accordance with the defined emission schedule. 
 
 # Additional Context
 
