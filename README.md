@@ -246,7 +246,7 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 (properties that should NEVER EVER be broken).
 
 ### NontransferableERC20Votes
-- The owner should be able to mint and burn tokens.
+- The owner should be able to mint tokens.
 
 - Tokens cannot be transferred between addresses (except to mint by the owner). This includes direct transfers, transfers from, and any other mechanisms that might move tokens between different addresses. 
 
