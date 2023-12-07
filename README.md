@@ -245,6 +245,11 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 ## Main invariants
 (properties that should NEVER EVER be broken).
 
+### NontransferableERC20Votes
+- No one should be able to transfer or approve transfer of any tokens.
+
+- The owner should be able to mint and burn tokens.
+
 ### Creator payments
 - The TokenEmitter and AuctionHouse should always pay creators in accordance with the creatorRateBps and entropyRateBps.
 
