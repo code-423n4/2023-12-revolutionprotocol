@@ -239,53 +239,56 @@ All the contracts not mentioned in scope including all test files. Any issues th
 Any issues or improvements on how we integrate with the out of scope contracts is in scope.
 
 ## Main invariants
-*Describe the project's main invariants (properties that should NEVER EVER be broken).*
+(properties that should NEVER EVER be broken).
 
 ### Creator payments
-The TokenEmitter and AuctionHouse should always pay creators in accordance with the creatorRateBps and entropyRateBps.
+- The TokenEmitter and AuctionHouse should always pay creators in accordance with the creatorRateBps and entropyRateBps.
 
-The AuctionHouse should always pay creator(s) of the CultureIndex art piece being auctioned.
+- The AuctionHouse should always pay creator(s) of the CultureIndex art piece being auctioned.
 
-The TokenEmitter should always pay the `creatorsAddress`.
+- The TokenEmitter should always pay the `creatorsAddress`.
 
 ### CultureIndex
 
-Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
+- Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
 
-The voting process within the CultureIndex must be solely based on the ERC721 and ERC20 balance of the voter.
+- The voting weights calculated must be solely based on the ERC721 and ERC20 balance of the account that casts the vote.
 
-Accounts should not be able to vote more than once on the same art piece with the same ERC721 token in the CultureIndex.
+- Accounts should not be able to vote more than once on the same art piece with the same ERC721 token in the CultureIndex.
 
-Accounts can not vote twice on the same art piece.
+- Accounts can not vote twice on the same art piece.
 
-Only snapshotted (at art piece creation block) vote weights should be able to update the MaxHeap vote weight value of the art piece.
+- Only snapshotted (at art piece creation block) vote weights should be able to update the total vote weight of the art piece.
 
-CultureIndex and MaxHeap, must be resilient to DoS attacks that could significantly hinder voting, art creation, or auction processes.
+- CultureIndex and MaxHeap, must be resilient to DoS attacks that could significantly hinder voting, art creation, or auction processes.
 
 ### VerbsToken
 
-VerbsToken should only mint art pieces from the CultureIndex.
+- VerbsToken should only mint art pieces from the CultureIndex.
 
-VerbsToken should always mint the top voted art piece in the CultureIndex.
+- VerbsToken should always mint the top voted art piece in the CultureIndex.
 
 
 ### AuctionHouse
 
-AuctionHouse should only auction off tokens from the VerbsToken.
+- AuctionHouse should only auction off tokens from the VerbsToken.
 
 
 ### VRGDA
 
-The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
+- The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
 
 
 ### TokenEmitter
 
-The treasury and creatorsAddress should not be able to buy tokens.
+- The treasury and creatorsAddress should not be able to buy tokens.
 
-The distribution of ERC20 governance tokens should be in accordance with the defined emission schedule. 
+- The distribution of ERC20 governance tokens should be in accordance with the defined emission schedule. 
 
-The TokenEmitter should always pay protocol rewards.
+- The TokenEmitter should always pay protocol rewards.
+
+- The treasury should always be transferred it's share of ether (minus creatorRateBps share).
+
 
 # Additional Context
 
