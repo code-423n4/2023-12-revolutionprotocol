@@ -210,9 +210,7 @@ The green line is the pricing function p(x) for a linear VRGDA. The red line is 
 
 ## Attack ideas (Where to look for bugs)
 
-*List specific areas to address - see [this blog post](https://medium.com/code4rena/the-security-council-elections-within-the-arbitrum-dao-a-comprehensive-guide-aa6d001aae60#9adb) for an example*
-
-The main difference between Revolution and Nouns DAO is that we auction off community created art instead of a generated PFP. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd is a good start. 
+The main difference between Revolution and Nouns DAO is that we auction off community created art instead of a generated PFP. So - focusing on ways in which the `CultureIndex` -> `VerbsToken` -> `VerbsAuctionHouse` flow can be attacked, or DOS'd to prevent community intent from manifesting is a good start. 
 
 ### Where to start
 
