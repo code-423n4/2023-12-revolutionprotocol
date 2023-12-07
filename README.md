@@ -79,6 +79,10 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 
 ## Setup
 
+```
+git clone https://github.com/code-423n4/2023-12-revolutionprotocol.git && cd 2023-12-revolutionprotocol
+```
+
 #### Node.js and pnpm
 ```
 npm install -g pnpm
