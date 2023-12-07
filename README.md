@@ -73,8 +73,6 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 
 # Developer guide
 
-*as well as steps to run the tests with a gas report.* 
-
 *Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
 
 ## Setup
@@ -112,6 +110,14 @@ turbo run test
 Run tests in dev mode for a package w/gas logs
 ```
 cd packages/revolution-contracts && pnpm run dev
+```
+## Gas reports
+
+Gas reports are located in [gas-reports](https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/gas-reports)
+
+Run the tests with and generate a gas report.
+```
+cd packages/revolution-contracts && pnpm run write-gas-report
 ```
 
 
