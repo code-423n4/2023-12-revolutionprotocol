@@ -239,9 +239,21 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 ## Main invariants
 *Describe the project's main invariants (properties that should NEVER EVER be broken).*
 
-Anything uploaded to the CultureIndex should be mintable by the VerbsToken contract and not disrupt the token functionality in any way.
+The TokenEmitter should always pay creators.
 
+The AuctionHouse should always pay creators.
 
+Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
+
+The VerbsToken should only mint art pieces from the CultureIndex.
+
+The AuctionHouse should only auction off tokens from the VerbsToken.
+
+The AuctionHouse should always pay creator(s) of the CultureIndex art piece being auctioned.
+
+The TokenEmitter should always pay the `creatorsAddress`.
+
+The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
 
 
 # Additional Context
