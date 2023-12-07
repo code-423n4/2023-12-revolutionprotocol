@@ -121,8 +121,8 @@ slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_mo
 slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
 ```
 
-# overview
-In Revolution, instead of [auctioning](https://nouns.wtf/) off a generative PFP, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
+# revolution overview
+Instead of [auctioning](https://nouns.wtf/) off a generative PFP like Nouns, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
 
 The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol). 
 
@@ -137,7 +137,7 @@ The ERC20 tokens the creator receives is calculated by the [TokenEmitter](https:
 
 <img width="817" alt="culture index" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png">
 
- The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol), a heap datastructure that enables O(1) lookups of the highest voted art piece. 
+ The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol), a heap datastructure that enables efficient lookups of the highest voted art piece. 
 
 The contract has a function called **dropTopVotedPiece**, only callable by the owner, which pops (removes) the top voted item from the **MaxHeap** and returns it. 
 
