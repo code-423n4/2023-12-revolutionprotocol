@@ -120,6 +120,7 @@ Run the tests with and generate a gas report.
 cd packages/revolution-contracts && pnpm run write-gas-report
 ```
 
+Gas optimizations around the CultureIndex `createPiece` and `vote` functionality, the [MaxHeap](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) and [`buyToken`](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) should be prioritized.
 
 ## Slither
 
