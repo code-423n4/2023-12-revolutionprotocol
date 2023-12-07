@@ -248,6 +248,9 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 - The TokenEmitter should always pay the `creatorsAddress`.
 
+- ETH and ERC20 transfer functions are secure and protected with reentrancy checks
+  
+
 ### CultureIndex
 
 - Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
@@ -262,6 +265,8 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 - CultureIndex and MaxHeap, must be resilient to DoS attacks that could significantly hinder voting, art creation, or auction processes.
 
+- An art piece that has not met quorum cannot be dropped.
+
 ### VerbsToken
 
 - VerbsToken should only mint art pieces from the CultureIndex.
@@ -272,6 +277,8 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 ### AuctionHouse
 
 - AuctionHouse should only auction off tokens from the VerbsToken.
+  
+- The owner of the auction should always receive it's share of ether (minus creatorRateBps share).
 
 
 ### VRGDA
@@ -287,7 +294,7 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 - The TokenEmitter should always pay protocol rewards.
 
-- The treasury should always be transferred it's share of ether (minus creatorRateBps share).
+- The treasury should always receive it's share of ether (minus creatorRateBps share).
 
 
 # Additional Context
