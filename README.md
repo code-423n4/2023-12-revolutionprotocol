@@ -55,6 +55,7 @@ Automated findings output for the audit can be found [here](https://github.com/c
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
 
 [ ⭐️ SPONSORS: Are there any known issues or risks deemed acceptable that shouldn't lead to a valid finding? If so, list them here. ]
+
 The AuctionHouse will fail to create a new auction if the CultureIndex is empty.
 
 # the Revolution protocol ⌐◨-◨
@@ -81,7 +82,7 @@ The ERC20 tokens the creator receives is calculated by the [TokenEmitter](https:
 ## CultureIndex
 [**CultureIndex.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of a specific ERC721 or ERC20 can vote on any given art piece.
 
-<img width="1517" alt="culture index" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png">
+<img width="817" alt="culture index" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png">
 
  The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol), a heap datastructure that enables O(1) lookups of the highest voted art piece. 
 
@@ -93,7 +94,7 @@ The contract has a function called **dropTopVotedPiece**, only callable by the o
 ## AuctionHouse
 [**VerbsAuctionHouse.sol**](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits auction proceeds (the winning bid) with the creator(s) of the art piece that is minted.
 
-<img width="1382" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrb-auction.png">
+<img width="882" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrb-auction.png">
 
 ### Creator payment
 The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator(s) of the art piece, called the _creator's share_. The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in ether. The remaining amount of the _creator's share_ is sent to the [TokenEmitter](https://github.com/collectivexyz/revolution-protocol/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) contract's **buyToken** function to buy the creator ERC20 governance tokens, according to a linear token emission schedule.
