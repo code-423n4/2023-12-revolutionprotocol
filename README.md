@@ -246,9 +246,15 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 (properties that should NEVER EVER be broken).
 
 ### NontransferableERC20Votes
-- No one should be able to transfer or approve transfer of any tokens.
-
 - The owner should be able to mint and burn tokens.
+
+- Tokens cannot be transferred between addresses (except to mint by the owner). This includes direct transfers, transfers from, and any other mechanisms that might move tokens between different addresses. 
+
+- No address should be able to approve another address to spend tokens on its behalf, as there should be no transfer of tokens.
+
+- Only authorized entities (like the contract owner or specific roles) should be able to mint new tokens. Minted tokens should correctly increase the recipient's balance and the total supply.
+
+- Voting power and delegation work as intended without enabling any form of transferability.
 
 ### Creator payments
 - The TokenEmitter and AuctionHouse should always pay creators in accordance with the creatorRateBps and entropyRateBps.
