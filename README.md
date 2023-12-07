@@ -256,11 +256,11 @@ The voting process within the CultureIndex must be solely based on the ERC721 an
 
 Accounts should not be able to vote more than once on the same art piece with the same ERC721 token in the CultureIndex.
 
-Account can not vote twice on the same art piece.
+Accounts can not vote twice on the same art piece.
 
-Only snapshotted vote weights should be able to update the MaxHeap vote weight value of the art piece.
+Only snapshotted (at art piece creation block) vote weights should be able to update the MaxHeap vote weight value of the art piece.
 
-CultureIndex and MaxHeap, must be resilient to DoS attacks that could hinder voting, art creation, or auction processes.
+CultureIndex and MaxHeap, must be resilient to DoS attacks that could significantly hinder voting, art creation, or auction processes.
 
 ### VerbsToken
 
@@ -273,15 +273,19 @@ VerbsToken should always mint the top voted art piece in the CultureIndex.
 
 AuctionHouse should only auction off tokens from the VerbsToken.
 
+
 ### VRGDA
 
 The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
+
 
 ### TokenEmitter
 
 The treasury and creatorsAddress should not be able to buy tokens.
 
 The distribution of ERC20 governance tokens should be in accordance with the defined emission schedule. 
+
+The TokenEmitter should always pay protocol rewards.
 
 # Additional Context
 
