@@ -285,6 +285,8 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 - Accounts can not vote twice on the same art piece.
 
+- `voteWithSig` signatures should only be valid for a one-time use.
+
 - Only snapshotted (at art piece creation block) vote weights should be able to update the total vote weight of the art piece. eg: If you received votes after snapshot date on the art piece, you should have 0 votes.
 
 - CultureIndex and MaxHeap, must be resilient to DoS attacks that could significantly hinder voting, art creation, or auction processes.
@@ -351,6 +353,8 @@ Begin by examining the access control and permissions for contracts that make up
 Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure. 
 
 Ensuring nothing uploaded to CultureIndex could break or otherwise disrupt the minting functionality of the VerbsToken.
+
+Any replay attacks on `voteWithSig` signatures.
 
 ### [AuctionHouse](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) attacks
 
