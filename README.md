@@ -61,6 +61,8 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 
 The AuctionHouse will fail to create a new auction if the CultureIndex is empty.
 
+VerbsToken mint can fail if the top voted piece in the CultureIndex has not met quorum.
+
 # the Revolution protocol ⌐◨-◨
 
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury.
@@ -253,29 +255,29 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 (properties that should NEVER EVER be broken).
 
 ### NontransferableERC20Votes
-- The owner should be able to mint tokens.
+- Only the owner should be able to directly mint tokens.
 
 - Tokens cannot be transferred between addresses (except to mint by the owner). This includes direct transfers, transfers from, and any other mechanisms that might move tokens between different addresses. 
 
 - No address should be able to approve another address to spend tokens on its behalf, as there should be no transfer of tokens.
 
-- Only authorized entities (like the contract owner or specific roles) should be able to mint new tokens. Minted tokens should correctly increase the recipient's balance and the total supply.
+- Only authorized entities (owner) should be able to mint new tokens. Minted tokens should correctly increase the recipient's balance and the total supply.
 
-- Voting power and delegation work as intended without enabling any form of transferability.
+- Voting power and delegation work as intended according to [Votes](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/governance/utils/Votes.sol) without enabling any form of transferability.
 
 ### Creator payments
-- The TokenEmitter and AuctionHouse should always pay creators in accordance with the creatorRateBps and entropyRateBps.
+- The TokenEmitter and AuctionHouse should always pay creators (ETH or ERC20) in accordance with the creatorRateBps and entropyRateBps calculation.
 
-- The AuctionHouse should always pay creator(s) of the CultureIndex art piece being auctioned.
+- The AuctionHouse should always pay only creator(s) of the CultureIndex art piece being auctioned and the owner.
 
 - The TokenEmitter should always pay the `creatorsAddress`.
 
-- ETH and ERC20 transfer functions are secure and protected with reentrancy checks
+- ETH and ERC20 transfer functions are secure and protected with reentrancy checks / math errors.
   
 
 ### CultureIndex
 
-- Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the token contract in any way.
+- Anything uploaded to the CultureIndex should always be mintable by the VerbsToken contract and not disrupt the VerbsToken contract in any way.
 
 - The voting weights calculated must be solely based on the ERC721 and ERC20 balance of the account that casts the vote.
 
@@ -283,7 +285,7 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 - Accounts can not vote twice on the same art piece.
 
-- Only snapshotted (at art piece creation block) vote weights should be able to update the total vote weight of the art piece.
+- Only snapshotted (at art piece creation block) vote weights should be able to update the total vote weight of the art piece. eg: If you received votes after snapshot date on the art piece, you should have 0 votes.
 
 - CultureIndex and MaxHeap, must be resilient to DoS attacks that could significantly hinder voting, art creation, or auction processes.
 
@@ -312,11 +314,11 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 - The treasury and creatorsAddress should not be able to buy tokens.
 
-- The distribution of ERC20 governance tokens should be in accordance with the defined emission schedule. 
+- The distribution of ERC20 governance tokens should be in accordance with the defined linear emission schedule. 
 
-- The TokenEmitter should always pay protocol rewards.
+- The TokenEmitter should always pay protocol rewards assuming enough ETH was paid to the buyToken function.
 
-- The treasury should always receive it's share of ether (minus creatorRateBps share).
+- The treasury should always receive it's share of ether (minus creatorRateBps and protocol rewards share).
 
 
 # Additional Context
