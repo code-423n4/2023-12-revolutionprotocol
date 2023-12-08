@@ -350,13 +350,20 @@ Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or c
 
 Ensuring nothing uploaded to CultureIndex could break or otherwise disrupt the minting functionality of the VerbsToken.
 
+### [AuctionHouse](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) attacks
+
+Ensuring gas passed to the settleAndCreateNewAuction functions or other nefarious interactions with AuctionSettlement cannot brick the auction.
+
+Ensuring anything submitted to the CultureIndex cannot brick the auction by being minted. Look for large numbers of creators on art pieces as a potential attack vector.
+
+
 ### [TokenEmitter](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) attacks
 
 Another large distinction from Nouns is that there are 2 classes of governance shares, the ERC721 auction item (VerbsToken) and the nontransferable ERC20. These two tokens are used to vote on the CultureIndex and choose the next auction item, and in the future will be used to govern a DAO with a treasury. It is essential to explore potential ways in which the ERC20 emission from the TokenEmitter can be exploited to gain an outsized governance share. 
 
 ### Creator rate attacks
 
-The system is further complicated by the creator payments on both the AuctionHouse and the TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and TokenEmitter. The CultureIndex voting setup and quorum determins the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the TokenEmitter. Given creators will be paid directly, ensure malicious creator contracts cannot disrupt the system.
+The system is further complicated by the creator payments on both the AuctionHouse and the TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and TokenEmitter. The CultureIndex voting setup and quorum determins the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the TokenEmitter. Given creators will be paid directly, ensure malicious creator contracts or a large number of creators cannot disrupt the system by eg: bricking the auction.
 
 ## Tokens used on launch and anticipated to interact with.
 
