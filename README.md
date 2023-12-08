@@ -352,9 +352,11 @@ Ensuring nothing uploaded to CultureIndex could break or otherwise disrupt the m
 
 ### [AuctionHouse](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/VerbsAuctionHouse.sol) attacks
 
-Ensuring gas passed to the settleAndCreateNewAuction functions or other nefarious interactions with AuctionSettlement cannot brick the auction.
+Ensuring gas passed to the settleAndCreateNewAuction functions or other nefarious interactions with AuctionSettlement cannot brick/pause the auction.
 
 Ensuring anything submitted to the CultureIndex cannot brick the auction by being minted. Look for large numbers of creators on art pieces as a potential attack vector.
+
+Ensuring anything nefarious in the minting functionality of the VerbsToken contract cannot brick the auction.
 
 
 ### [TokenEmitter](https://github.com/code-423n4/2023-12-collective/blob/main/packages/revolution-contracts/src/TokenEmitter.sol) attacks
