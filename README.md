@@ -245,7 +245,7 @@ You can read more about the implementation on [Paradigm's site](https://www.para
 
 ## Out of scope
 
-All the contracts not mentioned in scope including all test files. Any issues that were raised in the previous 2 Nouns audits. Findings [here](https://github.com/code-423n4/2023-07-nounsdao-findings/blob/main/report.md) and [here](https://github.com/code-423n4/2022-08-nounsdao-findings/blob/main/report.md).
+All the contracts not mentioned in scope including all test files. 
 
 Any issues or improvements on how we integrate with the out of scope contracts is in scope.
 
