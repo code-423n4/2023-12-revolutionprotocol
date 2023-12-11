@@ -352,6 +352,9 @@ contract CultureIndexArtPieceTest is CultureIndexTestSuite {
 
         cultureIndex.transferOwnership(address(erc721Token));
 
+        vm.startPrank(address(erc721Token));
+        cultureIndex.acceptOwnership();
+
         vm.startPrank(address(erc20TokenEmitter));
         erc20Token.mint(address(this), erc20Supply);
 

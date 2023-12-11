@@ -20,6 +20,7 @@
 | _currentPieceId         | uint256                                                           | 10   | 0      | 32    | src/CultureIndex.sol:CultureIndex |
 | votes                   | mapping(uint256 => mapping(address => struct ICultureIndex.Vote)) | 11   | 0      | 32    | src/CultureIndex.sol:CultureIndex |
 | totalVoteWeights        | mapping(uint256 => uint256)                                       | 12   | 0      | 32    | src/CultureIndex.sol:CultureIndex |
+| dropperAdmin            | address                                                           | 13   | 0      | 20    | src/CultureIndex.sol:CultureIndex |
 
 =======================
 ➡ ERC20TokenEmitter
@@ -60,10 +61,11 @@
 
 | Name            | Type                        | Slot | Offset | Bytes | Contract                |
 |-----------------|-----------------------------|------|--------|-------|-------------------------|
-| heap            | mapping(uint256 => uint256) | 0    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
-| size            | uint256                     | 1    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
-| valueMapping    | mapping(uint256 => uint256) | 2    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
-| positionMapping | mapping(uint256 => uint256) | 3    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
+| admin           | address                     | 0    | 0      | 20    | src/MaxHeap.sol:MaxHeap |
+| heap            | mapping(uint256 => uint256) | 1    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
+| size            | uint256                     | 2    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
+| valueMapping    | mapping(uint256 => uint256) | 3    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
+| positionMapping | mapping(uint256 => uint256) | 4    | 0      | 32    | src/MaxHeap.sol:MaxHeap |
 
 =======================
 ➡ VerbsToken

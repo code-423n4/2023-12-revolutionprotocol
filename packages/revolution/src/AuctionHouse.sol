@@ -33,7 +33,17 @@ import { ICultureIndex } from "./interfaces/ICultureIndex.sol";
 import { IRevolutionBuilder } from "./interfaces/IRevolutionBuilder.sol";
 import { Ownable2StepUpgradeable } from "@openzeppelin/contracts-upgradeable/access/Ownable2StepUpgradeable.sol";
 
-contract AuctionHouse is IAuctionHouse, PausableUpgradeable, ReentrancyGuardUpgradeable, Ownable2StepUpgradeable {
+import { UUPS } from "./libs/proxy/UUPS.sol";
+import { VersionedContract } from "./version/VersionedContract.sol";
+
+contract AuctionHouse is
+    IAuctionHouse,
+    VersionedContract,
+    UUPS,
+    PausableUpgradeable,
+    ReentrancyGuardUpgradeable,
+    Ownable2StepUpgradeable
+{
     // The Verbs ERC721 token contract
     IVerbsToken public verbs;
 
@@ -358,7 +368,7 @@ contract AuctionHouse is IAuctionHouse, PausableUpgradeable, ReentrancyGuardUpgr
                 uint256 creatorsShare = _auction.amount - auctioneerPayment;
 
                 uint256 numCreators = verbs.getArtPieceById(_auction.verbId).creators.length;
-                address deployer = verbs.getArtPieceById(_auction.verbId).dropper;
+                address deployer = verbs.getArtPieceById(_auction.verbId).sponsor;
 
                 //Build arrays for erc20TokenEmitter.buyToken
                 uint256[] memory vrgdaSplits = new uint256[](numCreators);
@@ -430,5 +440,17 @@ contract AuctionHouse is IAuctionHouse, PausableUpgradeable, ReentrancyGuardUpgr
             // Ensure successful transfer
             if (!wethSuccess) revert("WETH transfer failed");
         }
+    }
+
+    ///                                                          ///
+    ///                        AUCTION UPGRADE                   ///
+    ///                                                          ///
+
+    /// @notice Ensures the caller is authorized to upgrade the contract and the new implementation is valid
+    /// @dev This function is called in `upgradeTo` & `upgradeToAndCall`
+    /// @param _newImpl The new implementation address
+    function _authorizeUpgrade(address _newImpl) internal view override onlyOwner whenPaused {
+        // Ensure the new implementation is registered by the Builder DAO
+        if (!manager.isRegisteredUpgrade(_getImplementation(), _newImpl)) revert INVALID_UPGRADE(_newImpl);
     }
 }

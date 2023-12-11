@@ -298,7 +298,7 @@ contract VerbsToken is
             newPiece.pieceId = artPiece.pieceId;
             newPiece.metadata = artPiece.metadata;
             newPiece.isDropped = artPiece.isDropped;
-            newPiece.dropper = artPiece.dropper;
+            newPiece.sponsor = artPiece.sponsor;
             newPiece.totalERC20Supply = artPiece.totalERC20Supply;
             newPiece.quorumVotes = artPiece.quorumVotes;
             newPiece.totalVotesSupply = artPiece.totalVotesSupply;

@@ -21,6 +21,9 @@ contract TokenBasicTest is VerbsTokenTestSuite {
     function testTokenMetadataIntegrity() public {
         // Create an art piece and mint a token
         uint256 artPieceId = createDefaultArtPiece();
+
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         uint256 tokenId = erc721Token.mint();
 
         // Retrieve the token metadata URI
@@ -88,6 +91,9 @@ contract TokenBasicTest is VerbsTokenTestSuite {
     /// @dev Tests that minted tokens are correctly associated with the art piece from CultureIndex
     function testCorrectArtAssociation() public {
         uint256 artPieceId = createDefaultArtPiece();
+
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         uint256 tokenId = erc721Token.mint();
 
         (uint256 recordedPieceId, , , , , , , ) = erc721Token.artPieces(tokenId);
@@ -111,7 +117,7 @@ contract TokenBasicTest is VerbsTokenTestSuite {
         vm.expectEmit(true, true, true, true);
         emit ICultureIndexEvents.PieceCreated(
             0,
-            address(auction),
+            address(this),
             ICultureIndex.ArtPieceMetadata({
                 name: name,
                 description: description,
@@ -124,6 +130,8 @@ contract TokenBasicTest is VerbsTokenTestSuite {
             0
         );
 
+        vm.stopPrank();
+        vm.startPrank(address(this));
         uint256 artPieceId = createArtPiece(
             name,
             description,
@@ -303,6 +311,9 @@ contract TokenBasicTest is VerbsTokenTestSuite {
         address voter = address(0x5);
         uint256 voteWeight = 100;
 
+        vm.stopPrank();
+        vm.startPrank(address(auction));
+
         // Simulate dropping the piece
         erc721Token.mint(); // Replace with your actual function to mark a piece as dropped
 
@@ -394,6 +405,8 @@ contract TokenBasicTest is VerbsTokenTestSuite {
     function testDropTopVotedPieceOnEmptyHeap() public {
         // Arrange
         // Ensure no art pieces have been created or all created pieces are already dropped
+        vm.stopPrank();
+        vm.startPrank(address(auction));
 
         // Act & Assert
         vm.expectRevert("Culture index is empty");
@@ -489,6 +502,9 @@ contract TokenBasicTest is VerbsTokenTestSuite {
 
     /// @dev Tests the interaction with the CultureIndex during minting
     function testCultureIndexInteraction() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
+
         //create piece
         createDefaultArtPiece();
 

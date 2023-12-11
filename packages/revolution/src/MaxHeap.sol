@@ -12,6 +12,9 @@ import { VersionedContract } from "./version/VersionedContract.sol";
 /// @dev This contract implements a Max Heap data structure with basic operations
 /// @author Written by rocketman and gpt4
 contract MaxHeap is VersionedContract, UUPS, Ownable2StepUpgradeable, ReentrancyGuardUpgradeable {
+    /// @notice The parent contract that is allowed to update the data store
+    address public admin;
+
     ///                                                          ///
     ///                         IMMUTABLES                       ///
     ///                                                          ///
@@ -29,15 +32,30 @@ contract MaxHeap is VersionedContract, UUPS, Ownable2StepUpgradeable, Reentrancy
     }
 
     ///                                                          ///
+    ///                          MODIFIERS                       ///
+    ///                                                          ///
+
+    /**
+     * @notice Require that the minter has not been locked.
+     */
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Sender is not the admin");
+        _;
+    }
+
+    ///                                                          ///
     ///                         INITIALIZER                      ///
     ///                                                          ///
 
     /**
      * @notice Initializes the maxheap contract
      * @param _initialOwner The initial owner of the contract
+     * @param _admin The contract that is allowed to update the data store
      */
-    function initialize(address _initialOwner) public initializer {
+    function initialize(address _initialOwner, address _admin) public initializer {
         require(msg.sender == address(manager), "Only manager can initialize");
+
+        admin = _admin;
 
         __Ownable_init(_initialOwner);
         __ReentrancyGuard_init();
@@ -73,7 +91,7 @@ contract MaxHeap is VersionedContract, UUPS, Ownable2StepUpgradeable, Reentrancy
     /// @notice Reheapify the heap starting at a given position
     /// @dev This ensures that the heap property is maintained
     /// @param pos The starting position for the heapify operation
-    function maxHeapify(uint256 pos) public onlyOwner {
+    function maxHeapify(uint256 pos) internal {
         uint256 left = 2 * pos + 1;
         uint256 right = 2 * pos + 2;
 
@@ -98,7 +116,7 @@ contract MaxHeap is VersionedContract, UUPS, Ownable2StepUpgradeable, Reentrancy
     /// @dev The function will revert if the heap is full
     /// @param itemId The item ID to insert
     /// @param value The value to insert
-    function insert(uint256 itemId, uint256 value) public onlyOwner {
+    function insert(uint256 itemId, uint256 value) public onlyAdmin {
         heap[size] = itemId;
         valueMapping[itemId] = value; // Update the value mapping
         positionMapping[itemId] = size; // Update the position mapping
@@ -115,7 +133,7 @@ contract MaxHeap is VersionedContract, UUPS, Ownable2StepUpgradeable, Reentrancy
     /// @param itemId The item ID whose vote count needs to be updated
     /// @param newValue The new value for the item
     /// @dev This function adjusts the heap to maintain the max-heap property after updating the vote count
-    function updateValue(uint256 itemId, uint256 newValue) public onlyOwner {
+    function updateValue(uint256 itemId, uint256 newValue) public onlyAdmin {
         uint256 position = positionMapping[itemId];
         uint256 oldValue = valueMapping[itemId];
 
@@ -135,7 +153,7 @@ contract MaxHeap is VersionedContract, UUPS, Ownable2StepUpgradeable, Reentrancy
     /// @notice Extract the maximum element from the heap
     /// @dev The function will revert if the heap is empty
     /// @return The maximum element from the heap
-    function extractMax() external onlyOwner returns (uint256, uint256) {
+    function extractMax() external onlyAdmin returns (uint256, uint256) {
         require(size > 0, "Heap is empty");
 
         uint256 popped = heap[0];

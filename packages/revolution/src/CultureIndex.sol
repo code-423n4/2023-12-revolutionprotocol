@@ -74,6 +74,9 @@ contract CultureIndex is
     // Constant for max number of creators
     uint256 public constant MAX_NUM_CREATORS = 100;
 
+    // The address that is allowed to drop art pieces
+    address public dropperAdmin;
+
     ///                                                          ///
     ///                         IMMUTABLES                       ///
     ///                                                          ///
@@ -99,6 +102,8 @@ contract CultureIndex is
      * @param _erc20VotingToken The address of the ERC20 voting token, commonly referred to as "points"
      * @param _erc721VotingToken The address of the ERC721 voting token, commonly the dropped art pieces
      * @param _initialOwner The owner of the contract, allowed to drop pieces. Commonly updated to the AuctionHouse
+     * @param _maxHeap The address of the max heap contract
+     * @param _dropperAdmin The address that can drop new art pieces
      * @param _cultureIndexParams The CultureIndex settings
      */
     function initialize(
@@ -106,6 +111,7 @@ contract CultureIndex is
         address _erc721VotingToken,
         address _initialOwner,
         address _maxHeap,
+        address _dropperAdmin,
         IRevolutionBuilder.CultureIndexParams memory _cultureIndexParams
     ) external initializer {
         require(msg.sender == address(manager), "Only manager can initialize");
@@ -130,11 +136,12 @@ contract CultureIndex is
         description = _cultureIndexParams.description;
         quorumVotesBPS = _cultureIndexParams.quorumVotesBPS;
         minVoteWeight = _cultureIndexParams.minVoteWeight;
+        dropperAdmin = _dropperAdmin;
 
         emit QuorumVotesBPSSet(quorumVotesBPS, _cultureIndexParams.quorumVotesBPS);
 
         // Create maxHeap
-        maxHeap = MaxHeap(address(_maxHeap));
+        maxHeap = MaxHeap(_maxHeap);
     }
 
     ///                                                          ///
@@ -222,7 +229,7 @@ contract CultureIndex is
         );
         newPiece.totalERC20Supply = erc20VotingToken.totalSupply();
         newPiece.metadata = metadata;
-        newPiece.dropper = msg.sender;
+        newPiece.sponsor = msg.sender;
         newPiece.creationBlock = block.number;
         newPiece.quorumVotes = (quorumVotesBPS * newPiece.totalVotesSupply) / 10_000;
 
@@ -230,43 +237,14 @@ contract CultureIndex is
             newPiece.creators.push(creatorArray[i]);
         }
 
-        _emitPieceCreatedEvents(
-            pieceId,
-            msg.sender,
-            metadata,
-            creatorArray,
-            creatorArrayLength,
-            newPiece.quorumVotes,
-            newPiece.totalVotesSupply
-        );
-
-        return newPiece.pieceId;
-    }
-
-    /**
-     * @notice Emits events for created art piece
-     * @param pieceId The ID of the art piece.
-     * @param sender The address of the sender.
-     * @param metadata The metadata associated with the art piece, including name, description, image, and optional animation URL.
-     * @param creatorArray An array of creators who contributed to the piece, along with their respective basis points that must sum up to 10,000.
-     * @param quorum The quorum votes required for the art piece to be dropped.
-     * @param totalVotesSupply The total votes supply at the time of creation.
-     */
-    function _emitPieceCreatedEvents(
-        uint256 pieceId,
-        address sender,
-        ArtPieceMetadata calldata metadata,
-        CreatorBps[] calldata creatorArray,
-        uint256 creatorArrayLength,
-        uint256 quorum,
-        uint256 totalVotesSupply
-    ) internal {
-        emit PieceCreated(pieceId, sender, metadata, quorum, totalVotesSupply);
+        emit PieceCreated(pieceId, msg.sender, metadata, newPiece.quorumVotes, newPiece.totalVotesSupply);
 
         // Emit an event for each creator
         for (uint i; i < creatorArrayLength; i++) {
             emit PieceCreatorAdded(pieceId, creatorArray[i].creator, msg.sender, creatorArray[i].bps);
         }
+
+        return newPiece.pieceId;
     }
 
     /**
@@ -538,7 +516,9 @@ contract CultureIndex is
      * @notice Pulls and drops the top-voted piece.
      * @return The top voted piece
      */
-    function dropTopVotedPiece() public nonReentrant onlyOwner returns (ArtPiece memory) {
+    function dropTopVotedPiece() public nonReentrant returns (ArtPiece memory) {
+        require(msg.sender == dropperAdmin, "Only dropper can drop pieces");
+
         ICultureIndex.ArtPiece memory piece = getTopVotedPiece();
         require(totalVoteWeights[piece.pieceId] >= piece.quorumVotes, "Does not meet quorum votes to be dropped.");
 

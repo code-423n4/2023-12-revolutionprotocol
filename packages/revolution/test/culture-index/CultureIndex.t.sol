@@ -34,7 +34,7 @@ contract CultureIndexTestSuite is RevolutionBuilderTest {
         super.deployMock();
 
         //start prank to be cultureindex's owner
-        vm.startPrank(address(erc721Token));
+        vm.startPrank(address(dao));
 
         // govToken = new NontransferableERC20Votes(address(this), "Revolution Governance", "GOV");
 

@@ -162,6 +162,8 @@ contract TokenAccessControlTest is VerbsTokenTestSuite {
 
     /// @dev Tests that only the minter can burn tokens
     function testBurningPermission() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         createDefaultArtPiece();
         uint256 tokenId = erc721Token.mint();
 
@@ -198,15 +200,13 @@ contract TokenAccessControlTest is VerbsTokenTestSuite {
 
     /// @dev Tests that the minter can be set and locked appropriately
     function testMinterAssignmentAndLocking() public {
-        vm.stopPrank();
-        vm.startPrank(address(auction));
         createDefaultArtPiece();
         // Test setting the minter and minting a token
         erc721Token.setMinter(address(0x2));
         vm.startPrank(address(0x2)); // simulate calls from the new minter address
         erc721Token.mint();
 
-        vm.startPrank(address(auction));
+        vm.startPrank(address(dao));
         // Lock the minter and attempt to change it, expecting a revert
         erc721Token.lockMinter();
         vm.expectRevert("Minter is locked");
@@ -224,7 +224,7 @@ contract TokenAccessControlTest is VerbsTokenTestSuite {
         vm.startPrank(address(manager));
         IDescriptor(newDescriptor).initialize(address(this), "Verb");
 
-        vm.startPrank(address(auction));
+        vm.startPrank(address(dao));
         erc721Token.setDescriptor(IDescriptor(newDescriptor));
 
         // Lock the descriptor and attempt to change it, expecting a revert

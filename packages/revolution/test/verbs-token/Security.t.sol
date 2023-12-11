@@ -71,6 +71,9 @@ contract TokenSecurityTest is VerbsTokenTestSuite {
 
     /// @dev Tests approval checks for transfer functions
     function testApprovalChecks() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
+
         createDefaultArtPiece();
 
         uint256 tokenId = erc721Token.mint();
@@ -170,7 +173,7 @@ contract TokenSecurityTest is VerbsTokenTestSuite {
         vm.expectEmit(true, true, true, true);
         emit ICultureIndexEvents.PieceCreated(
             0,
-            address(auction),
+            address(dao),
             ICultureIndex.ArtPieceMetadata({
                 name: "Mona Lisa",
                 description: "A masterpiece",
@@ -185,7 +188,7 @@ contract TokenSecurityTest is VerbsTokenTestSuite {
 
         // Check that the PieceCreatorAdded event was emitted with correct parameters
         vm.expectEmit(true, true, true, true);
-        emit ICultureIndexEvents.PieceCreatorAdded(0, address(0x1), address(auction), 10000);
+        emit ICultureIndexEvents.PieceCreatorAdded(0, address(0x1), address(dao), 10000);
 
         createDefaultArtPiece();
     }

@@ -30,6 +30,16 @@ import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/I
  * {ERC721-balanceOf}), and can use {_transferVotingUnits} to track a change in the distribution of those units (in the
  * previous example, it would be included in {ERC721-_update}).
  */
+
+/**
+ * @dev MODIFICATIONS
+ * Checkpointing logic from VotesUpgradeable.sol has been used with the following modifications:
+ * - `delegates` is renamed to `_delegates` and is set to private
+ * - `delegates` is a public function that uses the `_delegates` mapping look-up, but unlike
+ *   VotesUpgradeable.sol, returns the delegator's own address if there is no delegate.
+ *   This avoids the delegator needing to "delegate to self" with an additional transaction
+ */
+
 abstract contract VotesUpgradeable is
     Initializable,
     ContextUpgradeable,

@@ -23,7 +23,7 @@ contract CultureIndexArtPieceTest is CultureIndexTestSuite {
         erc20Token.mint(address(voter1Test), 100);
         erc20Token.mint(address(voter2Test), 200);
 
-        vm.roll(block.number + 1); // roll block number to enable voting snapshot
+        vm.roll(block.number + 1); // roll block number to enable voting
 
         // Vote for the first piece with voter1
         voter1Test.voteForPiece(firstPieceId);

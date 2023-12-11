@@ -18,14 +18,14 @@ interface ICultureIndexEvents {
     /**
      * @dev Emitted when a new piece is created.
      * @param pieceId Unique identifier for the newly created piece.
-     * @param dropper Address that created the piece.
+     * @param sponsor Address that created the piece.
      * @param metadata Metadata associated with the art piece.
      * @param quorumVotes The quorum votes for the piece.
      * @param totalVotesSupply The total votes supply for the piece.
      */
     event PieceCreated(
         uint256 indexed pieceId,
-        address indexed dropper,
+        address indexed sponsor,
         ICultureIndex.ArtPieceMetadata metadata,
         uint256 quorumVotes,
         uint256 totalVotesSupply
@@ -47,11 +47,17 @@ interface ICultureIndexEvents {
      */
     event VoteCast(uint256 indexed pieceId, address indexed voter, uint256 weight, uint256 totalWeight);
 
-    // The events emitted for the respective creators of a piece
+    /**
+     * @dev The events emitted for the respective creators of a piece
+     * @param pieceId Unique identifier for the piece being voted for.
+     * @param creatorAddress Address of the creator.
+     * @param sponsor Address that put the piece onchain.
+     * @param bps Basis points of the creator.
+     */
     event PieceCreatorAdded(
         uint256 indexed pieceId,
         address indexed creatorAddress,
-        address indexed dropper,
+        address indexed sponsor,
         uint256 bps
     );
 
@@ -94,12 +100,23 @@ interface ICultureIndex is ICultureIndexEvents {
         uint256 bps;
     }
 
-    // Struct defining an art piece.
+    /**
+     * @dev Struct defining an art piece.
+     *@param pieceId Unique identifier for the piece.
+     * @param metadata Metadata associated with the art piece.
+     * @param creators Creators of the art piece.
+     * @param sponsor Address that created the piece.
+     * @param isDropped Boolean indicating if the piece has been dropped.
+     * @param creationBlock Block number when the piece was created.
+     * @param quorumVotes The quorum votes for the piece.
+     * @param totalERC20Supply The total ERC20 supply for the piece.
+     * @param totalVotesSupply The total votes supply for the piece.
+     */
     struct ArtPiece {
         uint256 pieceId;
         ArtPieceMetadata metadata;
         CreatorBps[] creators;
-        address dropper;
+        address sponsor;
         bool isDropped;
         uint256 creationBlock;
         uint256 quorumVotes;
@@ -237,6 +254,7 @@ interface ICultureIndex is ICultureIndexEvents {
      * @param erc721VotingToken The address of the ERC721 voting token, commonly the dropped art pieces
      * @param initialOwner The owner of the contract, allowed to drop pieces. Commonly updated to the AuctionHouse
      * @param maxHeap The address of the max heap contract
+     * @param dropperAdmin The address that can drop new art pieces
      * @param cultureIndexParams The CultureIndex settings
      */
     function initialize(
@@ -244,6 +262,7 @@ interface ICultureIndex is ICultureIndexEvents {
         address erc721VotingToken,
         address initialOwner,
         address maxHeap,
+        address dropperAdmin,
         IRevolutionBuilder.CultureIndexParams calldata cultureIndexParams
     ) external;
 }

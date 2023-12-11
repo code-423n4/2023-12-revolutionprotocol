@@ -22,7 +22,7 @@ contract CultureIndexAccessControlTest is CultureIndexTestSuite {
         vm.assume(newQuorumBPS <= cultureIndex.MAX_QUORUM_VOTES_BPS());
 
         // Set new quorum BPS by owner
-        vm.startPrank(address(erc721Token));
+        vm.startPrank(address(dao));
         cultureIndex._setQuorumVotesBPS(newQuorumBPS);
         vm.stopPrank();
 
@@ -36,7 +36,7 @@ contract CultureIndexAccessControlTest is CultureIndexTestSuite {
         vm.assume(newQuorumBPS > cultureIndex.MAX_QUORUM_VOTES_BPS());
 
         // Set new quorum BPS by owner
-        vm.startPrank(address(erc721Token));
+        vm.startPrank(address(dao));
         vm.expectRevert("CultureIndex::_setQuorumVotesBPS: invalid quorum bps");
         cultureIndex._setQuorumVotesBPS(newQuorumBPS);
         vm.stopPrank();
@@ -61,7 +61,7 @@ contract CultureIndexAccessControlTest is CultureIndexTestSuite {
         vm.assume(quorumBps > 200 && quorumBps <= cultureIndex.MAX_QUORUM_VOTES_BPS());
 
         // Set quorum BPS
-        vm.startPrank(address(erc721Token));
+        vm.startPrank(address(dao));
         cultureIndex._setQuorumVotesBPS(quorumBps);
         vm.stopPrank();
 
@@ -77,6 +77,8 @@ contract CultureIndexAccessControlTest is CultureIndexTestSuite {
         // Vote for the piece, but do not meet the quorum
         vm.startPrank(address(this));
         cultureIndex.vote(pieceId);
+
+        emit log_address(address(cultureIndex.dropperAdmin()));
 
         // Attempt to drop the top-voted piece and expect it to fail
         vm.expectRevert("Does not meet quorum votes to be dropped.");

@@ -707,11 +707,9 @@ contract CultureIndexVotingBasicTest is CultureIndexTestSuite {
         uint256 quorumBPS = cultureIndex.quorumVotesBPS(); // Example quorum BPS (20%)
 
         // Set the quorum BPS
-        vm.startPrank(address(erc721Token));
         cultureIndex._setQuorumVotesBPS(quorumBPS);
 
         // Set the ERC20 and ERC721 total supplies
-        vm.stopPrank();
         vm.startPrank(address(erc20TokenEmitter));
         erc20Token.mint(address(this), erc20TotalSupply);
 
@@ -734,7 +732,6 @@ contract CultureIndexVotingBasicTest is CultureIndexTestSuite {
         // Calculate expected quorum votes
         uint256 expectedQuorumVotes = (quorumBPS *
             (erc20TotalSupply + erc721TotalSupply * 1e18 * cultureIndex.erc721VotingTokenWeight())) / 10_000;
-
         // Get the quorum votes from the contract
         uint256 actualQuorumVotes = cultureIndex.quorumVotes();
 

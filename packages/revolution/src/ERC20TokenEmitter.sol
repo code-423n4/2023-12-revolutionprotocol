@@ -31,7 +31,7 @@ contract ERC20TokenEmitter is
     VRGDAC public vrgdac;
 
     // solhint-disable-next-line not-rely-on-time
-    uint public startTime;
+    uint256 public startTime;
 
     /**
      * @notice A running total of the amount of tokens emitted.
@@ -105,7 +105,7 @@ contract ERC20TokenEmitter is
         startTime = block.timestamp;
     }
 
-    function _mint(address _to, uint _amount) private {
+    function _mint(address _to, uint256 _amount) private {
         token.mint(_to, _amount);
     }
 
@@ -153,7 +153,7 @@ contract ERC20TokenEmitter is
         address[] calldata addresses,
         uint[] calldata basisPointSplits,
         ProtocolRewardAddresses calldata protocolRewardsRecipients
-    ) public payable nonReentrant whenNotPaused returns (uint tokensSoldWad) {
+    ) public payable nonReentrant whenNotPaused returns (uint256 tokensSoldWad) {
         //prevent treasury from paying itself
         require(msg.sender != treasury && msg.sender != creatorsAddress, "Funds recipient cannot buy tokens");
 
@@ -162,7 +162,7 @@ contract ERC20TokenEmitter is
         require(addresses.length == basisPointSplits.length, "Parallel arrays required");
 
         // Get value left after protocol rewards
-        uint msgValueRemaining = _handleRewardsAndGetValueToSend(
+        uint256 msgValueRemaining = _handleRewardsAndGetValueToSend(
             msg.value,
             protocolRewardsRecipients.builder,
             protocolRewardsRecipients.purchaseReferral,
@@ -199,18 +199,19 @@ contract ERC20TokenEmitter is
 
         //Mint tokens for creators
         if (totalTokensForCreators > 0 && creatorsAddress != address(0)) {
-            _mint(creatorsAddress, uint(totalTokensForCreators));
+            _mint(creatorsAddress, uint256(totalTokensForCreators));
         }
 
-        uint bpsSum = 0;
+        uint256 bpsSum = 0;
 
         //Mint tokens to buyers
-        if (totalTokensForBuyers > 0) {
-            for (uint i = 0; i < addresses.length; i++) {
+
+        for (uint256 i = 0; i < addresses.length; i++) {
+            if (totalTokensForBuyers > 0) {
                 // transfer tokens to address
-                _mint(addresses[i], uint((totalTokensForBuyers * int(basisPointSplits[i])) / 10_000));
-                bpsSum += basisPointSplits[i];
+                _mint(addresses[i], uint256((totalTokensForBuyers * int(basisPointSplits[i])) / 10_000));
             }
+            bpsSum += basisPointSplits[i];
         }
 
         require(bpsSum == 10_000, "bps must add up to 10_000");
@@ -220,12 +221,12 @@ contract ERC20TokenEmitter is
             msg.value,
             toPayTreasury,
             msg.value - msgValueRemaining,
-            uint(totalTokensForBuyers),
-            uint(totalTokensForCreators),
+            uint256(totalTokensForBuyers),
+            uint256(totalTokensForCreators),
             creatorDirectPayment
         );
 
-        return uint(totalTokensForBuyers);
+        return uint256(totalTokensForBuyers);
     }
 
     /**
@@ -233,7 +234,7 @@ contract ERC20TokenEmitter is
      * @param amount the amount of tokens to buy.
      * @return spentY The cost in wei of the token purchase.
      */
-    function buyTokenQuote(uint amount) public view returns (int spentY) {
+    function buyTokenQuote(uint256 amount) public view returns (int spentY) {
         require(amount > 0, "Amount must be greater than 0");
         // Note: By using toDaysWadUnsafe(block.timestamp - startTime) we are establishing that 1 "unit of time" is 1 day.
         // solhint-disable-next-line not-rely-on-time
@@ -250,7 +251,7 @@ contract ERC20TokenEmitter is
      * @param etherAmount the payment amount in wei.
      * @return gainedX The amount of tokens that would be emitted for the payment amount.
      */
-    function getTokenQuoteForEther(uint etherAmount) public view returns (int gainedX) {
+    function getTokenQuoteForEther(uint256 etherAmount) public view returns (int gainedX) {
         require(etherAmount > 0, "Ether amount must be greater than 0");
         // Note: By using toDaysWadUnsafe(block.timestamp - startTime) we are establishing that 1 "unit of time" is 1 day.
         // solhint-disable-next-line not-rely-on-time
@@ -267,7 +268,7 @@ contract ERC20TokenEmitter is
      * @param paymentAmount the payment amount in wei.
      * @return gainedX The amount of tokens that would be emitted for the payment amount.
      */
-    function getTokenQuoteForPayment(uint paymentAmount) external view returns (int gainedX) {
+    function getTokenQuoteForPayment(uint256 paymentAmount) external view returns (int gainedX) {
         require(paymentAmount > 0, "Payment amount must be greater than 0");
         // Note: By using toDaysWadUnsafe(block.timestamp - startTime) we are establishing that 1 "unit of time" is 1 day.
         // solhint-disable-next-line not-rely-on-time
@@ -287,8 +288,7 @@ contract ERC20TokenEmitter is
     function setEntropyRateBps(uint256 _entropyRateBps) external onlyOwner {
         require(_entropyRateBps <= 10_000, "Entropy rate must be less than or equal to 10_000");
 
-        entropyRateBps = _entropyRateBps;
-        emit EntropyRateBpsUpdated(_entropyRateBps);
+        emit EntropyRateBpsUpdated(entropyRateBps = _entropyRateBps);
     }
 
     /**
@@ -298,9 +298,8 @@ contract ERC20TokenEmitter is
      */
     function setCreatorRateBps(uint256 _creatorRateBps) external onlyOwner {
         require(_creatorRateBps <= 10_000, "Creator rate must be less than or equal to 10_000");
-        creatorRateBps = _creatorRateBps;
 
-        emit CreatorRateBpsUpdated(_creatorRateBps);
+        emit CreatorRateBpsUpdated(creatorRateBps = _creatorRateBps);
     }
 
     /**
@@ -309,8 +308,7 @@ contract ERC20TokenEmitter is
      */
     function setCreatorsAddress(address _creatorsAddress) external override onlyOwner nonReentrant {
         require(_creatorsAddress != address(0), "Invalid address");
-        creatorsAddress = _creatorsAddress;
 
-        emit CreatorsAddressUpdated(_creatorsAddress);
+        emit CreatorsAddressUpdated(creatorsAddress = _creatorsAddress);
     }
 }

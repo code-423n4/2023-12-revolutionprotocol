@@ -46,7 +46,7 @@ contract TokenMintingTest is VerbsTokenTestSuite {
 
         // Now compare the relevant fields of topVotedPieceBeforeMint and droppedArtPiece
         assertEq(droppedArtPiece.pieceId, topVotedPieceBeforeMint.pieceId, "Piece ID should match");
-        assertEq(droppedArtPiece.dropper, topVotedPieceBeforeMint.dropper, "Dropper address should match");
+        assertEq(droppedArtPiece.sponsor, topVotedPieceBeforeMint.sponsor, "Sponsor address should match");
         //ensure isDropped is now true
         assertTrue(droppedArtPiece.isDropped, "isDropped should be true");
         assertTrue(
@@ -90,6 +90,9 @@ contract TokenMintingTest is VerbsTokenTestSuite {
 
     /// @dev Tests the minting with no pieces added
     function testMintWithNoPieces() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
+
         // Try to remove max and expect to fail
         try erc721Token.mint() {
             fail("Should revert on removing max from empty heap");
@@ -100,6 +103,8 @@ contract TokenMintingTest is VerbsTokenTestSuite {
 
     /// @dev Tests basic minting
     function testMint() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         // Add a piece to the CultureIndex
         createDefaultArtPiece();
 
@@ -118,6 +123,8 @@ contract TokenMintingTest is VerbsTokenTestSuite {
         createDefaultArtPiece();
 
         uint256 initialTotalSupply = erc721Token.totalSupply();
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         uint256 newTokenId = erc721Token.mint();
         assertEq(erc721Token.totalSupply(), initialTotalSupply + 1, "One new token should have been minted");
         assertEq(erc721Token.ownerOf(newTokenId), address(auction), "The contract should own the newly minted token");
@@ -126,6 +133,9 @@ contract TokenMintingTest is VerbsTokenTestSuite {
     /// @dev Tests burning a verb token
     function testBurn() public {
         createDefaultArtPiece();
+
+        vm.stopPrank();
+        vm.startPrank(address(auction));
 
         uint256 tokenId = erc721Token.mint();
         uint256 initialTotalSupply = erc721Token.totalSupply();
@@ -186,13 +196,16 @@ contract TokenMintingTest is VerbsTokenTestSuite {
             pieceId: 0,
             metadata: metadata,
             creators: creators,
-            dropper: address(auction),
+            sponsor: address(dao),
             isDropped: true,
             creationBlock: block.number,
             quorumVotes: 0,
             totalERC20Supply: 0,
             totalVotesSupply: 0
         });
+
+        vm.stopPrank();
+        vm.startPrank(address(auction));
 
         vm.expectEmit(true, true, true, true);
 
@@ -203,6 +216,8 @@ contract TokenMintingTest is VerbsTokenTestSuite {
 
     /// @dev Tests the burn function.
     function testBurnFunction() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         //create piece
         createDefaultArtPiece();
         uint256 tokenId = erc721Token.mint();
@@ -217,6 +232,8 @@ contract TokenMintingTest is VerbsTokenTestSuite {
 
     /// @dev Validates that the token URI is correctly set and retrieved
     function testTokenURI() public {
+        vm.stopPrank();
+        vm.startPrank(address(auction));
         uint256 artPieceId = createDefaultArtPiece();
         uint256 tokenId = erc721Token.mint();
         (, ICultureIndex.ArtPieceMetadata memory metadata, , , , , , ) = cultureIndex.pieces(artPieceId);

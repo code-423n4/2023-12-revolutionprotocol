@@ -34,7 +34,7 @@ contract VerbsTokenTestSuite is RevolutionBuilderTest {
 
         super.deployMock();
 
-        vm.startPrank(address(auction));
+        vm.startPrank(address(dao));
 
         // // Create a new mock ERC20 token for voting
         // govToken = new NontransferableERC20Votes(address(this), "Revolution Governance", "GOV");

@@ -22,7 +22,7 @@ contract MaxHeapTestSuite is RevolutionBuilderTest {
 
         address maxHeapTesterAddr = address(new ERC1967Proxy(maxHeapTesterImpl, ""));
 
-        MaxHeapTester(maxHeapTesterAddr).initialize(address(cultureIndex));
+        MaxHeapTester(maxHeapTesterAddr).initialize(address(dao), address(cultureIndex));
 
         maxHeapTester = MaxHeapTester(maxHeapTesterAddr);
 
@@ -124,7 +124,7 @@ contract MaxHeapTestSuite is RevolutionBuilderTest {
         maxHeapTester._set(0, 10, 2); // Assume a '_set' function for testing
 
         // Run heapify from the root
-        maxHeapTester.maxHeapify(0);
+        maxHeapTester.maxHeapifyTest(0);
 
         // Validate the max value
         (uint256 maxItemId, uint256 correctedMaxValue) = maxHeapTester.getMax();
@@ -180,7 +180,7 @@ contract MaxHeapTestSuite is RevolutionBuilderTest {
         maxHeapTester.insert(3, 5);
         maxHeapTester.insert(4, 12);
         maxHeapTester._set(1, 200, 4); // Assume a '_set' function for testing
-        maxHeapTester.maxHeapify(1);
+        maxHeapTester.maxHeapifyTest(1);
         uint256 itemId = maxHeapTester.heap(1);
         uint256 val = maxHeapTester.valueMapping(itemId);
         assertEq(val, 10, "Value should be 10 after heapify");
@@ -207,5 +207,11 @@ contract MaxHeapTester is MaxHeap {
     function _set(uint256 pos, uint256 itemId, uint256 value) public {
         heap[pos] = itemId;
         valueMapping[itemId] = value;
+    }
+
+    /// @notice Function to call maxHeapify (ONLY FOR TESTING)
+    /// @param pos The position to start heapify from
+    function maxHeapifyTest(uint256 pos) public {
+        super.maxHeapify(pos);
     }
 }
