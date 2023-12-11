@@ -1,28 +1,8 @@
 # Repo setup
 
-## ⭐️ Sponsor: Add code to this repo
 
-- [x] Create a PR to this repo with the below changes:
-- [x] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
-- [x] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
-- [x] Please have final versions of contracts and documentation added/updated in this repo **no less than 48 business hours prior to audit start time.**
-- [x] Be prepared for a 🚨code freeze🚨 for the duration of the audit — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the audit. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
-
----
-
-## ⭐️ Sponsor: Edit this `README.md` file
-
-- [x] Modify the contents of this `README.md` file. Describe how your code is supposed to work with links to any relevent documentation and any other criteria/details that the C4 Wardens should keep in mind when reviewing. ([Here's a well-constructed example.](https://github.com/code-423n4/2022-08-foundation#readme))
-- [x] Review the Gas award pool amount. This can be adjusted up or down, based on your preference - just flag it for Code4rena staff so we can update the pool totals across all comms channels.
 - [ ] Optional / nice to have: pre-record a high-level overview of your protocol (not just specific smart contract functions). This saves wardens a lot of time wading through documentation.
-- [x] [This checklist in Notion](https://code4rena.notion.site/Key-info-for-Code4rena-sponsors-f60764c4c4574bbf8e7a6dbd72cc49b4#0cafa01e6201462e9f78677a39e09746) provides some best practices for Code4rena audits.
 
-## ⭐️ Sponsor: Final touches
-
-- [ ] Review and confirm the details in the section titled "Scoping details" and alert Code4rena staff of any changes.
-- [ ] Check that images and other files used in this README have been uploaded to the repo as a file and then linked in the README using absolute path (e.g. `https://github.com/code-423n4/yourrepo-url/filepath.png`)
-- [ ] Ensure that _all_ links and image/file paths in this README use absolute paths, not relative paths
-- [ ] Check that all README information is in markdown format (HTML does not render on Code4rena.com)
 - [ ] Remove any part of this template that's not relevant to the final version of the README (e.g. instructions in brackets and italic)
 - [ ] Delete this checklist and all text above the line below when you're ready.
 
@@ -265,7 +245,7 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 (properties that should NEVER EVER be broken).
 
-For all contracts - only the RevolutionBuilder manager should be able to initialize and upgrade them.
+Only the RevolutionBuilder instance should be able to initialize the 7 in-scope contracts in the revolution-contracts package. Only the initialized owner should be able to upgrade (via [UUPS](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/proxy/UUPS.sol)) the CultureIndex, MaxHeap, Descriptor, and VerbsToken contracts.
 
 ### NontransferableERC20Votes
 
@@ -362,8 +342,6 @@ Compared to Nouns DAO, complexity arises from the auction of community created/v
 
 Begin by examining the access control and permissions for contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security and continued operation. Also, review the ERC20TokenEmitter contract's ownership and permissions to prevent governance takeover.
 
-Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package.
-
 ### [CultureIndex](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) attacks
 
 Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure.
@@ -404,9 +382,17 @@ Ethereum
 
 ## Trusted roles
 
-- [ ] Please list all trusted roles (e.g. operators, slashers, pausers, etc.), the privileges they hold, and any conditions under which privilege escalation is expected/allowable
+- Trusted roles (e.g. operators, slashers, pausers, etc.), the privileges they hold, and any conditions under which privilege escalation is expected/allowable
 
 [RevolutionBuilder](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/builder/RevolutionBuilder.sol) manages upgrades and deployments for the set of 7 contracts in the scope. Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package scope. Privilege escalation is not allowed, everything should be managed by the RevolutionBuilder contract.
+
+VerbsToken has a descriptor, minter, and CultureIndex. The minter is assumed to be always set to the AuctionHouse contract, and should have complete and sole control over the token minting functionality.
+
+CultureIndex has a `dropperAdmin` address set on initialize that has exclusive and locked control of dropping pieces from the CultureIndex. 
+
+MaxHeap has an `admin` address set on initialize that has exclusive and locked control of updating the MaxHeap data structure.
+
+VerbsDAOLogicV1 (outside scope) is assumed to be the owner of all contracts (CultureIndex, MaxHeap, Descriptor, ERC20TokenEmitter, NontransferableERC20Votes, and VerbsToken) and is able to upgrade via [UUPS](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/proxy/UUPS.sol) the CultureIndex, MaxHeap, Descriptor, and VerbsToken.
 
 ## DOS
 
