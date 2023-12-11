@@ -1,5 +1,3 @@
-
-
 # Repo setup
 
 ## ⭐️ Sponsor: Add code to this repo
@@ -9,7 +7,6 @@
 - [ ] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
 - [ ] Please have final versions of contracts and documentation added/updated in this repo **no less than 48 business hours prior to audit start time.**
 - [ ] Be prepared for a 🚨code freeze🚨 for the duration of the audit — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the audit. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
-
 
 ---
 
@@ -21,9 +18,10 @@
 - [ ] [This checklist in Notion](https://code4rena.notion.site/Key-info-for-Code4rena-sponsors-f60764c4c4574bbf8e7a6dbd72cc49b4#0cafa01e6201462e9f78677a39e09746) provides some best practices for Code4rena audits.
 
 ## ⭐️ Sponsor: Final touches
+
 - [ ] Review and confirm the details in the section titled "Scoping details" and alert Code4rena staff of any changes.
 - [ ] Check that images and other files used in this README have been uploaded to the repo as a file and then linked in the README using absolute path (e.g. `https://github.com/code-423n4/yourrepo-url/filepath.png`)
-- [ ] Ensure that *all* links and image/file paths in this README use absolute paths, not relative paths
+- [ ] Ensure that _all_ links and image/file paths in this README use absolute paths, not relative paths
 - [ ] Check that all README information is in markdown format (HTML does not render on Code4rena.com)
 - [ ] Remove any part of this template that's not relevant to the final version of the README (e.g. instructions in brackets and italic)
 - [ ] Delete this checklist and all text above the line below when you're ready.
@@ -31,6 +29,7 @@
 ---
 
 # Revolution audit details
+
 - Total Prize Pool: $36,500 USDC
   - HM awards: $24,750 USDC
   - Analysis awards: $1,500 USDC
@@ -45,7 +44,6 @@
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts December 13, 20:00 UTC
 - Ends December 21, 20:00 UTC
-
 
 ## Automated Findings
 
@@ -69,7 +67,7 @@ Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/
 
 <img width="377" alt="noun" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/noun.png">
 
-Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule. 
+Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule.
 
 The ultimate goal of Revolution is fair ownership distribution over a community movement where anyone can earn decision making power over the energy of the movement. If this excites you, [build with us](mailto:rocketman@collective.xyz).
 
@@ -82,16 +80,19 @@ git clone https://github.com/code-423n4/2023-12-revolutionprotocol.git && cd 202
 ```
 
 #### Node.js and pnpm
+
 ```
 npm install -g pnpm
 ```
 
 #### Turbo
+
 ```
 npm install turbo --global
 ```
 
 #### Foundry
+
 [Installation guide](https://book.getfoundry.sh/getting-started/installation)
 
 ## Install dependencies
@@ -103,92 +104,105 @@ pnpm install
 ## Run tests
 
 Run tests for both Protocol Rewards and Revolution Contracts
+
 ```
 turbo run test
 ```
 
 Run tests in dev mode for a package w/gas logs
+
 ```
-cd packages/revolution-contracts && pnpm run dev
+cd packages/revolution && pnpm run dev
 ```
+
 ## Gas reports
 
 Gas reports are located in [gas-reports](https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/gas-reports)
 
 Run the tests with and generate a gas report.
+
 ```
-cd packages/revolution-contracts && pnpm run write-gas-report
+cd packages/revolution && pnpm run write-gas-report
 ```
 
-Gas optimizations around the CultureIndex `createPiece` and `vote` functionality, the [MaxHeap](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) and [`buyToken`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol) should be prioritized.
+Gas optimizations around the CultureIndex `createPiece` and `vote` functionality, the [MaxHeap](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol) and [`buyToken`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol) should be prioritized.
 
 ## Slither
 
 #### Revolution contracts
+
 ```
-cd packages/revolution-contracts && slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
+cd packages/revolution && slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
 ```
 
 #### Protocol rewards
+
 ```
 cd packages/protocol-rewards && slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
 ```
 
 # revolution overview
-Instead of [auctioning](https://nouns.wtf/) off a generative PFP like Nouns, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces. 
 
-The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/AuctionHouse.sol). 
+Instead of [auctioning](https://nouns.wtf/) off a generative PFP like Nouns, anyone can upload art pieces to the [CultureIndex](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) contract, and the community votes on their favorite art pieces.
 
-The auction proceeds are split with the creator(s) of the art piece, and the rest is sent to the owner of the auction contract. The winner of the auction receives an ERC721 of the art piece. The creator receives an amount of ERC20 governance tokens and a share of the winning bid. 
+The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol).
 
-The ERC20 tokens the creator receives is calculated by the [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol). Both the ERC721 and the ERC20 governance token have voting power to vote on art pieces in the **CultureIndex**. 
+The auction proceeds are split with the creator(s) of the art piece, and the rest is sent to the owner of the auction contract. The winner of the auction receives an ERC721 of the art piece. The creator receives an amount of ERC20 governance tokens and a share of the winning bid.
+
+The ERC20 tokens the creator receives is calculated by the [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol). Both the ERC721 and the ERC20 governance token have voting power to vote on art pieces in the **CultureIndex**.
 
 # relevant contracts
 
 ## CultureIndex
-[**CultureIndex.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of an ERC721 or ERC20 can vote weighted by their balance on any given art piece.
+
+[**CultureIndex.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of an ERC721 or ERC20 can vote weighted by their balance on any given art piece.
 
 <img width="817" alt="culture index" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png">
 
- The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol), a heap datastructure that enables efficient lookups of the highest voted art piece. 
+The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol), a heap datastructure that enables efficient lookups of the highest voted art piece.
 
-The contract has a function called **dropTopVotedPiece**, only callable by the owner, which pops (removes) the top voted item from the **MaxHeap** and returns it. 
+The contract has a function called **dropTopVotedPiece**, only callable by the owner, which pops (removes) the top voted item from the **MaxHeap** and returns it.
 
 ## VerbsToken
-[**VerbsToken.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) is a fork of the [NounsToken](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsToken.sol) contract. **VerbsToken** owns the **CultureIndex**. When calling **mint()** on the **VerbsToken**, the contract calls **dropTopVotedPiece** on **CultureIndex**, and creates an ERC721 with metadata based on the dropped art piece data from the **CultureIndex**. 
+
+[**VerbsToken.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol) is a fork of the [NounsToken](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsToken.sol) contract. **VerbsToken** owns the **CultureIndex**. When calling **mint()** on the **VerbsToken**, the contract calls **dropTopVotedPiece** on **CultureIndex**, and creates an ERC721 with metadata based on the dropped art piece data from the **CultureIndex**.
 
 ## AuctionHouse
-[**AuctionHouse.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/AuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits auction proceeds (the winning bid) with the creator(s) of the art piece that is minted.
+
+[**AuctionHouse.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits auction proceeds (the winning bid) with the creator(s) of the art piece that is minted.
 
 <img width="882" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrb-auction.png">
 
 ### Creator payment
-The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator(s) of the art piece, called the _creator's share_. 
+
+The **creatorRateBps** defines the proportion (in basis points) of the auction proceeds that is reserved for the creator(s) of the art piece, called the _creator's share_.
 
 ```
 creator_share = (msg.value * creatorRateBps) / 10_000
 ```
 
-The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in ether. 
+The **entropyRateBps** defines the proportion of the _creator's share_ that is sent to the creator directly in ether.
 
 ```
 direct creator payment = (creator_share * entropyRateBps) / 10_000
 ```
 
-The remaining amount of the _creator's share_ is sent to the [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol) contract's **buyToken** function to buy the creator ERC20 governance tokens, according to a linear token emission schedule.
+The remaining amount of the _creator's share_ is sent to the [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol) contract's **buyToken** function to buy the creator ERC20 governance tokens, according to a linear token emission schedule.
 
 ## ERC20TokenEmitter
-**[ERC20TokenEmitter.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol)** is a linear [VRGDA](https://www.paradigm.xyz/2022/08/vrgda) that mints an ERC20 token when the payable **buyToken** function is called, and enables anyone to purchase the ERC20 governance token at any time. A portion of value spent on buying the ERC20 tokens is paid to creators and to a protocol rewards contract.
+
+**[ERC20TokenEmitter.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol)** is a linear [VRGDA](https://www.paradigm.xyz/2022/08/vrgda) that mints an ERC20 token when the payable **buyToken** function is called, and enables anyone to purchase the ERC20 governance token at any time. A portion of value spent on buying the ERC20 tokens is paid to creators and to a protocol rewards contract.
 
 ### Creator payment
+
 The ERC20TokenEmitter has a **creatorRateBps** and **entropyRateBps** that function the same as the **AuctionHouse** contract's. Whenever a **buyToken** purchase of governance tokens is made, a **creatorRateBps** portion of the proceeds is reserved for the **creatorsAddress** set in the contract, with direct payment calculated according to the **entropyRateBps**.
 
-
 ### Protocol rewards
-A fixed percentage of the value sent to the **buyToken** function is paid to the **TokenEmitterRewards** contract. The rewards setup is modeled after Zora's _fixed_ [protocol rewards](https://github.com/ourzora/zora-protocol/tree/main/packages/protocol-rewards). The key difference is that instead of a _fixed_ amount of ETH being split between the builder, referrer, deployer, and architect, the **TokenEmitterRewards** system splits a percentage of the value to relevant parties. 
 
+A fixed percentage of the value sent to the **buyToken** function is paid to the **TokenEmitterRewards** contract. The rewards setup is modeled after Zora's _fixed_ [protocol rewards](https://github.com/ourzora/zora-protocol/tree/main/packages/protocol-rewards). The key difference is that instead of a _fixed_ amount of ETH being split between the builder, referrer, deployer, and architect, the **TokenEmitterRewards** system splits a percentage of the value to relevant parties.
 
 ## VRGDA
+
 The ERC20TokenEmitter utilizes a VRGDA to emit ERC20 tokens at a predictable rate. You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view the implementation for selling NFTs [here](https://github.com/transmissions11/VRGDAs). Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. If the emission is ahead of schedule, the price increases exponentially. If it is behind schedule, the price of each token decreases by some constant decay rate.
 
 <img width="903" alt="Screenshot 2023-12-05 at 8 31 54 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgda.png">
@@ -197,65 +211,67 @@ You can read more about the implementation on [Paradigm's site](https://www.para
 
 ## Links
 
-- **Previous Nouns DAO audits:** 
+- **Previous Nouns DAO audits:**
 - [NounsDAOV2](https://github.com/code-423n4/2022-08-nounsdao)
 - [NounsDAOV3 (fork)](https://github.com/code-423n4/2023-07-nounsdao)
 - **Twitter:**
-[@collectivexyz](https://twitter.com/collectivexyz) and [@vrbsdao](https://twitter.com/vrbsdao)
-
+  [@collectivexyz](https://twitter.com/collectivexyz) and [@vrbsdao](https://twitter.com/vrbsdao)
 
 # Scope
 
-*List all files in scope in the table below (along with hyperlinks) -- and feel free to add notes here to emphasize areas of focus.*
+_List all files in scope in the table below (along with hyperlinks) -- and feel free to add notes here to emphasize areas of focus._
 
-| Contract | Purpose | Libraries used |  External contract calls
-| ----------- | ----------- | ----------- | ----------- |
-| [MaxHeap.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) | Implements a [MaxHeap](https://www.geeksforgeeks.org/introduction-to-max-heap-data-structure/) data structure for O(1) max value retrieval | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) |  |
-| [CultureIndex.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) | Creation and weighted token voting of community art pieces | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/erc20/ERC20Votes.sol) [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/ERC721Checkpointable.sol) | [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/ERC721Checkpointable.sol) / [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/erc20/ERC20Votes.sol) / [`MaxHeap`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/MaxHeap.sol) |
-| [NontransferableERC20Votes.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/NontransferableERC20Votes.sol) | A nontransferable ERC20 Votes token | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/erc20/ERC20Votes.sol) |  |
-| [ERC20TokenEmitter.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol) | Continuous linear VRGDA for purchasing ERC20 tokens with ether | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`SignedWadMath`](https://github.com/transmissions11/solmate/blob/main/src/utils/SignedWadMath.sol)  | [`NontransferableERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/NontransferableERC20Votes.sol) / [`TokenEmitterRewards`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/TokenEmitter/TokenEmitterRewards.sol) / [`VRGDAC`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol) |
-| [AuctionHouse.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/AuctionHouse.sol) | AuctionHouse for selling ERC721s and paying creators | [`@openzeppelin/contracts-upgradeable`](https://openzeppelin.com/contracts/)| [`ERC20TokenEmitter`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol) / [`VerbsToken`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) | |
-| [VerbsToken.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol) | The ERC721 that mints from the top *CultureIndex* art piece | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/base/ERC721Checkpointable.sol) | [`CultureIndex`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) |
-| [libs/VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol) | The continuous linear VRGDA used for ERC20 token emission | [`SignedWadMath`](https://github.com/transmissions11/solmate/blob/main/src/utils/SignedWadMath.sol) ||  |
-||
-| [TokenEmitterRewards.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/TokenEmitter/TokenEmitterRewards.sol) | Compute rewards and deposit for the *ERC20TokenEmitter* |  | |
-| [RewardSplits.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/RewardSplits.sol) | Compute and deposit rewards based on splits |  | [`RevolutionProtocolRewards`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/RevolutionProtocolRewards.sol) |
+| Contract                                                                                                                                                                  | Purpose                                                                                                                                    | Libraries used                                                                                                                                                                                                                                                                                                                                           | External contract calls                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| [MaxHeap.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol)                                                     | Implements a [MaxHeap](https://www.geeksforgeeks.org/introduction-to-max-heap-data-structure/) data structure for O(1) max value retrieval | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/)                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| [CultureIndex.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol)                                           | Creation and weighted token voting of community art pieces                                                                                 | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/base/erc20/ERC20Votes.sol) [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/base/ERC721Checkpointable.sol) | [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/base/ERC721Checkpointable.sol) / [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/base/erc20/ERC20Votes.sol) / [`MaxHeap`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol)                                            |
+| [NontransferableERC20Votes.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/NontransferableERC20Votes.sol)                 | A nontransferable ERC20 Votes token                                                                                                        | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/base/erc20/ERC20Votes.sol)                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| [ERC20TokenEmitter.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol)                                 | Continuous linear VRGDA for purchasing ERC20 tokens with ether                                                                             | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`SignedWadMath`](https://github.com/transmissions11/solmate/blob/main/src/utils/SignedWadMath.sol)                                                                                                                                                                                     | [`NontransferableERC20Votes`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/NontransferableERC20Votes.sol) / [`TokenEmitterRewards`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/TokenEmitter/TokenEmitterRewards.sol) / [`VRGDAC`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol) |
+| [AuctionHouse.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol)                                           | AuctionHouse for selling ERC721s and paying creators                                                                                       | [`@openzeppelin/contracts-upgradeable`](https://openzeppelin.com/contracts/)                                                                                                                                                                                                                                                                             | [`ERC20TokenEmitter`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol) / [`VerbsToken`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol)                                                                                                                                                                                        |     |
+| [VerbsToken.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol)                                               | The ERC721 that mints from the top _CultureIndex_ art piece                                                                                | [`@openzeppelin/contracts`](https://openzeppelin.com/contracts/) [`ERC721Checkpointable`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/base/ERC721Checkpointable.sol)                                                                                                                                      | [`CultureIndex`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol)                                                                                                                                                                                                                                                                                                                              |
+| [libs/VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)                                             | The continuous linear VRGDA used for ERC20 token emission                                                                                  | [`SignedWadMath`](https://github.com/transmissions11/solmate/blob/main/src/utils/SignedWadMath.sol)                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |     |
+|                                                                                                                                                                           |
+| [TokenEmitterRewards.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/TokenEmitter/TokenEmitterRewards.sol) | Compute rewards and deposit for the _ERC20TokenEmitter_                                                                                    |                                                                                                                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| [RewardSplits.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/abstract/RewardSplits.sol)                            | Compute and deposit rewards based on splits                                                                                                |                                                                                                                                                                                                                                                                                                                                                          | [`RevolutionProtocolRewards`](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/protocol-rewards/src/RevolutionProtocolRewards.sol)                                                                                                                                                                                                                                                                                              |
 
 ### Protocol rewards SLOC
-| Type | File   | Logic Contracts | Interfaces | Lines | nLines | nSLOC | Comment Lines | Complex. Score | Capabilities |
-| ---- | ------ | --------------- | ---------- | ----- | ------ | ----- | ------------- | -------------- | ------------ | 
-| 🎨 | abstract/TokenEmitter/TokenEmitterRewards.sol | 1 | **** | 22 | 17 | 12 | 1 | 11 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 🎨 | abstract/RewardSplits.sol | 1 | **** | 93 | 88 | 64 | 7 | 33 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 🎨 | **Totals** | **2** | **** | **115**  | **105** | **76** | **8** | **44** | **<abbr title='Payable Functions'>💰</abbr>** |
+
+| Type | File                                          | Logic Contracts | Interfaces | Lines   | nLines  | nSLOC  | Comment Lines | Complex. Score | Capabilities                                  |
+| ---- | --------------------------------------------- | --------------- | ---------- | ------- | ------- | ------ | ------------- | -------------- | --------------------------------------------- |
+| 🎨   | abstract/TokenEmitter/TokenEmitterRewards.sol | 1               | \*\*\*\*   | 22      | 17      | 12     | 1             | 11             | **<abbr title='Payable Functions'>💰</abbr>** |
+| 🎨   | abstract/RewardSplits.sol                     | 1               | \*\*\*\*   | 93      | 88      | 64     | 7             | 33             | **<abbr title='Payable Functions'>💰</abbr>** |
+| 🎨   | **Totals**                                    | **2**           | \*\*\*\*   | **115** | **105** | **76** | **8**         | **44**         | **<abbr title='Payable Functions'>💰</abbr>** |
 
 ### Revolution contracts SLOC
-| Type | File   | Logic Contracts | Interfaces | Lines | nLines | nSLOC | Comment Lines | Complex. Score | Capabilities |
-| ---- | ------ | --------------- | ---------- | ----- | ------ | ----- | ------------- | -------------- | ------------ | 
-| 📝 | CultureIndex.sol | 1 | **** | 567 | 529 | 232 | 203 | 216 | **<abbr title='Payable Functions'>💰</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr>** |
-| 📝 | MaxHeap.sol | 1 | **** | 167 | 167 | 82 | 58 | 69 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 📝 | VerbsToken.sol | 1 | **** | 332 | 324 | 139 | 125 | 125 | **<abbr title='Payable Functions'>💰</abbr><abbr title='TryCatch Blocks'>♻️</abbr>** |
-| 📝 | AuctionHouse.sol | 1 | **** | 434 | 428 | 201 | 147 | 192 | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='TryCatch Blocks'>♻️</abbr>** |
-| 📝 | ERC20TokenEmitter.sol | 1 | **** | 316 | 306 | 153 | 102 | 155 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 📝 | NontransferableERC20Votes.sol | 1 | **** | 158 | 151 | 56 | 71 | 48 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 📝 | libs/VRGDAC.sol | 1 | **** | 97 | 97 | 61 | 21 | 34 | **<abbr title='Unchecked Blocks'>Σ</abbr>** |
-| 📝 | **Totals** | **7** | **** | **2071**  | **2002** | **924** | **727** | **839** | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr><abbr title='TryCatch Blocks'>♻️</abbr><abbr title='Unchecked Blocks'>Σ</abbr>** |
 
+| Type | File                          | Logic Contracts | Interfaces | Lines    | nLines   | nSLOC   | Comment Lines | Complex. Score | Capabilities                                                                                                                                                                                                                                                                                                        |
+| ---- | ----------------------------- | --------------- | ---------- | -------- | -------- | ------- | ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 📝   | CultureIndex.sol              | 1               | \*\*\*\*   | 567      | 529      | 232     | 203           | 216            | **<abbr title='Payable Functions'>💰</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr>**                                                                                                                                                                       |
+| 📝   | MaxHeap.sol                   | 1               | \*\*\*\*   | 167      | 167      | 82      | 58            | 69             | **<abbr title='Payable Functions'>💰</abbr>**                                                                                                                                                                                                                                                                       |
+| 📝   | VerbsToken.sol                | 1               | \*\*\*\*   | 332      | 324      | 139     | 125           | 125            | **<abbr title='Payable Functions'>💰</abbr><abbr title='TryCatch Blocks'>♻️</abbr>**                                                                                                                                                                                                                                |
+| 📝   | AuctionHouse.sol              | 1               | \*\*\*\*   | 434      | 428      | 201     | 147           | 192            | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='TryCatch Blocks'>♻️</abbr>**                                                                                                                                        |
+| 📝   | ERC20TokenEmitter.sol         | 1               | \*\*\*\*   | 316      | 306      | 153     | 102           | 155            | **<abbr title='Payable Functions'>💰</abbr>**                                                                                                                                                                                                                                                                       |
+| 📝   | NontransferableERC20Votes.sol | 1               | \*\*\*\*   | 158      | 151      | 56      | 71            | 48             | **<abbr title='Payable Functions'>💰</abbr>**                                                                                                                                                                                                                                                                       |
+| 📝   | libs/VRGDAC.sol               | 1               | \*\*\*\*   | 97       | 97       | 61      | 21            | 34             | **<abbr title='Unchecked Blocks'>Σ</abbr>**                                                                                                                                                                                                                                                                         |
+| 📝   | **Totals**                    | **7**           | \*\*\*\*   | **2071** | **2002** | **924** | **727**       | **839**        | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr><abbr title='TryCatch Blocks'>♻️</abbr><abbr title='Unchecked Blocks'>Σ</abbr>** |
 
 ## Out of scope
 
-All the contracts not mentioned in scope including all test files. 
+All the contracts not mentioned in scope including all test files.
 
 Any issues or improvements on how we integrate with the out of scope contracts is in scope.
 
 ## Main invariants
+
 (properties that should NEVER EVER be broken).
 
 For all contracts - only the RevolutionBuilder manager should be able to initialize and upgrade them.
 
 ### NontransferableERC20Votes
+
 - Only the owner should be able to directly mint tokens.
 
-- Tokens cannot be transferred between addresses (except to mint by the owner). This includes direct transfers, transfers from, and any other mechanisms that might move tokens between different addresses. 
+- Tokens cannot be transferred between addresses (except to mint by the owner). This includes direct transfers, transfers from, and any other mechanisms that might move tokens between different addresses.
 
 - No address should be able to approve another address to spend tokens on its behalf, as there should be no transfer of tokens.
 
@@ -264,6 +280,7 @@ For all contracts - only the RevolutionBuilder manager should be able to initial
 - Voting power and delegation work as intended according to [Votes](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/governance/utils/Votes.sol) without enabling any form of transferability.
 
 ### Creator payments
+
 - The ERC20TokenEmitter and AuctionHouse should always pay creators (ETH or ERC20) in accordance with the creatorRateBps and entropyRateBps calculation.
 
 - The AuctionHouse should always pay only creator(s) of the CultureIndex art piece being auctioned and the owner.
@@ -271,7 +288,6 @@ For all contracts - only the RevolutionBuilder manager should be able to initial
 - The ERC20TokenEmitter should always pay the `creatorsAddress`.
 
 - ETH and ERC20 transfer functions are secure and protected with reentrancy checks / math errors.
-  
 
 ### CultureIndex
 
@@ -297,42 +313,38 @@ For all contracts - only the RevolutionBuilder manager should be able to initial
 
 - VerbsToken should always mint the top voted art piece in the CultureIndex.
 
-
 ### AuctionHouse
 
 - AuctionHouse should only auction off tokens from the VerbsToken.
-  
 - The owner of the auction should always receive it's share of ether (minus creatorRateBps share).
-
 
 ### VRGDA
 
 - The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
 
-
 ### ERC20TokenEmitter
 
 - The treasury and creatorsAddress should not be able to buy tokens.
 
-- The distribution of ERC20 governance tokens should be in accordance with the defined linear emission schedule. 
+- The distribution of ERC20 governance tokens should be in accordance with the defined linear emission schedule.
 
 - The ERC20TokenEmitter should always pay protocol rewards assuming enough ETH was paid to the buyToken function.
 
 - The treasury should always receive it's share of ether (minus creatorRateBps and protocol rewards share).
 
-
 # Additional Context
 
 ### VRGDAC
-The Token Emitter utilizes a continuous VRGDA ([VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol)) to facilitate ERC20 token purchases. Given an amount of ether to pay, it will return the number of tokens to sell (`YtoX`), and given an amount of tokens to buy, will return the cost (`XtoY`) where X is the ERC20 token and Y is ether. The original VRGDAC implementation is [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd). 
 
-In order to get the amount of tokens to emit given a payment of ether (`YtoX` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol)), we first take the integral of the linear VRGDA pricing function [p(x)](https://www.paradigm.xyz/2022/08/vrgda).
+The Token Emitter utilizes a continuous VRGDA ([VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)) to facilitate ERC20 token purchases. Given an amount of ether to pay, it will return the number of tokens to sell (`YtoX`), and given an amount of tokens to buy, will return the cost (`XtoY`) where X is the ERC20 token and Y is ether. The original VRGDAC implementation is [here](https://gist.github.com/transmissions11/485a6e2deb89236202bd2f59796262fd).
+
+In order to get the amount of tokens to emit given a payment of ether (`YtoX` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)), we first take the integral of the linear VRGDA pricing function [p(x)](https://www.paradigm.xyz/2022/08/vrgda).
 
 <img width="487" alt="Screenshot 2023-12-05 at 9 21 59 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgda-c-integral.png">
 
-Then - we can get the cost of a specific number of tokens (`XtoY` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/libs/VRGDAC.sol)) by doing `p_integral(x_start+x_bought) - p_integral(x_start)` where `x_start` is the current supply of the ERC20 and `x_bought` is the amount of tokens you wish to purchase. 
+Then - we can get the cost of a specific number of tokens (`XtoY` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)) by doing `p_integral(x_start+x_bought) - p_integral(x_start)` where `x_start` is the current supply of the ERC20 and `x_bought` is the amount of tokens you wish to purchase.
 
-We can then solve for `x_bought` using a handy python [solver](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/script/solve.py) to find `YtoX`, allowing us to pass in an amount of ether and receive an amount of tokens to sell.
+We can then solve for `x_bought` using a handy python [solver](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/script/solve.py) to find `YtoX`, allowing us to pass in an amount of ether and receive an amount of tokens to sell.
 
 <img width="1727" alt="Screenshot 2023-12-05 at 8 34 22 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgdac-graph.png">
 
@@ -348,15 +360,15 @@ Begin by examining the access control and permissions for contracts that make up
 
 Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package.
 
-### [CultureIndex](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) attacks
+### [CultureIndex](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) attacks
 
-Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure. 
+Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure.
 
 Ensuring nothing uploaded to CultureIndex could break or otherwise disrupt the minting functionality of the VerbsToken.
 
 Any replay attacks on `voteWithSig` signatures.
 
-### [AuctionHouse](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/AuctionHouse.sol) attacks
+### [AuctionHouse](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol) attacks
 
 Ensuring gas passed to the settleAndCreateNewAuction functions or other nefarious interactions with AuctionSettlement cannot brick/pause the auction.
 
@@ -364,10 +376,9 @@ Ensuring anything submitted to the CultureIndex cannot brick the auction by bein
 
 Ensuring anything nefarious in the minting functionality of the VerbsToken contract cannot brick the auction.
 
+### [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol) attacks
 
-### [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/ERC20TokenEmitter.sol) attacks
-
-Another large distinction from Nouns is that there are 2 classes of governance shares, the ERC721 auction item (VerbsToken) and the nontransferable ERC20. These two tokens are used to vote on the CultureIndex and choose the next auction item, and in the future will be used to govern a DAO with a treasury. It is essential to explore potential ways in which the ERC20 emission from the ERC20TokenEmitter can be exploited to gain an outsized governance share. 
+Another large distinction from Nouns is that there are 2 classes of governance shares, the ERC721 auction item (VerbsToken) and the nontransferable ERC20. These two tokens are used to vote on the CultureIndex and choose the next auction item, and in the future will be used to govern a DAO with a treasury. It is essential to explore potential ways in which the ERC20 emission from the ERC20TokenEmitter can be exploited to gain an outsized governance share.
 
 ### Creator rate attacks
 
@@ -377,43 +388,43 @@ The system is further complicated by the creator payments on both the AuctionHou
 
 ### ERC20
 
-USDC, and the [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/NontransferableERC20Votes.sol)
+USDC, and the [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/NontransferableERC20Votes.sol)
 
 ### ERC721
 
-[VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol)
+[VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol)
 
 ## Blockchains
 
 Ethereum
 
 ## Trusted roles
+
 - [ ] Please list all trusted roles (e.g. operators, slashers, pausers, etc.), the privileges they hold, and any conditions under which privilege escalation is expected/allowable
 
-[RevolutionBuilder](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/builder/RevolutionBuilder.sol
-) manages upgrades and deployments for the set of 7 contracts in the scope. Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package scope. Privilege escalation is not allowed, everything should be managed by the RevolutionBuilder contract. 
+[RevolutionBuilder](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/builder/RevolutionBuilder.sol) manages upgrades and deployments for the set of 7 contracts in the scope. Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package scope. Privilege escalation is not allowed, everything should be managed by the RevolutionBuilder contract.
 
 ## DOS
+
 Minimum duration after which we would consider a DOS finding to be valid?
 
 DOS on CultureIndex: 20m
 
-
 ## EIP conformity
-  - [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/VerbsToken.sol): Should comply with `ERC721`
-  - [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/NontransferableERC20Votes.sol): Should comply with `ERC20`
 
+- [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol): Should comply with `ERC721`
+- [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/NontransferableERC20Votes.sol): Should comply with `ERC20`
 
-## Scoping Details 
+## Scoping Details
 
 ```
-- If you have a public code repo, please share it here: https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/packages/revolution-contracts, https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/packages/protocol-rewards 
+- If you have a public code repo, please share it here: https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/packages/revolution, https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/packages/protocol-rewards
 - How many contracts are in scope?: 9
-- Total SLoC for these contracts?: 1000  
-- How many external imports are there?: 14 
-- How many separate interfaces and struct definitions are there for the contracts within scope?: 13  
-- Does most of your code generally use composition or inheritance?: Inheritance   
-- How many external calls?: 4   
+- Total SLoC for these contracts?: 1000
+- How many external imports are there?: 14
+- How many separate interfaces and struct definitions are there for the contracts within scope?: 13
+- Does most of your code generally use composition or inheritance?: Inheritance
+- How many external calls?: 4
 - What is the overall line coverage percentage provided by your tests?: 88
 - Is this an upgrade of an existing system?:
 
@@ -421,11 +432,10 @@ True - We're upgrading Nouns DAO so that the auction item is a piece of communit
 
 - Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): NFT, Uses L2, ERC-20 Token
 - Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?: RevolutionBuilder for a look at the deployment and upgrade lifecycle
-- Please describe required context:   
+- Please describe required context:
 - Does it use an oracle?: No
-- Describe any novel or unique curve logic or mathematical models your code uses: We use a continuous VRGDA function, built by Paradigm (https://www.paradigm.xyz/2022/08/vrgda). It enables a linear emission of ERC20 tokens over time. 
-- Is this either a fork of or an alternate implementation of another project?: True  
+- Describe any novel or unique curve logic or mathematical models your code uses: We use a continuous VRGDA function, built by Paradigm (https://www.paradigm.xyz/2022/08/vrgda). It enables a linear emission of ERC20 tokens over time.
+- Is this either a fork of or an alternate implementation of another project?: True
 - Does it use a side-chain?:
 - Describe any specific areas you would like addressed:
 ```
-
