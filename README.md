@@ -57,13 +57,11 @@ _Note for C4 wardens: Anything included in this `Automated Findings / Publicly K
 
 ### Publicly Known Issues
 
-[ ⭐️ SPONSORS: Are there any known issues or risks deemed acceptable that shouldn't lead to a valid finding? If so, list them here. ]
+The AuctionHouse will fail to create a new auction if the CultureIndex is empty. Not too worried about this.
 
-The AuctionHouse will fail to create a new auction if the CultureIndex is empty.
+VerbsToken mint can fail if the top voted piece in the CultureIndex has not met quorum. Potential attack vector here.
 
-VerbsToken mint can fail if the top voted piece in the CultureIndex has not met quorum.
-
-If you create the VRGDA with shoddy parameters you can get bad outputs and errors.
+If you create the VRGDA with shoddy parameters you can get bad outputs and errors. Will add checks on the deployer/manager contract to ensure valid params.
 
 # the Revolution protocol ⌐◨-◨
 
@@ -233,14 +231,14 @@ You can read more about the implementation on [Paradigm's site](https://www.para
 ### Revolution contracts SLOC
 | Type | File   | Logic Contracts | Interfaces | Lines | nLines | nSLOC | Comment Lines | Complex. Score | Capabilities |
 | ---- | ------ | --------------- | ---------- | ----- | ------ | ----- | ------------- | -------------- | ------------ | 
-| 📝 | CultureIndex.sol | 1 | **** | 569 | 531 | 233 | 203 | 216 | **<abbr title='Payable Functions'>💰</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr>** |
+| 📝 | CultureIndex.sol | 1 | **** | 567 | 529 | 232 | 203 | 216 | **<abbr title='Payable Functions'>💰</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr>** |
 | 📝 | MaxHeap.sol | 1 | **** | 167 | 167 | 82 | 58 | 69 | **<abbr title='Payable Functions'>💰</abbr>** |
 | 📝 | VerbsToken.sol | 1 | **** | 332 | 324 | 139 | 125 | 125 | **<abbr title='Payable Functions'>💰</abbr><abbr title='TryCatch Blocks'>♻️</abbr>** |
 | 📝 | AuctionHouse.sol | 1 | **** | 434 | 428 | 201 | 147 | 192 | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='TryCatch Blocks'>♻️</abbr>** |
 | 📝 | ERC20TokenEmitter.sol | 1 | **** | 316 | 306 | 153 | 102 | 155 | **<abbr title='Payable Functions'>💰</abbr>** |
 | 📝 | NontransferableERC20Votes.sol | 1 | **** | 158 | 151 | 56 | 71 | 48 | **<abbr title='Payable Functions'>💰</abbr>** |
 | 📝 | libs/VRGDAC.sol | 1 | **** | 97 | 97 | 61 | 21 | 34 | **<abbr title='Unchecked Blocks'>Σ</abbr>** |
-| 📝 | **Totals** | **7** | **** | **2073**  | **2004** | **925** | **727** | **839** | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr><abbr title='TryCatch Blocks'>♻️</abbr><abbr title='Unchecked Blocks'>Σ</abbr>** |
+| 📝 | **Totals** | **7** | **** | **2071**  | **2002** | **924** | **727** | **839** | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr><abbr title='TryCatch Blocks'>♻️</abbr><abbr title='Unchecked Blocks'>Σ</abbr>** |
 
 
 ## Out of scope
@@ -251,6 +249,8 @@ Any issues or improvements on how we integrate with the out of scope contracts i
 
 ## Main invariants
 (properties that should NEVER EVER be broken).
+
+For all contracts - only the RevolutionBuilder manager should be able to initialize and upgrade them.
 
 ### NontransferableERC20Votes
 - Only the owner should be able to directly mint tokens.
