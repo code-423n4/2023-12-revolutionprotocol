@@ -75,8 +75,6 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 
 # Developer guide
 
-*Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
-
 ## Setup
 
 ```
