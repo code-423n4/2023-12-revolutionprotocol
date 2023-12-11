@@ -1,3 +1,0 @@
-{
-  "detectors_to_exclude": "low-level-calls,naming-convention,solc-version,assembly"
-}
