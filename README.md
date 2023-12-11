@@ -31,11 +31,11 @@
 # Revolution audit details
 
 - Total Prize Pool: $36,500 USDC
-  - HM awards: $24,750 USDC
-  - Analysis awards: $1,500 USDC
+  - HM awards: $24,250 USDC
+  - Analysis awards: $1,250 USDC
   - QA awards: $750 USDC
   - Bot Race awards: $2,250 USDC
-  - Gas awards: $750 USDC
+  - Gas awards: $1,500 USDC
   - Judge awards: $3,600 USDC
   - Lookout awards: $2,400 USDC
   - Scout awards: $500 USD
