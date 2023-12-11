@@ -318,6 +318,10 @@ For all contracts - only the RevolutionBuilder manager should be able to initial
 - AuctionHouse should only auction off tokens from the VerbsToken.
 - The owner of the auction should always receive it's share of ether (minus creatorRateBps share).
 
+### MaxHeap
+
+- The MaxHeap should always maintain the property of being a binary tree in which the value in each internal node is greater than or equal to the values in the children of that node.
+
 ### VRGDA
 
 - The VRGDAC should always exponentially increase the price of tokens if the supply is ahead of schedule.
