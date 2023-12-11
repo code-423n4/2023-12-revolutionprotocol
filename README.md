@@ -63,6 +63,8 @@ The AuctionHouse will fail to create a new auction if the CultureIndex is empty.
 
 VerbsToken mint can fail if the top voted piece in the CultureIndex has not met quorum.
 
+If you create the VRGDA with shoddy parameters you can get bad outputs and errors.
+
 # the Revolution protocol ⌐◨-◨
 
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury.
@@ -344,6 +346,8 @@ Compared to Nouns DAO, complexity arises from the auction of community created/v
 
 Begin by examining the access control and permissions for contracts that make up the art piece to AuctionHouse flow, such as the CultureIndex. It’s essential to ensure that access is tightly constrained and locked down to prevent unauthorized or malicious activities. Next, ensure the logic and flow of the system does not have any gaps or unexpected edge cases. This step is foundational to the system’s security and continued operation. Also, review the ERC20TokenEmitter contract's ownership and permissions to prevent governance takeover.
 
+Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package.
+
 ### [CultureIndex](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/CultureIndex.sol) attacks
 
 Checking that the CultureIndex or the MaxHeap can not be DOS'd where voting or creating art becomes prohibitively expensive, within a reasonable attack cost (~50 ETH). Keep in mind the CultureIndex can be reset by the VerbsToken to potentially relieve some pressure. 
@@ -386,6 +390,8 @@ Ethereum
 ## Trusted roles
 - [ ] Please list all trusted roles (e.g. operators, slashers, pausers, etc.), the privileges they hold, and any conditions under which privilege escalation is expected/allowable
 
+[RevolutionBuilder](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution-contracts/src/builder/RevolutionBuilder.sol
+) manages upgrades and deployments for the set of 7 contracts in the scope. Only the RevolutionBuilder instance should be able to initialize the 7 contracts in the revolution-contracts package scope. Privilege escalation is not allowed, everything should be managed by the RevolutionBuilder contract. 
 
 ## DOS
 Minimum duration after which we would consider a DOS finding to be valid?
@@ -399,23 +405,22 @@ DOS on CultureIndex: 20m
 
 
 ## Scoping Details 
-[ ⭐️ SPONSORS: please confirm/edit the information below. ]
 
 ```
 - If you have a public code repo, please share it here: https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/packages/revolution-contracts, https://github.com/code-423n4/2023-12-revolutionprotocol/tree/main/packages/protocol-rewards 
-- How many contracts are in scope?: 10
+- How many contracts are in scope?: 9
 - Total SLoC for these contracts?: 1000  
-- How many external imports are there?: 13  
+- How many external imports are there?: 14 
 - How many separate interfaces and struct definitions are there for the contracts within scope?: 13  
 - Does most of your code generally use composition or inheritance?: Inheritance   
-- How many external calls?: 1   
-- What is the overall line coverage percentage provided by your tests?: 92
+- How many external calls?: 4   
+- What is the overall line coverage percentage provided by your tests?: 88
 - Is this an upgrade of an existing system?:
 
 True - We're upgrading Nouns DAO so that the auction item is a piece of community created art, voted on by the community. Additionally, we are issuing an ERC20 governance token to the creator and splitting the auction proceeds with the creator of the art.
 
 - Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): NFT, Uses L2, ERC-20 Token
-- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?: False  
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?: RevolutionBuilder for a look at the deployment and upgrade lifecycle
 - Please describe required context:   
 - Does it use an oracle?: No
 - Describe any novel or unique curve logic or mathematical models your code uses: We use a continuous VRGDA function, built by Paradigm (https://www.paradigm.xyz/2022/08/vrgda). It enables a linear emission of ERC20 tokens over time. 
