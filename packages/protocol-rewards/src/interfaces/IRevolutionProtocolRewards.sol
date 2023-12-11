@@ -72,7 +72,12 @@ interface IRevolutionProtocolRewards {
     /// @param amounts amounts to send to each recipient, array aligns with recipients
     /// @param reasons optional bytes4 hash for indexing
     /// @param comment Optional comment to include with purchase
-    function depositBatch(address[] calldata recipients, uint256[] calldata amounts, bytes4[] calldata reasons, string calldata comment) external payable;
+    function depositBatch(
+        address[] calldata recipients,
+        uint256[] calldata amounts,
+        bytes4[] calldata reasons,
+        string calldata comment
+    ) external payable;
 
     /// @notice Used by Revolution token contracts to deposit protocol rewards
     /// @param builderReferral Builder referral
@@ -107,5 +112,13 @@ interface IRevolutionProtocolRewards {
     /// @param v V component of signature
     /// @param r R component of signature
     /// @param s S component of signature
-    function withdrawWithSig(address from, address to, uint256 amount, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external;
+    function withdrawWithSig(
+        address from,
+        address to,
+        uint256 amount,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external;
 }

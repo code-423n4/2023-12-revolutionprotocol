@@ -1,11 +1,14 @@
 {
   "name": "@collectivexyz/protocol-rewards",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": "https://github.com/collectivexyz/revolution-protocol.git",
   "license": "MIT",
   "files": [
     "src/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build:sizes": "forge build --sizes",
     "dev": "FOUNDRY_PROFILE=dev forge test --watch -vvv",
@@ -14,10 +17,14 @@
     "prettier:check": "prettier --check 'src/**/*.sol' 'test/**/*.sol'",
     "prettier": "prettier --write 'src/**/*.sol' 'test/**/*.sol'",
     "lint": "prettier --check 'src/**/*.sol' 'test/**/*.sol'",
-    "clean": "forge cache clean && if [ -d out ]; then forge clean; fi"
+    "write-gas-report": "forge test --gas-report > ../../gas-reports/protocol-rewards.ansi",
+    "clean": "forge cache clean && if [ -d out ]; then forge clean; fi",
+    "storage-inspect:check": "./script/storage-check.sh check RevolutionProtocolRewards RewardSplits TokenEmitterRewards",
+    "storage-inspect:generate": "./script/storage-check.sh generate RevolutionProtocolRewards RewardSplits TokenEmitterRewards"
   },
   "dependencies": {
     "@openzeppelin/contracts": "5.0.0",
+    "@openzeppelin/contracts-upgradeable": "5.0.0",
     "ds-test": "https://github.com/dapphub/ds-test#cd98eff28324bfac652e63a239a60632a761790b",
     "forge-std": "https://github.com/foundry-rs/forge-std#705263c95892a906d7af65f0f73ce8a4a0c80b80"
   },

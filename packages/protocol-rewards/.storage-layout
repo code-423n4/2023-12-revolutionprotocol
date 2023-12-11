@@ -1,0 +1,27 @@
+👁👁 STORAGE LAYOUT snapshot 👁👁
+=======================
+
+=======================
+➡ RevolutionProtocolRewards
+=======================
+
+| Name             | Type                        | Slot | Offset | Bytes | Contract                                                    |
+|------------------|-----------------------------|------|--------|-------|-------------------------------------------------------------|
+| _nameFallback    | string                      | 0    | 0      | 32    | src/RevolutionProtocolRewards.sol:RevolutionProtocolRewards |
+| _versionFallback | string                      | 1    | 0      | 32    | src/RevolutionProtocolRewards.sol:RevolutionProtocolRewards |
+| balanceOf        | mapping(address => uint256) | 2    | 0      | 32    | src/RevolutionProtocolRewards.sol:RevolutionProtocolRewards |
+| nonces           | mapping(address => uint256) | 3    | 0      | 32    | src/RevolutionProtocolRewards.sol:RevolutionProtocolRewards |
+
+=======================
+➡ RewardSplits
+=======================
+
+| Name | Type | Slot | Offset | Bytes | Contract |
+|------|------|------|--------|-------|----------|
+
+=======================
+➡ TokenEmitterRewards
+=======================
+
+| Name | Type | Slot | Offset | Bytes | Contract |
+|------|------|------|--------|-------|----------|

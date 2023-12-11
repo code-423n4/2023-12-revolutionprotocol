@@ -3,26 +3,33 @@ pragma solidity 0.8.22;
 
 import "../ProtocolRewardsTest.sol";
 import { RewardsSettings } from "../../src/abstract/RewardSplits.sol";
-import { NontransferableERC20Votes } from "../utils/TokenEmitterLibrary.sol";
+import { NontransferableERC20Votes, IERC20TokenEmitter } from "../utils/TokenEmitterLibrary.sol";
 
 contract TokenEmitterRewardsTest is ProtocolRewardsTest {
     MockTokenEmitter internal mockTokenEmitter;
-    NontransferableERC20Votes internal govToken;
+    NontransferableERC20Votes internal erc20Token;
 
     function setUp() public override {
         super.setUp();
 
-        govToken = new NontransferableERC20Votes(address(this), "Revolution Governance", "GOV");
+        erc20Token = new NontransferableERC20Votes(address(this), "Revolution Governance", "GOV");
 
-        mockTokenEmitter = new MockTokenEmitter(address(this), govToken, treasury, address(protocolRewards), revolution);
+        mockTokenEmitter = new MockTokenEmitter(
+            address(this),
+            erc20Token,
+            treasury,
+            address(protocolRewards),
+            revolution
+        );
 
-        govToken.transferOwnership(address(mockTokenEmitter));
+        erc20Token.transferOwnership(address(mockTokenEmitter));
 
         vm.label(address(mockTokenEmitter), "MOCK_TOKENEMITTER");
     }
 
     function testDeposit(uint256 msgValue) public {
-        bool shouldExpectRevert = msgValue <= mockTokenEmitter.minPurchaseAmount() || msgValue >= mockTokenEmitter.maxPurchaseAmount();
+        bool shouldExpectRevert = msgValue <= mockTokenEmitter.minPurchaseAmount() ||
+            msgValue >= mockTokenEmitter.maxPurchaseAmount();
 
         vm.deal(collector, msgValue);
 
@@ -38,7 +45,14 @@ contract TokenEmitterRewardsTest is ProtocolRewardsTest {
             //expect INVALID_ETH_AMOUNT()
             vm.expectRevert();
         }
-        mockTokenEmitter.buyToken{ value: msgValue }(addresses, bps, builderReferral, purchaseReferral, deployer);
+
+        IERC20TokenEmitter.ProtocolRewardAddresses memory rewardAddrs = IERC20TokenEmitter.ProtocolRewardAddresses({
+            builder: builderReferral,
+            purchaseReferral: purchaseReferral,
+            deployer: deployer
+        });
+
+        mockTokenEmitter.buyToken{ value: msgValue }(addresses, bps, rewardAddrs);
 
         if (shouldExpectRevert) {
             vm.expectRevert();
@@ -55,11 +69,22 @@ contract TokenEmitterRewardsTest is ProtocolRewardsTest {
     }
 
     function testNullReferralRecipient(uint256 msgValue) public {
-        bool shouldExpectRevert = msgValue <= mockTokenEmitter.minPurchaseAmount() || msgValue >= mockTokenEmitter.maxPurchaseAmount();
+        bool shouldExpectRevert = msgValue <= mockTokenEmitter.minPurchaseAmount() ||
+            msgValue >= mockTokenEmitter.maxPurchaseAmount();
 
-        NontransferableERC20Votes govToken2 = new NontransferableERC20Votes(address(this), "Revolution Governance", "GOV");
+        NontransferableERC20Votes govToken2 = new NontransferableERC20Votes(
+            address(this),
+            "Revolution Governance",
+            "GOV"
+        );
 
-        mockTokenEmitter = new MockTokenEmitter(address(this), govToken2, treasury, address(protocolRewards), revolution);
+        mockTokenEmitter = new MockTokenEmitter(
+            address(this),
+            govToken2,
+            treasury,
+            address(protocolRewards),
+            revolution
+        );
 
         govToken2.transferOwnership(address(mockTokenEmitter));
 
@@ -76,7 +101,15 @@ contract TokenEmitterRewardsTest is ProtocolRewardsTest {
             //expect INVALID_ETH_AMOUNT()
             vm.expectRevert();
         }
-        mockTokenEmitter.buyToken{ value: msgValue }(addresses, bps, builderReferral, address(0), deployer);
+        mockTokenEmitter.buyToken{ value: msgValue }(
+            addresses,
+            bps,
+            IERC20TokenEmitter.ProtocolRewardAddresses({
+                builder: builderReferral,
+                purchaseReferral: address(0),
+                deployer: deployer
+            })
+        );
 
         if (shouldExpectRevert) {
             //expect INVALID_ETH_AMOUNT()
@@ -88,7 +121,11 @@ contract TokenEmitterRewardsTest is ProtocolRewardsTest {
             assertApproxEqAbs(protocolRewards.totalRewardsSupply(), totalReward, 5);
             assertApproxEqAbs(protocolRewards.balanceOf(builderReferral), settings.builderReferralReward, 5);
             assertApproxEqAbs(protocolRewards.balanceOf(deployer), settings.deployerReward, 5);
-            assertApproxEqAbs(protocolRewards.balanceOf(revolution), settings.purchaseReferralReward + settings.revolutionReward, 5);
+            assertApproxEqAbs(
+                protocolRewards.balanceOf(revolution),
+                settings.purchaseReferralReward + settings.revolutionReward,
+                5
+            );
         }
     }
 

@@ -1,0 +1,190 @@
+Compiling 58 files with 0.8.22
+Solc 0.8.22 finished in 26.40s
+Compiler run [33msuccessful with warnings:[0m
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:947:24:
+[34m    |[0m
+[34m947 |[0m     function _transfer([33maddress from[0m, address to, uint256 value) internal override {
+[34m    |[0m                        [1;33m^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:947:38:
+[34m    |[0m
+[34m947 |[0m     function _transfer(address from, [33maddress to[0m, uint256 value) internal override {
+[34m    |[0m                                      [1;33m^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:947:50:
+[34m    |[0m
+[34m947 |[0m     function _transfer(address from, address to, [33muint256 value[0m) internal override {
+[34m    |[0m                                                  [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:987:23:
+[34m    |[0m
+[34m987 |[0m     function _approve([33maddress owner[0m, address spender, uint256 value) internal override {
+[34m    |[0m                       [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:987:38:
+[34m    |[0m
+[34m987 |[0m     function _approve(address owner, [33maddress spender[0m, uint256 value) internal override {
+[34m    |[0m                                      [1;33m^^^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:987:55:
+[34m    |[0m
+[34m987 |[0m     function _approve(address owner, address spender, [33muint256 value[0m) internal override {
+[34m    |[0m                                                       [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:995:9:
+[34m    |[0m
+[34m995 |[0m         [33maddress owner[0m,
+[34m    |[0m         [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:996:9:
+[34m    |[0m
+[34m996 |[0m         [33maddress spender[0m,
+[34m    |[0m         [1;33m^^^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:997:9:
+[34m    |[0m
+[34m997 |[0m         [33muint256 value[0m,
+[34m    |[0m         [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:998:9:
+[34m    |[0m
+[34m998 |[0m         [33mbool emitEvent[0m
+[34m    |[0m         [1;33m^^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+    [34m-->[0m test/utils/TokenEmitterLibrary.sol:1006:30:
+[34m     |[0m
+[34m1006 |[0m     function _spendAllowance([33maddress owner[0m, address spender, uint256 value) internal virtual override {
+[34m     |[0m                              [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+    [34m-->[0m test/utils/TokenEmitterLibrary.sol:1006:45:
+[34m     |[0m
+[34m1006 |[0m     function _spendAllowance(address owner, [33maddress spender[0m, uint256 value) internal virtual override {
+[34m     |[0m                                             [1;33m^^^^^^^^^^^^^^^[0m
+
+[1;33mWarning (5667)[0m[1;37m: Unused function parameter. Remove or comment out the variable name to silence this warning.[0m
+    [34m-->[0m test/utils/TokenEmitterLibrary.sol:1006:62:
+[34m     |[0m
+[34m1006 |[0m     function _spendAllowance(address owner, address spender, [33muint256 value[0m) internal virtual override {
+[34m     |[0m                                                              [1;33m^^^^^^^^^^^^^[0m
+
+[1;33mWarning (2018)[0m[1;37m: Function state mutability can be restricted to pure[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:947:5:
+[34m    |[0m
+[34m947 |[0m     [33mfunction _transfer(address from, address to, uint256 value) internal override {[0m
+[34m    |[0m     [1;33m^ (Relevant source part starts here and spans across multiple lines).[0m
+
+[1;33mWarning (2018)[0m[1;37m: Function state mutability can be restricted to pure[0m
+   [34m-->[0m test/utils/TokenEmitterLibrary.sol:987:5:
+[34m    |[0m
+[34m987 |[0m     [33mfunction _approve(address owner, address spender, uint256 value) internal override {[0m
+[34m    |[0m     [1;33m^ (Relevant source part starts here and spans across multiple lines).[0m
+
+
+Running 16 tests for test/unit/Withdraw.t.sol:WithdrawTest
+[32m[PASS][0m testRevert_InvalidNonce() (gas: 45978)
+[32m[PASS][0m testRevert_InvalidReplay() (gas: 86536)
+[32m[PASS][0m testRevert_InvalidSigner() (gas: 46014)
+[32m[PASS][0m testRevert_InvalidWithdrawAmount() (gas: 46551)
+[32m[PASS][0m testRevert_InvalidWithdrawToAddress() (gas: 14810)
+[32m[PASS][0m testRevert_InvalidWithdrawWithSigToAddress() (gas: 45892)
+[32m[PASS][0m testRevert_SigExpired() (gas: 22739)
+[32m[PASS][0m testRevert_WithdrawForInvalidAmount() (gas: 14710)
+[32m[PASS][0m testRevert_WithdrawForInvalidToAddress() (gas: 14343)
+[32m[PASS][0m testRevert_WithdrawInvalidAmount() (gas: 15085)
+[32m[PASS][0m testWithdraw() (gas: 51231)
+[32m[PASS][0m testWithdrawFor() (gas: 47894)
+[32m[PASS][0m testWithdrawForFullBalance() (gas: 48129)
+[32m[PASS][0m testWithdrawFullBalance() (gas: 51410)
+[32m[PASS][0m testWithdrawWithSig() (gas: 82017)
+[32m[PASS][0m testWithdrawWithSigFullBalance() (gas: 81904)
+Test result: [32mok[0m. [32m16[0m passed; [31m0[0m failed; [33m0[0m skipped; finished in 82.00ms
+
+Running 3 tests for test/unit/TokenEmitterRewards.t.sol:TokenEmitterRewardsTest
+[32m[PASS][0m testDeposit(uint256) (runs: 256, μ: 59054, ~: 37004)
+[32m[PASS][0m testNullReferralRecipient(uint256) (runs: 256, μ: 3403049, ~: 3387920)
+[32m[PASS][0m testRevertInvalidEth(uint16) (runs: 256, μ: 11397, ~: 11397)
+Test result: [32mok[0m. [32m3[0m passed; [31m0[0m failed; [33m0[0m skipped; finished in 1.81s
+
+Running 6 tests for test/unit/Deposit.t.sol:DepositTest
+[32m[PASS][0m testDeposit(uint256,address) (runs: 256, μ: 43493, ~: 45987)
+[32m[PASS][0m testDepositBatch(uint8) (runs: 256, μ: 2978168, ~: 1829596)
+[32m[PASS][0m testRevert_CannotDepositToAddressZero(uint256) (runs: 256, μ: 19385, ~: 19804)
+[32m[PASS][0m testRevert_InvalidDepositMsgValue(uint8) (runs: 256, μ: 371373, ~: 263819)
+[32m[PASS][0m testRevert_RecipientCannotBeAddressZero(uint8) (runs: 256, μ: 412937, ~: 334641)
+[32m[PASS][0m testRevert_RecipientsAndAmountsLengthMismatch(uint8,uint8) (runs: 256, μ: 345850, ~: 288643)
+Test result: [32mok[0m. [32m6[0m passed; [31m0[0m failed; [33m0[0m skipped; finished in 2.06s
+
+Running 2 tests for test/invariant/ProtocolRewards.invariant.t.sol:ProtocolRewardsInvariantTest
+[32m[PASS][0m invariant_TotalSupplyMatchesTotalDeposits() (runs: 1000, calls: 20000, reverts: 0)
+[32m[PASS][0m invariant_UserBalanceCannotExceedTotalSupply() (runs: 1000, calls: 20000, reverts: 0)
+Test result: [32mok[0m. [32m2[0m passed; [31m0[0m failed; [33m0[0m skipped; finished in 4.63s
+| src/RevolutionProtocolRewards.sol:RevolutionProtocolRewards contract |                 |        |        |         |         |
+|----------------------------------------------------------------------|-----------------|--------|--------|---------|---------|
+| Deployment Cost                                                      | Deployment Size |        |        |         |         |
+| 776352                                                               | 5145            |        |        |         |         |
+| Function Name                                                        | min             | avg    | median | max     | # calls |
+| WITHDRAW_TYPEHASH                                                    | 220             | 220    | 220    | 220     | 8       |
+| balanceOf                                                            | 455             | 1363   | 455    | 2455    | 218     |
+| deposit                                                              | 750             | 22238  | 25789  | 26051   | 35      |
+| depositBatch                                                         | 1015            | 638286 | 2090   | 2547948 | 4       |
+| nonces                                                               | 2499            | 2499   | 2499   | 2499    | 8       |
+| totalRewardsSupply                                                   | 288             | 288    | 288    | 288     | 93      |
+| withdraw                                                             | 504             | 12938  | 12532  | 32914   | 23      |
+| withdrawFor                                                          | 460             | 16666  | 16666  | 32871   | 4       |
+| withdrawWithSig                                                      | 542             | 30784  | 24615  | 59343   | 9       |
+
+
+| test/invariant/Handler.sol:Handler contract |                 |       |        |        |         |
+|---------------------------------------------|-----------------|-------|--------|--------|---------|
+| Deployment Cost                             | Deployment Size |       |        |        |         |
+| 465319                                      | 2612            |       |        |        |         |
+| Function Name                               | min             | avg   | median | max    | # calls |
+| deposit                                     | 50837           | 82317 | 86937  | 138267 | 17      |
+| forEachActor                                | 2507            | 27683 | 27566  | 48116  | 20      |
+| ghost_depositSum                            | 2329            | 2329  | 2329   | 2329   | 20      |
+| ghost_withdrawSum                           | 2274            | 2274  | 2274   | 2274   | 20      |
+| withdraw                                    | 2437            | 35608 | 38117  | 57712  | 23      |
+
+
+| test/invariant/ProtocolRewards.invariant.t.sol:ProtocolRewardsInvariantTest contract |                 |      |        |      |         |
+|--------------------------------------------------------------------------------------|-----------------|------|--------|------|---------|
+| Deployment Cost                                                                      | Deployment Size |      |        |      |         |
+| 3467673                                                                              | 17149           |      |        |      |         |
+| Function Name                                                                        | min             | avg  | median | max  | # calls |
+| ensureActorBalanceDoesNotExceedTotalSupply                                           | 4106            | 5507 | 4106   | 8606 | 61      |
+
+
+| test/utils/MockTokenEmitter.sol:MockTokenEmitter contract |                 |      |        |      |         |
+|-----------------------------------------------------------|-----------------|------|--------|------|---------|
+| Deployment Cost                                           | Deployment Size |      |        |      |         |
+| 1565371                                                   | 8964            |      |        |      |         |
+| Function Name                                             | min             | avg  | median | max  | # calls |
+| buyToken                                                  | 3335            | 5722 | 5722   | 8109 | 2       |
+| computePurchaseRewards                                    | 634             | 909  | 1047   | 1047 | 3       |
+| maxPurchaseAmount                                         | 746             | 746  | 746    | 746  | 1       |
+| minPurchaseAmount                                         | 570             | 570  | 570    | 570  | 3       |
+
+
+| test/utils/TokenEmitterLibrary.sol:NontransferableERC20Votes contract |                 |      |        |      |         |
+|-----------------------------------------------------------------------|-----------------|------|--------|------|---------|
+| Deployment Cost                                                       | Deployment Size |      |        |      |         |
+| 1712263                                                               | 10568           |      |        |      |         |
+| Function Name                                                         | min             | avg  | median | max  | # calls |
+| transferOwnership                                                     | 2699            | 2699 | 2699   | 2699 | 4       |
+
+
+
+ 
+Ran 4 test suites: [32m27[0m tests passed, [31m0[0m failed, [33m0[0m skipped (27 total tests)

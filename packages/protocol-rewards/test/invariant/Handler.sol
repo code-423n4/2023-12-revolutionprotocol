@@ -70,7 +70,10 @@ contract Handler is CommonBase, StdCheats, StdUtils {
         ghost_depositSum += amount;
     }
 
-    function withdraw(uint256 actorSeed, uint256 amount) public validateActor(msg.sender) useActor(actorSeed) validateWithdraw {
+    function withdraw(
+        uint256 actorSeed,
+        uint256 amount
+    ) public validateActor(msg.sender) useActor(actorSeed) validateWithdraw {
         amount = bound(amount, 0, rewards.balanceOf(currentActor));
 
         amount == 0 ? ghost_withdrawSum += rewards.balanceOf(currentActor) : ghost_withdrawSum += amount;
