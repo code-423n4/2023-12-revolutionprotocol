@@ -117,7 +117,7 @@ Instead of [auctioning](https://nouns.wtf/) off a generative PFP like Nouns, any
 
 The top piece is auctioned off every day as an ERC721 [VerbsToken](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/VerbsToken.sol) via the [AuctionHouse](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol).
 
-The auction proceeds are split with the creator(s) of the art piece, and the owner of the auction contract. The creator(s) of the art piece receive an amount of ERC20 governance tokens and a share of the winning bid. The auction owner is transferred the remaining ETH. The winner (highest bidder) of the auction receives an ERC721 of the art piece. 
+The auction proceeds are split with the creator(s) of the art piece, and the owner of the auction contract. The creator(s) of the art piece receive an amount of ERC20 governance tokens and a share of the winning bid. The auction owner is transferred the remaining ETH from the winning bid. The winner (highest bidder) of the auction receives an ERC721 of the art piece. 
 
 The ERC20 tokens the creator receives is calculated by the [ERC20TokenEmitter](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/ERC20TokenEmitter.sol). Both the ERC721 and the ERC20 governance token have voting power to vote on art pieces in the **CultureIndex**.
 
