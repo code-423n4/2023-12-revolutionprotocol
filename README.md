@@ -1,12 +1,3 @@
-# Repo setup
-
-
-- [ ] Optional / nice to have: pre-record a high-level overview of your protocol (not just specific smart contract functions). This saves wardens a lot of time wading through documentation.
-
-Will do this before it starts^
-
----
-
 # Revolution audit details
 
 - Total Prize Pool: $36,500 USDC
@@ -44,7 +35,7 @@ If you create the VRGDA with shoddy parameters you can get bad outputs and error
 
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury.
 
-<img width="377" alt="noun" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/noun.png">
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/15350e9a-5c22-439a-91d5-496e40d742db)
 
 Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule.
 
@@ -136,7 +127,7 @@ The ERC20 tokens the creator receives is calculated by the [ERC20TokenEmitter](h
 
 [**CultureIndex.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of an ERC721 or ERC20 can vote weighted by their balance on any given art piece.
 
-<img width="817" alt="culture index" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png">
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/653df685-7e13-44ee-b208-11ac82b85da2)
 
 The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol), a heap datastructure that enables efficient lookups of the highest voted art piece.
 
@@ -150,7 +141,7 @@ The contract has a function called **dropTopVotedPiece**, only callable by the o
 
 [**AuctionHouse.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits auction proceeds (the winning bid) with the creator(s) of the art piece that is minted.
 
-<img width="882" alt="Screenshot 2023-12-06 at 11 25 27 AM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrb-auction.png">
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/fc57ff33-aac0-40e7-888e-e8117db7989f)
 
 ### Creator payment
 
@@ -184,7 +175,7 @@ A fixed percentage of the value sent to the **buyToken** function is paid to the
 
 The ERC20TokenEmitter utilizes a VRGDA to emit ERC20 tokens at a predictable rate. You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view the implementation for selling NFTs [here](https://github.com/transmissions11/VRGDAs). Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. If the emission is ahead of schedule, the price increases exponentially. If it is behind schedule, the price of each token decreases by some constant decay rate.
 
-<img width="903" alt="Screenshot 2023-12-05 at 8 31 54 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgda.png">
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/32366746-7f71-43f9-a6de-57b3a9092d72)
 
 You can read more about the implementation on [Paradigm's site](https://www.paradigm.xyz/2022/08/vrgda). Additional information located in the Additional Context section of the README.
 
@@ -197,8 +188,7 @@ You can read more about the implementation on [Paradigm's site](https://www.para
   [@collectivexyz](https://twitter.com/collectivexyz) and [@vrbsdao](https://twitter.com/vrbsdao)
 
 # Scope
-
-_List all files in scope in the table below (along with hyperlinks) -- and feel free to add notes here to emphasize areas of focus._
+*See [scope.txt](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/scope.txt)*
 
 The ERC20TokenEmitter and flow of action from CultureIndex `drop` -> VerbsToken `mint` -> AuctionHouse `createAuction` are likely the most complex and prone to attack.
 
@@ -220,22 +210,22 @@ The ERC20TokenEmitter and flow of action from CultureIndex `drop` -> VerbsToken 
 
 | Type | File                                          | Logic Contracts | Interfaces | Lines   | nLines  | nSLOC  | Comment Lines | Complex. Score | Capabilities                                  |
 | ---- | --------------------------------------------- | --------------- | ---------- | ------- | ------- | ------ | ------------- | -------------- | --------------------------------------------- |
-| 🎨   | abstract/TokenEmitter/TokenEmitterRewards.sol | 1               | \*\*\*\*   | 22      | 17      | 12     | 1             | 11             | **<abbr title='Payable Functions'>💰</abbr>** |
-| 🎨   | abstract/RewardSplits.sol                     | 1               | \*\*\*\*   | 93      | 88      | 64     | 7             | 33             | **<abbr title='Payable Functions'>💰</abbr>** |
-| 🎨   | **Totals**                                    | **2**           | \*\*\*\*   | **115** | **105** | **76** | **8**         | **44**         | **<abbr title='Payable Functions'>💰</abbr>** |
+| 🎨   | abstract/TokenEmitter/TokenEmitterRewards.sol | 1               | \*\*\*\*   | 22      | 17      | 12     | 1             | 11             | **💰** |
+| 🎨   | abstract/RewardSplits.sol                     | 1               | \*\*\*\*   | 93      | 88      | 64     | 7             | 33             | **💰** |
+| 🎨   | **Totals**                                    | **2**           | \*\*\*\*   | **115** | **105** | **76** | **8**         | **44**         | **💰** |
 
 ### Revolution contracts SLOC
 
 | Type | File   | Logic Contracts | Interfaces | Lines | nLines | nSLOC | Comment Lines | Complex. Score | Capabilities |
 | ---- | ------ | --------------- | ---------- | ----- | ------ | ----- | ------------- | -------------- | ------------ | 
-| 📝 | CultureIndex.sol | 1 | **** | 547 | 516 | 224 | 197 | 215 | **<abbr title='Payable Functions'>💰</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr>** |
-| 📝 | MaxHeap.sol | 1 | **** | 185 | 185 | 88 | 66 | 68 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 📝 | VerbsToken.sol | 1 | **** | 332 | 324 | 139 | 125 | 125 | **<abbr title='Payable Functions'>💰</abbr><abbr title='TryCatch Blocks'>♻️</abbr>** |
-| 📝 | AuctionHouse.sol | 1 | **** | 434 | 428 | 201 | 147 | 192 | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='TryCatch Blocks'>♻️</abbr>** |
-| 📝 | ERC20TokenEmitter.sol | 1 | **** | 314 | 304 | 150 | 102 | 155 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 📝 | NontransferableERC20Votes.sol | 1 | **** | 158 | 151 | 56 | 71 | 48 | **<abbr title='Payable Functions'>💰</abbr>** |
-| 📝 | libs/VRGDAC.sol | 1 | **** | 97 | 97 | 61 | 21 | 34 | **<abbr title='Unchecked Blocks'>Σ</abbr>** |
-| 📝 | **Totals** | **7** | **** | **2067**  | **2005** | **919** | **729** | **837** | **<abbr title='Uses Assembly'>🖥</abbr><abbr title='Payable Functions'>💰</abbr><abbr title='Initiates ETH Value Transfer'>📤</abbr><abbr title='Uses Hash-Functions'>🧮</abbr><abbr title='Handles Signatures: ecrecover'>🔖</abbr><abbr title='TryCatch Blocks'>♻️</abbr><abbr title='Unchecked Blocks'>Σ</abbr>** |
+| 📝 | CultureIndex.sol | 1 | **** | 547 | 516 | 224 | 197 | 215 | **💰🧮🔖** |
+| 📝 | MaxHeap.sol | 1 | **** | 185 | 185 | 88 | 66 | 68 | **💰** |
+| 📝 | VerbsToken.sol | 1 | **** | 332 | 324 | 139 | 125 | 125 | **💰♻️** |
+| 📝 | AuctionHouse.sol | 1 | **** | 434 | 428 | 201 | 147 | 192 | **🖥💰📤♻️** |
+| 📝 | ERC20TokenEmitter.sol | 1 | **** | 314 | 304 | 150 | 102 | 155 | **💰** |
+| 📝 | NontransferableERC20Votes.sol | 1 | **** | 158 | 151 | 56 | 71 | 48 | **💰** |
+| 📝 | libs/VRGDAC.sol | 1 | **** | 97 | 97 | 61 | 21 | 34 | **Σ** |
+| 📝 | **Totals** | **7** | **** | **2067**  | **2005** | **919** | **729** | **837** | **🖥💰📤🧮🔖♻️Σ** |
 
 ## Out of scope
 
@@ -326,13 +316,14 @@ The Token Emitter utilizes a continuous VRGDA ([VRGDAC.sol](https://github.com/c
 
 In order to get the amount of tokens to emit given a payment of ether (`YtoX` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)), we first take the integral of the linear VRGDA pricing function [p(x)](https://www.paradigm.xyz/2022/08/vrgda).
 
-<img width="487" alt="Screenshot 2023-12-05 at 9 21 59 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgda-c-integral.png">
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/3bbeebaa-2f59-477e-b755-148116a17918)
 
 Then - we can get the cost of a specific number of tokens (`XtoY` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)) by doing `p_integral(x_start+x_bought) - p_integral(x_start)` where `x_start` is the current supply of the ERC20 and `x_bought` is the amount of tokens you wish to purchase.
 
 We can then solve for `x_bought` using a handy python [solver](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/script/solve.py) to find `YtoX`, allowing us to pass in an amount of ether and receive an amount of tokens to sell.
 
-<img width="1727" alt="Screenshot 2023-12-05 at 8 34 22 PM" src="https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgdac-graph.png">
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/a9f3e05d-855f-44f8-80e4-860e6de3e0ec)
+
 
 The green line is the pricing function p(x) for a linear VRGDA. The red line is the integral of p(x), and the purple line signifies the amount of ERC20 tokens you'd receive given a payment in ether (YtoX). The relevant functions and integrals for the VRGDAC are available here: https://www.desmos.com/calculator/im67z1tate.
 
@@ -366,7 +357,7 @@ Another large distinction from Nouns is that there are 2 classes of governance s
 
 ### Creator rate attacks
 
-The system is further complicated by the creator payments on both the AuctionHouse and the ERC20TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and ERC20TokenEmitter. The CultureIndex voting setup and quorum determins the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the ERC20TokenEmitter. Given creators will be paid directly, ensure malicious creator contracts or a large number of creators cannot disrupt the system by eg: bricking the auction.
+The system is further complicated by the creator payments on both the AuctionHouse and the ERC20TokenEmitter. The DAO is able to unilaterally set both the `creatorRateBps` and `entropyRateBps` on both the Auction and ERC20TokenEmitter. The CultureIndex voting setup and quorum determine the creator(s) paid as part of the Auction. The DAO can set the `creatorsAddress` on the ERC20TokenEmitter. Given creators will be paid directly, ensure malicious creator contracts or a large number of creators cannot disrupt the system by eg: bricking the auction.
 
 ## Tokens used on launch and anticipated to interact with.
 
