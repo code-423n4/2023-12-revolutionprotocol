@@ -1,0 +1,4 @@
+{
+    "filter_paths": "(/tests/|/test/|/lib/|/scripts/|/node_modules/|/example/|/Mocks/|/mocks/|/mock/)",
+    "detectors_to_exclude": "unused-return,low-level-calls,naming-convention,solc-version,assembly"
+}

@@ -1,0 +1,10 @@
+INFO:Detectors:
+RevolutionProtocolRewards.depositBatch(address[],uint256[],bytes4[],string).i_scope_0 (src/RevolutionProtocolRewards.sol#73) is a local variable never initialized
+RevolutionProtocolRewards.depositBatch(address[],uint256[],bytes4[],string).i (src/RevolutionProtocolRewards.sol#62) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+INFO:Detectors:
+RevolutionProtocolRewards.withdrawWithSig(address,address,uint256,uint256,uint8,bytes32,bytes32) (src/RevolutionProtocolRewards.sol#180-218) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > deadline (src/RevolutionProtocolRewards.sol#189)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Slither:. analyzed (104 contracts with 80 detectors), 3 result(s) found

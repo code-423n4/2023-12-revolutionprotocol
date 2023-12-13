@@ -1,0 +1,325 @@
+INFO:Detectors:
+VerbsDAOLogicV1._refundGas(uint256) (src/governance/VerbsDAOLogicV1.sol#1083-1096) sends eth to arbitrary user
+	Dangerous calls:
+	- (refundSent) = tx.origin.call{value: refundAmount}() (src/governance/VerbsDAOLogicV1.sol#1093)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+INFO:Detectors:
+RewardSplits is re-used:
+	- RewardSplits (../protocol-rewards/src/abstract/RewardSplits.sol#14-93)
+	- RewardSplits (node_modules/@collectivexyz/protocol-rewards/src/abstract/RewardSplits.sol#14-93)
+IRevolutionProtocolRewards is re-used:
+	- IRevolutionProtocolRewards (../protocol-rewards/src/interfaces/IRevolutionProtocolRewards.sol#6-124)
+	- IRevolutionProtocolRewards (node_modules/@collectivexyz/protocol-rewards/src/interfaces/IRevolutionProtocolRewards.sol#6-124)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#name-reused
+INFO:Detectors:
+VerbsDAOStorageV1.quorumVotesBPS (src/governance/VerbsDAOInterfaces.sol#158) is never initialized. It is used in:
+	- VerbsDAOLogicV1.getDynamicQuorumParamsAt(uint256) (src/governance/VerbsDAOLogicV1.sol#1031-1071)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-state-variables
+INFO:Detectors:
+VerbsDAOLogicV1.dynamicQuorumVotes(uint256,uint256,VerbsDAOStorageV1.DynamicQuorumParams) (src/governance/VerbsDAOLogicV1.sol#1012-1022) performs a multiplication on the result of a division:
+	- againstVotesBPS = (10000 * againstVotes) / totalSupply (src/governance/VerbsDAOLogicV1.sol#1017)
+	- quorumAdjustmentBPS = (params.quorumCoefficient * againstVotesBPS) / 1e6 (src/governance/VerbsDAOLogicV1.sol#1018)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+INFO:Detectors:
+AuctionHouse._settleAuction() (src/AuctionHouse.sol#336-414) uses a dangerous strict equality:
+	- _auction.bidder == address(0) (src/AuctionHouse.sol#358)
+VerbsDAOLogicV1._refundGas(uint256) (src/governance/VerbsDAOLogicV1.sol#1083-1096) uses a dangerous strict equality:
+	- balance == 0 (src/governance/VerbsDAOLogicV1.sol#1086)
+VerbsDAOLogicV1._writeQuorumParamsCheckpoint(VerbsDAOStorageV1.DynamicQuorumParams) (src/governance/VerbsDAOLogicV1.sol#1073-1081) uses a dangerous strict equality:
+	- pos > 0 && quorumParamsCheckpoints[pos - 1].fromBlock == blockNumber (src/governance/VerbsDAOLogicV1.sol#1076)
+VerbsDAOLogicV1.getDynamicQuorumParamsAt(uint256) (src/governance/VerbsDAOLogicV1.sol#1031-1071) uses a dangerous strict equality:
+	- cp.fromBlock == blockNumber (src/governance/VerbsDAOLogicV1.sol#1062)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+INFO:Detectors:
+Contract locking ether found:
+	Contract NontransferableERC20Votes (src/NontransferableERC20Votes.sol#29-158) has payable functions:
+	 - NontransferableERC20Votes.constructor(address) (src/NontransferableERC20Votes.sol#44-46)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#contracts-that-lock-ether
+INFO:Detectors:
+Reentrancy in VerbsDAOLogicV1.queue(uint256) (src/governance/VerbsDAOLogicV1.sol#342-360):
+	External calls:
+	- queueOrRevertInternal(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],eta) (src/governance/VerbsDAOLogicV1.sol#350-356)
+		- timelock.queueTransaction(target,value,signature,data,eta) (src/governance/VerbsDAOLogicV1.sol#373)
+	State variables written after the call(s):
+	- proposal.eta = eta (src/governance/VerbsDAOLogicV1.sol#358)
+	VerbsDAOStorageV1._proposals (src/governance/VerbsDAOInterfaces.sol#173) can be used in cross function reentrancies:
+	- VerbsDAOLogicV1.cancel(uint256) (src/governance/VerbsDAOLogicV1.sol#429-453)
+	- VerbsDAOLogicV1.castVoteInternal(address,uint256,uint8) (src/governance/VerbsDAOLogicV1.sol#665-688)
+	- VerbsDAOLogicV1.execute(uint256) (src/governance/VerbsDAOLogicV1.sol#380-397)
+	- VerbsDAOLogicV1.getActions(uint256) (src/governance/VerbsDAOLogicV1.sol#496-510)
+	- VerbsDAOLogicV1.getReceipt(uint256,address) (src/governance/VerbsDAOLogicV1.sol#518-520)
+	- VerbsDAOLogicV1.proposals(uint256) (src/governance/VerbsDAOLogicV1.sol#557-577)
+	- VerbsDAOLogicV1.propose(address[],uint256[],string[],bytes[],string) (src/governance/VerbsDAOLogicV1.sol#241-336)
+	- VerbsDAOLogicV1.queue(uint256) (src/governance/VerbsDAOLogicV1.sol#342-360)
+	- VerbsDAOLogicV1.quorumVotes(uint256) (src/governance/VerbsDAOLogicV1.sol#986-998)
+	- VerbsDAOLogicV1.state(uint256) (src/governance/VerbsDAOLogicV1.sol#527-549)
+	- VerbsDAOLogicV1.veto(uint256) (src/governance/VerbsDAOLogicV1.sol#459-486)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+CultureIndex.validateCreatorsArray(ICultureIndex.CreatorBps[]).i (src/CultureIndex.sol#185) is a local variable never initialized
+CultureIndex._voteForMany(uint256[],address).i (src/CultureIndex.sol#355) is a local variable never initialized
+RevolutionProtocolRewards.depositBatch(address[],uint256[],bytes4[],string).i_scope_0 (node_modules/@collectivexyz/protocol-rewards/src/RevolutionProtocolRewards.sol#73) is a local variable never initialized
+RevolutionProtocolRewards.depositBatch(address[],uint256[],bytes4[],string).i (node_modules/@collectivexyz/protocol-rewards/src/RevolutionProtocolRewards.sol#62) is a local variable never initialized
+VotesUpgradeable._moveDelegateVotes(address,address,uint256).oldValue_scope_0 (src/base/VotesUpgradeable.sol#245) is a local variable never initialized
+VotesUpgradeable._moveDelegateVotes(address,address,uint256).newValue_scope_1 (src/base/VotesUpgradeable.sol#245) is a local variable never initialized
+CultureIndex.batchVoteForManyWithSig(address[],uint256[][],uint256[],uint8[],bytes32[],bytes32[]).i_scope_0 (src/CultureIndex.sol#407) is a local variable never initialized
+CultureIndex.createPiece(ICultureIndex.ArtPieceMetadata,ICultureIndex.CreatorBps[]).i_scope_0 (src/CultureIndex.sol#243) is a local variable never initialized
+ERC1967Upgrade._upgradeToAndCallUUPS(address,bytes,bool).slot (src/libs/proxy/ERC1967Upgrade.sol#37) is a local variable never initialized
+CultureIndex.batchVoteForManyWithSig(address[],uint256[][],uint256[],uint8[],bytes32[],bytes32[]).i (src/CultureIndex.sol#403) is a local variable never initialized
+VerbsDAOLogicV1.propose(address[],uint256[],string[],bytes[],string).temp (src/governance/VerbsDAOLogicV1.sol#248) is a local variable never initialized
+AuctionHouse._createAuction().verbId (src/AuctionHouse.sol#313) is a local variable never initialized
+CultureIndex.createPiece(ICultureIndex.ArtPieceMetadata,ICultureIndex.CreatorBps[]).i (src/CultureIndex.sol#236) is a local variable never initialized
+VerbsToken._mintTo(address)._artPiece (src/VerbsToken.sol#292) is a local variable never initialized
+RevolutionBuilder._safeGetVersion(address).version (src/builder/RevolutionBuilder.sol#333) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+INFO:Detectors:
+IDescriptor.setBaseURI(string).baseURI (src/interfaces/IDescriptor.sol#34) shadows:
+	- IDescriptor.baseURI() (src/interfaces/IDescriptor.sol#30) (function)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#local-variable-shadowing
+INFO:Detectors:
+VerbsToken.initialize(address,address,address,address,IRevolutionBuilder.ERC721TokenParams) (src/VerbsToken.sol#130-156) should emit an event for: 
+	- minter = _minter (src/VerbsToken.sol#153) 
+MaxHeap.initialize(address,address) (src/MaxHeap.sol#55-62) should emit an event for: 
+	- admin = _admin (src/MaxHeap.sol#58) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-access-control
+INFO:Detectors:
+AuctionHouse.initialize(address,address,address,address,IRevolutionBuilder.AuctionParams) (src/AuctionHouse.sol#113-144) should emit an event for: 
+	- timeBuffer = _auctionParams.timeBuffer (src/AuctionHouse.sol#136) 
+	- reservePrice = _auctionParams.reservePrice (src/AuctionHouse.sol#137) 
+	- minBidIncrementPercentage = _auctionParams.minBidIncrementPercentage (src/AuctionHouse.sol#138) 
+	- duration = _auctionParams.duration (src/AuctionHouse.sol#139) 
+	- creatorRateBps = _auctionParams.creatorRateBps (src/AuctionHouse.sol#140) 
+	- entropyRateBps = _auctionParams.entropyRateBps (src/AuctionHouse.sol#141) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+INFO:Detectors:
+CultureIndex.initialize(address,address,address,address,address,IRevolutionBuilder.CultureIndexParams)._dropperAdmin (src/CultureIndex.sol#114) lacks a zero-check on :
+		- dropperAdmin = _dropperAdmin (src/CultureIndex.sol#139)
+ERC20TokenEmitter.initialize(address,address,address,address,address)._creatorsAddress (src/ERC20TokenEmitter.sol#89) lacks a zero-check on :
+		- creatorsAddress = _creatorsAddress (src/ERC20TokenEmitter.sol#102)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._erc721TokenImpl (src/builder/RevolutionBuilder.sol#91) lacks a zero-check on :
+		- erc721TokenImpl = _erc721TokenImpl (src/builder/RevolutionBuilder.sol#101)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._descriptorImpl (src/builder/RevolutionBuilder.sol#92) lacks a zero-check on :
+		- descriptorImpl = _descriptorImpl (src/builder/RevolutionBuilder.sol#102)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._auctionImpl (src/builder/RevolutionBuilder.sol#93) lacks a zero-check on :
+		- auctionImpl = _auctionImpl (src/builder/RevolutionBuilder.sol#103)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._executorImpl (src/builder/RevolutionBuilder.sol#94) lacks a zero-check on :
+		- executorImpl = _executorImpl (src/builder/RevolutionBuilder.sol#104)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._daoImpl (src/builder/RevolutionBuilder.sol#95) lacks a zero-check on :
+		- daoImpl = _daoImpl (src/builder/RevolutionBuilder.sol#105)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._cultureIndexImpl (src/builder/RevolutionBuilder.sol#96) lacks a zero-check on :
+		- cultureIndexImpl = _cultureIndexImpl (src/builder/RevolutionBuilder.sol#106)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._erc20TokenImpl (src/builder/RevolutionBuilder.sol#97) lacks a zero-check on :
+		- erc20TokenImpl = _erc20TokenImpl (src/builder/RevolutionBuilder.sol#107)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._erc20TokenEmitterImpl (src/builder/RevolutionBuilder.sol#98) lacks a zero-check on :
+		- erc20TokenEmitterImpl = _erc20TokenEmitterImpl (src/builder/RevolutionBuilder.sol#108)
+RevolutionBuilder.constructor(address,address,address,address,address,address,address,address,address)._maxHeapImpl (src/builder/RevolutionBuilder.sol#99) lacks a zero-check on :
+		- maxHeapImpl = _maxHeapImpl (src/builder/RevolutionBuilder.sol#109)
+DAOExecutor.setPendingAdmin(address).pendingAdmin_ (src/governance/DAOExecutor.sol#128) lacks a zero-check on :
+		- pendingAdmin = pendingAdmin_ (src/governance/DAOExecutor.sol#130)
+DAOExecutor.executeTransaction(address,uint256,string,bytes,uint256).target (src/governance/DAOExecutor.sol#171) lacks a zero-check on :
+		- (success,returnData) = target.call{value: value}(callData) (src/governance/DAOExecutor.sol#195)
+VerbsDAOLogicV1._setPendingAdmin(address).newPendingAdmin (src/governance/VerbsDAOLogicV1.sol#886) lacks a zero-check on :
+		- pendingAdmin = newPendingAdmin (src/governance/VerbsDAOLogicV1.sol#894)
+VerbsDAOLogicV1._setPendingVetoer(address).newPendingVetoer (src/governance/VerbsDAOLogicV1.sol#926) lacks a zero-check on :
+		- pendingVetoer = newPendingVetoer (src/governance/VerbsDAOLogicV1.sol#933)
+MaxHeap.initialize(address,address)._admin (src/MaxHeap.sol#55) lacks a zero-check on :
+		- admin = _admin (src/MaxHeap.sol#58)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+CultureIndex._getPastVotes(address,uint256) (src/CultureIndex.sol#292-298) has external calls inside a loop: _calculateVoteWeight(erc20VotingToken.getPastVotes(account,blockNumber),erc721VotingToken.getPastVotes(account,blockNumber)) (src/CultureIndex.sol#293-297)
+CultureIndex._vote(uint256,address) (src/CultureIndex.sol#307-324) has external calls inside a loop: maxHeap.updateValue(pieceId,totalWeight) (src/CultureIndex.sol#322)
+ERC20TokenEmitter._mint(address,uint256) (src/ERC20TokenEmitter.sol#108-110) has external calls inside a loop: token.mint(_to,_amount) (src/ERC20TokenEmitter.sol#109)
+VerbsDAOLogicV1.queueOrRevertInternal(address,uint256,string,bytes,uint256) (src/governance/VerbsDAOLogicV1.sol#362-374) has external calls inside a loop: require(bool,string)(! timelock.queuedTransactions(keccak256(bytes)(abi.encode(target,value,signature,data,eta))),VerbsDAO::queueOrRevertInternal: identical proposal action already queued at eta) (src/governance/VerbsDAOLogicV1.sol#369-372)
+VerbsDAOLogicV1.queueOrRevertInternal(address,uint256,string,bytes,uint256) (src/governance/VerbsDAOLogicV1.sol#362-374) has external calls inside a loop: timelock.queueTransaction(target,value,signature,data,eta) (src/governance/VerbsDAOLogicV1.sol#373)
+VerbsDAOLogicV1.execute(uint256) (src/governance/VerbsDAOLogicV1.sol#380-397) has external calls inside a loop: timelock.executeTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (src/governance/VerbsDAOLogicV1.sol#388-394)
+VerbsDAOLogicV1.cancel(uint256) (src/governance/VerbsDAOLogicV1.sol#429-453) has external calls inside a loop: timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (src/governance/VerbsDAOLogicV1.sol#443-449)
+VerbsDAOLogicV1.veto(uint256) (src/governance/VerbsDAOLogicV1.sol#459-486) has external calls inside a loop: timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (src/governance/VerbsDAOLogicV1.sol#476-482)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+INFO:Detectors:
+Reentrancy in AuctionHouse._createAuction() (src/AuctionHouse.sol#309-330):
+	External calls:
+	- verbs.mint() (src/AuctionHouse.sol#313-329)
+	State variables written after the call(s):
+	- auction = Auction(verbId,0,startTime,endTime,address(0),false) (src/AuctionHouse.sol#317-324)
+Reentrancy in VerbsToken._mintTo(address) (src/VerbsToken.sol#281-319):
+	External calls:
+	- cultureIndex.dropTopVotedPiece() (src/VerbsToken.sol#292-318)
+	State variables written after the call(s):
+	- verbId = _currentVerbId ++ (src/VerbsToken.sol#294)
+	- newPiece.pieceId = artPiece.pieceId (src/VerbsToken.sol#298)
+	- newPiece.metadata = artPiece.metadata (src/VerbsToken.sol#299)
+	- newPiece.isDropped = artPiece.isDropped (src/VerbsToken.sol#300)
+	- newPiece.sponsor = artPiece.sponsor (src/VerbsToken.sol#301)
+	- newPiece.totalERC20Supply = artPiece.totalERC20Supply (src/VerbsToken.sol#302)
+	- newPiece.quorumVotes = artPiece.quorumVotes (src/VerbsToken.sol#303)
+	- newPiece.totalVotesSupply = artPiece.totalVotesSupply (src/VerbsToken.sol#304)
+	- newPiece.creators.push(artPiece.creators[i]) (src/VerbsToken.sol#307)
+Reentrancy in ERC20TokenEmitter.buyToken(address[],uint256[],IERC20TokenEmitter.ProtocolRewardAddresses) (src/ERC20TokenEmitter.sol#152-230):
+	External calls:
+	- msgValueRemaining = _handleRewardsAndGetValueToSend(msg.value,protocolRewardsRecipients.builder,protocolRewardsRecipients.purchaseReferral,protocolRewardsRecipients.deployer) (src/ERC20TokenEmitter.sol#165-170)
+		- protocolRewards.depositRewards{value: totalReward}(builderReferral,settings.builderReferralReward,purchaseReferral,settings.purchaseReferralReward,deployer,settings.deployerReward,revolutionRewardRecipient,settings.revolutionReward) (node_modules/@collectivexyz/protocol-rewards/src/abstract/RewardSplits.sol#80-89)
+	State variables written after the call(s):
+	- emittedTokenWad += totalTokensForBuyers (src/ERC20TokenEmitter.sol#187)
+	- emittedTokenWad += totalTokensForCreators (src/ERC20TokenEmitter.sol#188)
+Reentrancy in CultureIndex.createPiece(ICultureIndex.ArtPieceMetadata,ICultureIndex.CreatorBps[]) (src/CultureIndex.sol#209-248):
+	External calls:
+	- maxHeap.insert(pieceId,0) (src/CultureIndex.sol#221)
+	State variables written after the call(s):
+	- newPiece.pieceId = pieceId (src/CultureIndex.sol#225)
+	- newPiece.totalVotesSupply = _calculateVoteWeight(erc20VotingToken.totalSupply(),erc721VotingToken.totalSupply()) (src/CultureIndex.sol#226-229)
+	- newPiece.totalERC20Supply = erc20VotingToken.totalSupply() (src/CultureIndex.sol#230)
+	- newPiece.metadata = metadata (src/CultureIndex.sol#231)
+	- newPiece.sponsor = msg.sender (src/CultureIndex.sol#232)
+	- newPiece.creationBlock = block.number (src/CultureIndex.sol#233)
+	- newPiece.quorumVotes = (quorumVotesBPS * newPiece.totalVotesSupply) / 10_000 (src/CultureIndex.sol#234)
+	- newPiece.creators.push(creatorArray[i]) (src/CultureIndex.sol#237)
+Reentrancy in RevolutionBuilder.deploy(address,address,IRevolutionBuilder.ERC721TokenParams,IRevolutionBuilder.AuctionParams,IRevolutionBuilder.GovParams,IRevolutionBuilder.CultureIndexParams,IRevolutionBuilder.ERC20TokenParams,IRevolutionBuilder.ERC20TokenEmitterParams) (src/builder/RevolutionBuilder.sol#139-253):
+	External calls:
+	- erc721Token = address(new ERC1967Proxy(erc721TokenImpl,)) (src/builder/RevolutionBuilder.sol#152)
+	- daoAddressesByToken[erc721Token] = DAOAddresses(address(new ERC1967Proxy(descriptorImpl,)),address(new ERC1967Proxy(auctionImpl,)),address(new ERC1967Proxy(executorImpl,)),address(new ERC1967Proxy(daoImpl,)),address(new ERC1967Proxy(erc20TokenEmitterImpl,)),address(new ERC1967Proxy(cultureIndexImpl,)),address(new ERC1967Proxy(erc20TokenImpl,)),erc721Token,address(new ERC1967Proxy(maxHeapImpl,))) (src/builder/RevolutionBuilder.sol#167-177)
+	State variables written after the call(s):
+	- daoAddressesByToken[erc721Token] = DAOAddresses(address(new ERC1967Proxy(descriptorImpl,)),address(new ERC1967Proxy(auctionImpl,)),address(new ERC1967Proxy(executorImpl,)),address(new ERC1967Proxy(daoImpl,)),address(new ERC1967Proxy(erc20TokenEmitterImpl,)),address(new ERC1967Proxy(cultureIndexImpl,)),address(new ERC1967Proxy(erc20TokenImpl,)),erc721Token,address(new ERC1967Proxy(maxHeapImpl,))) (src/builder/RevolutionBuilder.sol#167-177)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+INFO:Detectors:
+Reentrancy in VerbsDAOLogicV1._refundGas(uint256) (src/governance/VerbsDAOLogicV1.sol#1083-1096):
+	External calls:
+	- (refundSent) = tx.origin.call{value: refundAmount}() (src/governance/VerbsDAOLogicV1.sol#1093)
+	Event emitted after the call(s):
+	- RefundableVote(tx.origin,refundAmount,refundSent) (src/governance/VerbsDAOLogicV1.sol#1094)
+Reentrancy in VerbsDAOLogicV1._withdraw() (src/governance/VerbsDAOLogicV1.sol#868-879):
+	External calls:
+	- (sent) = msg.sender.call{value: amount}() (src/governance/VerbsDAOLogicV1.sol#874)
+	Event emitted after the call(s):
+	- Withdraw(amount,sent) (src/governance/VerbsDAOLogicV1.sol#876)
+Reentrancy in VerbsDAOLogicV1.cancel(uint256) (src/governance/VerbsDAOLogicV1.sol#429-453):
+	External calls:
+	- timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (src/governance/VerbsDAOLogicV1.sol#443-449)
+	Event emitted after the call(s):
+	- ProposalCanceled(proposalId) (src/governance/VerbsDAOLogicV1.sol#452)
+Reentrancy in CultureIndex.createPiece(ICultureIndex.ArtPieceMetadata,ICultureIndex.CreatorBps[]) (src/CultureIndex.sol#209-248):
+	External calls:
+	- maxHeap.insert(pieceId,0) (src/CultureIndex.sol#221)
+	Event emitted after the call(s):
+	- PieceCreated(pieceId,msg.sender,metadata,newPiece.quorumVotes,newPiece.totalVotesSupply) (src/CultureIndex.sol#240)
+	- PieceCreatorAdded(pieceId,creatorArray[i_scope_0].creator,msg.sender,creatorArray[i_scope_0].bps) (src/CultureIndex.sol#244)
+Reentrancy in RevolutionBuilder.deploy(address,address,IRevolutionBuilder.ERC721TokenParams,IRevolutionBuilder.AuctionParams,IRevolutionBuilder.GovParams,IRevolutionBuilder.CultureIndexParams,IRevolutionBuilder.ERC20TokenParams,IRevolutionBuilder.ERC20TokenEmitterParams) (src/builder/RevolutionBuilder.sol#139-253):
+	External calls:
+	- erc721Token = address(new ERC1967Proxy(erc721TokenImpl,)) (src/builder/RevolutionBuilder.sol#152)
+	- daoAddressesByToken[erc721Token] = DAOAddresses(address(new ERC1967Proxy(descriptorImpl,)),address(new ERC1967Proxy(auctionImpl,)),address(new ERC1967Proxy(executorImpl,)),address(new ERC1967Proxy(daoImpl,)),address(new ERC1967Proxy(erc20TokenEmitterImpl,)),address(new ERC1967Proxy(cultureIndexImpl,)),address(new ERC1967Proxy(erc20TokenImpl,)),erc721Token,address(new ERC1967Proxy(maxHeapImpl,))) (src/builder/RevolutionBuilder.sol#167-177)
+	- IMaxHeap(daoAddressesByToken[erc721Token].maxHeap).initialize(daoAddressesByToken[erc721Token].dao,daoAddressesByToken[erc721Token].cultureIndex) (src/builder/RevolutionBuilder.sol#180-183)
+	- IVerbsToken(erc721Token).initialize(daoAddressesByToken[erc721Token].auction,daoAddressesByToken[erc721Token].descriptor,daoAddressesByToken[erc721Token].dao,daoAddressesByToken[erc721Token].cultureIndex,_erc721TokenParams) (src/builder/RevolutionBuilder.sol#185-191)
+	- IDescriptor(daoAddressesByToken[erc721Token].descriptor).initialize(daoAddressesByToken[erc721Token].dao,_erc721TokenParams.tokenNamePrefix) (src/builder/RevolutionBuilder.sol#193-196)
+	- ICultureIndex(daoAddressesByToken[erc721Token].cultureIndex).initialize(daoAddressesByToken[erc721Token].erc20Token,daoAddressesByToken[erc721Token].erc721Token,daoAddressesByToken[erc721Token].dao,daoAddressesByToken[erc721Token].erc721Token,_cultureIndexParams,daoAddressesByToken[erc721Token].maxHeap) (src/builder/RevolutionBuilder.sol#198-205)
+	- IAuctionHouse(daoAddressesByToken[erc721Token].auction).initialize(daoAddressesByToken[erc721Token].erc721Token,daoAddressesByToken[erc721Token].erc20TokenEmitter,daoAddressesByToken[erc721Token].dao,_auctionParams,_weth) (src/builder/RevolutionBuilder.sol#207-213)
+	- INontransferableERC20Votes(daoAddressesByToken[erc721Token].erc20Token).initialize(daoAddressesByToken[erc721Token].erc20TokenEmitter,_erc20TokenParams) (src/builder/RevolutionBuilder.sol#215-218)
+	- IERC20TokenEmitter(daoAddressesByToken[erc721Token].erc20TokenEmitter).initialize(daoAddressesByToken[erc721Token].erc20Token,daoAddressesByToken[erc721Token].dao,daoAddressesByToken[erc721Token].dao,vrgdac,_erc20TokenEmitterParams.creatorsAddress) (src/builder/RevolutionBuilder.sol#220-226)
+	- IDAOExecutor(daoAddressesByToken[erc721Token].executor).initialize(daoAddressesByToken[erc721Token].dao,_govParams.timelockDelay) (src/builder/RevolutionBuilder.sol#228-231)
+	- IVerbsDAO(daoAddressesByToken[erc721Token].dao).initialize(daoAddressesByToken[erc721Token].executor,daoAddressesByToken[erc721Token].erc721Token,daoAddressesByToken[erc721Token].erc20Token,_govParams) (src/builder/RevolutionBuilder.sol#233-238)
+	Event emitted after the call(s):
+	- DAODeployed(daoAddressesByToken[erc721Token].erc721Token,daoAddressesByToken[erc721Token].descriptor,daoAddressesByToken[erc721Token].auction,daoAddressesByToken[erc721Token].executor,daoAddressesByToken[erc721Token].dao,daoAddressesByToken[erc721Token].erc20TokenEmitter,daoAddressesByToken[erc721Token].cultureIndex,daoAddressesByToken[erc721Token].erc20Token,daoAddressesByToken[erc721Token].maxHeap) (src/builder/RevolutionBuilder.sol#240-250)
+Reentrancy in VerbsDAOLogicV1.execute(uint256) (src/governance/VerbsDAOLogicV1.sol#380-397):
+	External calls:
+	- timelock.executeTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (src/governance/VerbsDAOLogicV1.sol#388-394)
+	Event emitted after the call(s):
+	- ProposalExecuted(proposalId) (src/governance/VerbsDAOLogicV1.sol#396)
+Reentrancy in DAOExecutor.executeTransaction(address,uint256,string,bytes,uint256) (src/governance/DAOExecutor.sol#170-201):
+	External calls:
+	- (success,returnData) = target.call{value: value}(callData) (src/governance/DAOExecutor.sol#195)
+	Event emitted after the call(s):
+	- ExecuteTransaction(txHash,target,value,signature,data,eta) (src/governance/DAOExecutor.sol#198)
+Reentrancy in VerbsDAOLogicV1.queue(uint256) (src/governance/VerbsDAOLogicV1.sol#342-360):
+	External calls:
+	- queueOrRevertInternal(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],eta) (src/governance/VerbsDAOLogicV1.sol#350-356)
+		- timelock.queueTransaction(target,value,signature,data,eta) (src/governance/VerbsDAOLogicV1.sol#373)
+	Event emitted after the call(s):
+	- ProposalQueued(proposalId,eta) (src/governance/VerbsDAOLogicV1.sol#359)
+Reentrancy in VerbsDAOLogicV1.veto(uint256) (src/governance/VerbsDAOLogicV1.sol#459-486):
+	External calls:
+	- timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (src/governance/VerbsDAOLogicV1.sol#476-482)
+	Event emitted after the call(s):
+	- ProposalVetoed(proposalId) (src/governance/VerbsDAOLogicV1.sol#485)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+RevolutionProtocolRewards.withdrawWithSig(address,address,uint256,uint256,uint8,bytes32,bytes32) (node_modules/@collectivexyz/protocol-rewards/src/RevolutionProtocolRewards.sol#180-218) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > deadline (node_modules/@collectivexyz/protocol-rewards/src/RevolutionProtocolRewards.sol#189)
+AuctionHouse._safeTransferETHWithFallback(address,uint256) (src/AuctionHouse.sol#419-443) uses timestamp for comparisons
+	Dangerous comparisons:
+	- address(this).balance < _amount (src/AuctionHouse.sol#421)
+CultureIndex._verifyVoteSignature(address,uint256[],uint256,uint8,bytes32,bytes32) (src/CultureIndex.sol#419-444) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(deadline >= block.timestamp,Signature expired) (src/CultureIndex.sol#427)
+VotesUpgradeable.delegateBySig(address,uint256,uint256,uint8,bytes32,bytes32) (src/base/VotesUpgradeable.sol#180-199) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > expiry (src/base/VotesUpgradeable.sol#188)
+DAOExecutor.queueTransaction(address,uint256,string,bytes,uint256) (src/governance/DAOExecutor.sol#135-153) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(eta >= getBlockTimestamp() + delay,DAOExecutor::queueTransaction: Estimated execution block must satisfy delay.) (src/governance/DAOExecutor.sol#143-146)
+DAOExecutor.executeTransaction(address,uint256,string,bytes,uint256) (src/governance/DAOExecutor.sol#170-201) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(getBlockTimestamp() >= eta,DAOExecutor::executeTransaction: Transaction hasn't surpassed time lock.) (src/governance/DAOExecutor.sol#181)
+	- require(bool,string)(getBlockTimestamp() <= eta + GRACE_PERIOD,DAOExecutor::executeTransaction: Transaction is stale.) (src/governance/DAOExecutor.sol#182)
+VerbsDAOLogicV1.queueOrRevertInternal(address,uint256,string,bytes,uint256) (src/governance/VerbsDAOLogicV1.sol#362-374) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! timelock.queuedTransactions(keccak256(bytes)(abi.encode(target,value,signature,data,eta))),VerbsDAO::queueOrRevertInternal: identical proposal action already queued at eta) (src/governance/VerbsDAOLogicV1.sol#369-372)
+VerbsDAOLogicV1.state(uint256) (src/governance/VerbsDAOLogicV1.sol#527-549) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= proposal.eta + timelock.GRACE_PERIOD() (src/governance/VerbsDAOLogicV1.sol#544)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Detectors:
+VerbsDAOLogicV1.castVoteInternal(address,uint256,uint8) (src/governance/VerbsDAOLogicV1.sol#665-688) compares to a boolean constant:
+	-require(bool,string)(receipt.hasVoted == false,VerbsDAO::castVoteInternal: voter already voted) (src/governance/VerbsDAOLogicV1.sol#670)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+INFO:Detectors:
+ERC20Upgradeable._approve(address,address,uint256) (src/base/erc20/ERC20Upgradeable.sol#284-286) is never used and should be removed
+ERC20Upgradeable._approve(address,address,uint256,bool) (src/base/erc20/ERC20Upgradeable.sol#305-317) is never used and should be removed
+ERC20Upgradeable._burn(address,uint256) (src/base/erc20/ERC20Upgradeable.sol#262-267) is never used and should be removed
+ERC20Upgradeable._mint(address,uint256) (src/base/erc20/ERC20Upgradeable.sol#247-252) is never used and should be removed
+ERC20Upgradeable._spendAllowance(address,address,uint256) (src/base/erc20/ERC20Upgradeable.sol#327-337) is never used and should be removed
+ERC20Upgradeable._transfer(address,address,uint256) (src/base/erc20/ERC20Upgradeable.sol#191-199) is never used and should be removed
+ERC20VotesUpgradeable.__ERC20Votes_init() (src/base/erc20/ERC20VotesUpgradeable.sol#30) is never used and should be removed
+ERC20VotesUpgradeable.__ERC20Votes_init_unchained() (src/base/erc20/ERC20VotesUpgradeable.sol#32) is never used and should be removed
+ERC721CheckpointableUpgradeable.__ERC721Votes_init() (src/base/ERC721CheckpointableUpgradeable.sol#29) is never used and should be removed
+ERC721CheckpointableUpgradeable.__ERC721Votes_init_unchained() (src/base/ERC721CheckpointableUpgradeable.sol#31) is never used and should be removed
+ERC721CheckpointableUpgradeable._increaseBalance(address,uint128) (src/base/ERC721CheckpointableUpgradeable.sol#74-77) is never used and should be removed
+ERC721EnumerableUpgradeable.__ERC721Enumerable_init() (src/base/ERC721EnumerableUpgradeable.sol#49) is never used and should be removed
+ERC721EnumerableUpgradeable.__ERC721Enumerable_init_unchained() (src/base/ERC721EnumerableUpgradeable.sol#51) is never used and should be removed
+ERC721EnumerableUpgradeable._increaseBalance(address,uint128) (src/base/ERC721EnumerableUpgradeable.sol#192-197) is never used and should be removed
+ERC721Upgradeable._safeMint(address,uint256) (src/base/ERC721Upgradeable.sol#336-338) is never used and should be removed
+ERC721Upgradeable._safeMint(address,uint256,bytes) (src/base/ERC721Upgradeable.sol#344-347) is never used and should be removed
+ERC721Upgradeable._safeTransfer(address,address,uint256) (src/base/ERC721Upgradeable.sol#409-411) is never used and should be removed
+ERC721Upgradeable._safeTransfer(address,address,uint256,bytes) (src/base/ERC721Upgradeable.sol#417-420) is never used and should be removed
+ERC721Upgradeable._transfer(address,address,uint256) (src/base/ERC721Upgradeable.sol#378-388) is never used and should be removed
+NontransferableERC20Votes._approve(address,address,uint256) (src/NontransferableERC20Votes.sol#141-143) is never used and should be removed
+NontransferableERC20Votes._approve(address,address,uint256,bool) (src/NontransferableERC20Votes.sol#148-150) is never used and should be removed
+NontransferableERC20Votes._spendAllowance(address,address,uint256) (src/NontransferableERC20Votes.sol#155-157) is never used and should be removed
+NontransferableERC20Votes._transfer(address,address,uint256) (src/NontransferableERC20Votes.sol#101-103) is never used and should be removed
+VotesUpgradeable.__Votes_init() (src/base/VotesUpgradeable.sol#81) is never used and should be removed
+VotesUpgradeable.__Votes_init_unchained() (src/base/VotesUpgradeable.sol#83) is never used and should be removed
+VotesUpgradeable._add(uint208,uint208) (src/base/VotesUpgradeable.sol#282-284) is never used and should be removed
+VotesUpgradeable._getTotalSupply() (src/base/VotesUpgradeable.sol#154-157) is never used and should be removed
+VotesUpgradeable._subtract(uint208,uint208) (src/base/VotesUpgradeable.sol#286-288) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code
+INFO:Detectors:
+NontransferableERC20Votes (src/NontransferableERC20Votes.sol#29-158) should inherit from INontransferableERC20Votes (src/interfaces/INontransferableERC20Votes.sol#6-11)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-inheritance
+INFO:Detectors:
+Variable VerbsDAOLogicV1.MAX_QUORUM_VOTES_BPS_UPPER_BOUND (src/governance/VerbsDAOLogicV1.sol#109) is too similar to VerbsDAOLogicV1.MIN_QUORUM_VOTES_BPS_UPPER_BOUND (src/governance/VerbsDAOLogicV1.sol#106)
+Variable VerbsDAOLogicV1.MAX_PROPOSAL_THRESHOLD_BPS (src/governance/VerbsDAOLogicV1.sol#88) is too similar to VerbsDAOLogicV1.MIN_PROPOSAL_THRESHOLD_BPS (src/governance/VerbsDAOLogicV1.sol#85)
+Variable VerbsDAOLogicV1.MIN_QUORUM_VOTES_BPS_LOWER_BOUND (src/governance/VerbsDAOLogicV1.sol#103) is too similar to VerbsDAOLogicV1.MIN_QUORUM_VOTES_BPS_UPPER_BOUND (src/governance/VerbsDAOLogicV1.sol#106)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#variable-names-too-similar
+INFO:Detectors:
+RewardSplits.slitherConstructorConstantVariables() (../protocol-rewards/src/abstract/RewardSplits.sol#14-93) uses literals with too many digits:
+	- minPurchaseAmount = 100000000000 (../protocol-rewards/src/abstract/RewardSplits.sol#23)
+ERC20TokenEmitter.slitherConstructorConstantVariables() (src/ERC20TokenEmitter.sol#17-314) uses literals with too many digits:
+	- minPurchaseAmount = 100000000000 (node_modules/@collectivexyz/protocol-rewards/src/abstract/RewardSplits.sol#23)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+INFO:Detectors:
+Descriptor.COPYRIGHT_CC0_1_0_UNIVERSAL_LICENSE (src/Descriptor.sol#57) is never used in Descriptor (src/Descriptor.sol#31-190)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable
+INFO:Detectors:
+VerbsDAOProxyStorage.implementation (src/governance/VerbsDAOInterfaces.sol#135) should be constant 
+VerbsDAOStorageV1.quorumVotesBPS (src/governance/VerbsDAOInterfaces.sol#158) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+INFO:Slither:. analyzed (211 contracts with 80 detectors), 114 result(s) found
