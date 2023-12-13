@@ -43,6 +43,8 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 
 # Developer guide
 
+Note: the `packages/revolution` contracts take quite a long time to compile. Working on improving this (ideas welcome).
+
 ## Setup
 
 ```
