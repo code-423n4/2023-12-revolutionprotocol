@@ -9,7 +9,7 @@
   "scripts": {
     "build:sizes": "forge build --sizes",
     "dev": "FOUNDRY_PROFILE=dev forge test --watch -vvv",
-    "test": "forge test -vvv",
+    "test": "FOUNDRY_PROFILE=dev forge test -vvv",
     "build:contracts": "forge build",
     "prettier:check": "prettier --check 'src/**/*.sol' 'test/**/*.sol'",
     "prettier": "prettier --write 'src/**/*.sol' 'test/**/*.sol'",
