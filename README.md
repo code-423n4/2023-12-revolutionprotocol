@@ -43,7 +43,7 @@ The ultimate goal of Revolution is fair ownership distribution over a community 
 
 # Developer guide
 
-Note: the `packages/revolution` contracts take quite a long time to compile. Working on improving this (ideas welcome).
+Note: the `packages/revolution` contracts take a long time to compile unless you use the `FOUNDRY_PROFILE=dev` prefix.
 
 ## Setup
 
@@ -104,13 +104,13 @@ Gas optimizations around the CultureIndex `createPiece` and `vote` functionality
 #### Revolution contracts
 
 ```
-cd packages/revolution && slither src --solc-remaps "ds-test/=node_modules/ds-test/src/,forge-std/=node_modules/forge-std/src/,@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable,solmate=node_modules/solmate/src,@collectivexyz/protocol-rewards/src/=node_modules/@collectivexyz/protocol-rewards/src/" --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol" --config-file="../../.github/config/slither.config.json"
+cd packages/revolution && slither src --checklist --show-ignored-findings --filter-paths "@openzeppelin|ERC721|Votes.sol|VotesUpgradeable.sol|ERC20Upgradeable.sol" --config-file="../../.github/config/slither.config.json"
 ```
 
 #### Protocol rewards
 
 ```
-cd packages/protocol-rewards && slither src --solc-remaps "ds-test/=../../node_modules/ds-test/src/,forge-std/=../../node_modules/forge-std/src/,@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/,@openzeppelin/contracts-upgradeable/=../../node_modules/@openzeppelin/contracts-upgradeable,solmate=../../node_modules/solmate/src" --checklist --show-ignored-findings --filter-paths "@openzeppelin"
+cd packages/protocol-rewards && slither src --checklist --show-ignored-findings --filter-paths "@openzeppelin"
 ```
 
 # revolution overview
