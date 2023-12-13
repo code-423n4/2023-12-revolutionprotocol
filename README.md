@@ -35,7 +35,7 @@ If you create the VRGDA with shoddy parameters you can get bad outputs and error
 
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury.
 
-![image](https://github-production-user-asset-6210df.s3.amazonaws.com/47150934/289708304-15350e9a-5c22-439a-91d5-496e40d742db.png?raw=true)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/noun.png)
 
 Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule.
 
