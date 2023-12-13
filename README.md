@@ -340,7 +340,7 @@ Then - we can get the cost of a specific number of tokens (`XtoY` in [VRGDAC.sol
 
 We can then solve for `x_bought` using a handy python [solver](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/script/solve.py) to find `YtoX`, allowing us to pass in an amount of ether and receive an amount of tokens to sell.
 
-![image](https://github-production-user-asset-6210df.s3.amazonaws.com/47150934/289710021-a9f3e05d-855f-44f8-80e4-860e6de3e0ec.png)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgdac-graph.png)
 
 
 The green line is the pricing function p(x) for a linear VRGDA. The red line is the integral of p(x), and the purple line signifies the amount of ERC20 tokens you'd receive given a payment in ether (YtoX). The relevant functions and integrals for the VRGDAC are available here: https://www.desmos.com/calculator/im67z1tate.
