@@ -389,7 +389,7 @@ USDC, and the [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-
 
 ## Blockchains
 
-Ethereum
+Ethereum (targeting Base and Optimism L2s)
 
 ## Trusted roles
 
