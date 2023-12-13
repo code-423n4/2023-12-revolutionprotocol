@@ -159,7 +159,7 @@ The contract has a function called **dropTopVotedPiece**, only callable by the o
 
 [**AuctionHouse.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/AuctionHouse.sol) is a fork of the [NounsAuctionHouse](https://github.com/nounsDAO/nouns-monorepo/blob/master/packages/nouns-contracts/contracts/NounsAuctionHouse.sol) contract, that mints **VerbsToken**s. Additionally, the **AuctionHouse** splits auction proceeds (the winning bid) with the creator(s) of the art piece that is minted.
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/fc57ff33-aac0-40e7-888e-e8117db7989f?raw=true)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrb-auction.png?raw=true)
 
 ### Creator payment
 
@@ -193,7 +193,7 @@ A fixed percentage of the value sent to the **buyToken** function is paid to the
 
 The ERC20TokenEmitter utilizes a VRGDA to emit ERC20 tokens at a predictable rate. You can read more about VRGDA's [here](https://www.paradigm.xyz/2022/08/vrgda), and view the implementation for selling NFTs [here](https://github.com/transmissions11/VRGDAs). Basically, a VRGDA contract dynamically adjusts the price of a token to adhere to a specific issuance schedule. If the emission is ahead of schedule, the price increases exponentially. If it is behind schedule, the price of each token decreases by some constant decay rate.
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/32366746-7f71-43f9-a6de-57b3a9092d72?raw=true)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgda.png?raw=true)
 
 You can read more about the implementation on [Paradigm's site](https://www.paradigm.xyz/2022/08/vrgda). Additional information located in the Additional Context section of the README.
 
@@ -334,7 +334,7 @@ The Token Emitter utilizes a continuous VRGDA ([VRGDAC.sol](https://github.com/c
 
 In order to get the amount of tokens to emit given a payment of ether (`YtoX` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)), we first take the integral of the linear VRGDA pricing function [p(x)](https://www.paradigm.xyz/2022/08/vrgda).
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/3bbeebaa-2f59-477e-b755-148116a17918?raw=true)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgda-c-integral.png?raw=true)
 
 Then - we can get the cost of a specific number of tokens (`XtoY` in [VRGDAC.sol](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/libs/VRGDAC.sol)) by doing `p_integral(x_start+x_bought) - p_integral(x_start)` where `x_start` is the current supply of the ERC20 and `x_bought` is the amount of tokens you wish to purchase.
 
