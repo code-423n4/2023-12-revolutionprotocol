@@ -145,7 +145,7 @@ The ERC20 tokens the creator receives is calculated by the [ERC20TokenEmitter](h
 
 [**CultureIndex.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of an ERC721 or ERC20 can vote weighted by their balance on any given art piece.
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/assets/47150934/653df685-7e13-44ee-b208-11ac82b85da2?raw=true)
+![image](https://github-production-user-asset-6210df.s3.amazonaws.com/47150934/289709805-653df685-7e13-44ee-b208-11ac82b85da2.png)
 
 The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol), a heap datastructure that enables efficient lookups of the highest voted art piece.
 
