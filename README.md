@@ -35,7 +35,7 @@ If you create the VRGDA with shoddy parameters you can get bad outputs and error
 
 Revolution is a set of contracts that improve on [Nouns DAO](https://github.com/nounsDAO/nouns-monorepo). Nouns is a generative avatar collective that auctions off one ERC721, every day, forever. 100% of the proceeds of each auction (the winning bid) go into a shared treasury, and owning an NFT gets you 1 vote over the treasury.
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/noun.png)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/noun.png?raw=true)
 
 Compared to Nouns, Revolution seeks to make governance token ownership more accessible to creators and builders, and balance the scales between culture and capital while committing to a constant governance inflation schedule.
 
@@ -145,7 +145,7 @@ The ERC20 tokens the creator receives is calculated by the [ERC20TokenEmitter](h
 
 [**CultureIndex.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/CultureIndex.sol) is a directory of uploaded art pieces that anyone can add media to. Owners of an ERC721 or ERC20 can vote weighted by their balance on any given art piece.
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/culture-index.png?raw=true)
 
 The art piece votes data is stored in [**MaxHeap.sol**](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/MaxHeap.sol), a heap datastructure that enables efficient lookups of the highest voted art piece.
 
@@ -340,7 +340,7 @@ Then - we can get the cost of a specific number of tokens (`XtoY` in [VRGDAC.sol
 
 We can then solve for `x_bought` using a handy python [solver](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/script/solve.py) to find `YtoX`, allowing us to pass in an amount of ether and receive an amount of tokens to sell.
 
-![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgdac-graph.png)
+![image](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/readme-img/vrgdac-graph.png?raw=true)
 
 
 The green line is the pricing function p(x) for a linear VRGDA. The red line is the integral of p(x), and the purple line signifies the amount of ERC20 tokens you'd receive given a payment in ether (YtoX). The relevant functions and integrals for the VRGDAC are available here: https://www.desmos.com/calculator/im67z1tate.
