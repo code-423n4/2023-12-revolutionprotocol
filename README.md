@@ -381,7 +381,7 @@ The system is further complicated by the creator payments on both the AuctionHou
 
 ### ERC20
 
-USDC, and the [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/NontransferableERC20Votes.sol)
+the [NontransferableERC20Votes](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/packages/revolution/src/NontransferableERC20Votes.sol)
 
 ### ERC721
 
