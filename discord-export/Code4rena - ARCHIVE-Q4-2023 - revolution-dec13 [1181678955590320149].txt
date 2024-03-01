@@ -1,0 +1,1652 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q4-2023 / revolution-dec13
+==============================================================
+
+[12/08/2023 17:32] kartoonjoy (pinned)
+👋 Hello and welcome to the audit channel for the $36,500 USDC **Revolution Protocol** audit!
+
+📆 Audit opens 12/13/2023 20:00 (20:00 UTC) and runs through 12/21/2023 20:00 (20:00 UTC) (8 days).
+
+Please give a warm welcome to the Collective team, particularly @rocketman ▀▄▀, @Woj, who will be available for questions either here in the channel or via DM in the PT, EST, (GMT+1) timezone(s).
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/audits/2023-12-revolution-protocol#top
+
+{Embed}
+https://code4rena.com/audits/2023-12-revolution-protocol
+Revolution Protocol  | Code4rena
+$36,500 USDC
+13 December 8:00 PM—21 December 8:00 PM
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/c4-og-banner-B72EA.png
+
+{Reactions}
+🫡 (3) 👍 
+
+[12/08/2023 17:32] kartoonjoy
+Pinned a message.
+
+
+[12/08/2023 18:13] rocketman_21
+gm legends let's do this thing
+
+{Reactions}
+🫡 (23) 
+
+[12/08/2023 18:15] whoismxuse
+https://tenor.com/view/chad-roblox-slender-nick-slendernick-gif-19910284
+
+{Embed}
+https://tenor.com/view/chad-roblox-slender-nick-slendernick-gif-19910284
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/chad-roblox-EA7AB.png
+
+
+[12/09/2023 14:59] tx.origin
+any docs we can check out to prepare a little already?
+
+{Reactions}
+👍🏾 
+
+[12/10/2023 00:20] unclejeff4407
+less goo
+
+
+[12/10/2023 00:55] kris_renzo
+Did you find anything?
+
+
+[12/10/2023 00:56] kris_renzo
+@rocketman ▀▄▀ @Woj
+
+
+[12/10/2023 15:11] rocketman_21
+yea will send over in ~2h finalizing some things @Kris_RenZo
+
+
+[12/10/2023 17:30] jvorex
+@Tendency @Trebien | C4
+
+
+[12/10/2023 17:54] whoismxuse
+https://tenor.com/view/waiting-gif-21631787
+
+{Embed}
+https://tenor.com/view/waiting-gif-21631787
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/waiting-837D1.png
+
+
+[12/10/2023 18:39] rocketman_21
+my fault been told to hold off by the managers of the audit - will have it posted tomorrow
+
+{Reactions}
+🤝 (3) 
+
+[12/10/2023 18:39] rocketman_21
+cc @mxuse
+
+
+[12/10/2023 18:40] whoismxuse
+all good brotha
+
+
+[12/11/2023 19:23] rocketman_21
+we making vrbs out here
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/vrb-auction-47444.png
+
+
+[12/11/2023 19:23] rocketman_21
+will share readme in 30
+
+
+[12/11/2023 19:39] rocketman_21
+:lightning:  DOCS LIVE  :lightning: 
+
+https://github.com/collectivexyz/revolution/blob/main/docs.md
+
+CC @Soul22 @mxuse
+
+{Embed}
+https://github.com/collectivexyz/revolution/blob/main/docs.md
+revolution/docs.md at main · collectivexyz/revolution
+bootstrap energy on the Internet. Contribute to collectivexyz/revolution development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/revolution-B15FC
+
+{Reactions}
+evillaughlaugh (6) 🐐 10_10 
+
+[12/11/2023 22:29] unclejeff4407
+most links are dead here
+
+
+[12/12/2023 03:47] 0xhacksmithh
+Contracts link are inactive as contest is not live yet
+
+
+[12/12/2023 07:16] unclejeff4407
+i see my bad
+
+
+[12/12/2023 18:21] rocketman_21
+fyi ignore https://github.com/collectivexyz/collective-governance-v1 - we aren't using those contracts at all (if you're trying to find some alpha before we start tomorrow 🙂 )
+
+{Reactions}
+10_10 
+
+[12/13/2023 13:10] unclejeff4407
+guys this is kind of my first contest, can anyone recommend smtg related to this contest to learn before it starts?
+
+
+[12/13/2023 13:14] tx.origin
+check out nouns dao and their previous audits I guess
+
+
+[12/13/2023 13:22] kartoonjoy
+FYI.....In general, you won't have documentation provided here prior to an audit's launch.
+
+{Reactions}
+👍 
+
+[12/13/2023 14:18] unclejeff4407
+I'm aware, I was talking about more general concepts such as DAOs
+
+
+[12/13/2023 14:18] unclejeff4407
+thanks
+
+
+[12/13/2023 17:56] mcryptohack
+Hi! This is also my first contest! Good luck!
+
+{Reactions}
+❤️ (3) hi5 (2) 
+
+[12/13/2023 18:32] unclejeff4407
+@MCHack u too mate!
+
+
+[12/13/2023 18:35] kartoonjoy
+📢 Please hold all communication in this channel from this point, please.
+
+{Reactions}
+🫡 (3) 
+
+[12/13/2023 20:02] C4 (pinned)
+**Automated Findings / Publicly Known Issues**
+
+Reminder: all [Automated Findings / Publicly Known Issues](https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/README.md#automated-findings) are out of scope and ineligible for awards.
+
+{Embed}
+https://github.com/code-423n4/2023-12-revolutionprotocol/blob/main/README.md
+2023-12-revolutionprotocol/README.md at main · code-423n4/2023-12-r...
+Contribute to code-423n4/2023-12-revolutionprotocol development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/264f725f-3111-4fdd-a4ad-e273f27cc367-99798
+
+
+[12/13/2023 20:03] kartoonjoy
+Pinned a message.
+
+
+[12/13/2023 21:07] todorowwww
+Hey guys, my first contest here as well. Maybe a stupid question, but anyone knows how to fix this?
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-7DA57.png
+
+
+[12/13/2023 21:08] 0xelvisc0stell0_
+use solc-select to match the correct version with the project (0.8.22)
+
+
+[12/13/2023 21:23] kartoonjoy
+the files in the scope table (and scope.txt file) are in scope
+
+
+[12/13/2023 21:51] rocketman_21
+Hey folks - I'll be around to answer any questions alongside @Woj 🤝 :noun_heart:
+
+{Reactions}
+🫡 (6) 
+
+[12/14/2023 00:31] sovaslava9
+Hello. What is type of media - other?
+
+
+[12/14/2023 05:08] taner2344
+Hello guys, How do we update dependencies  according to  Foundry ? foundry install doesn’t work  ...
+
+{Reactions}
+👍 
+
+[12/14/2023 05:28] zhaojie
+npm install？
+
+
+[12/14/2023 05:46] benrai
+When running ` turbo run test` I get the following issue:
+`@collectivexyz/protocol-rewards:test: Encountered invalid solc version in src/RevolutionProtocolRewards.sol: No solc version exists that matches the version requirement: =0.8.22`
+Even if I change the solc verion to 0.8.22 the error does not go awai. How can I fix this?
+
+
+[12/14/2023 05:47] benrai
+Check the contest page under `Setup`:
+https://code4rena.com/audits/2023-12-revolution-protocol#top
+
+The repo uses an different setup apparently
+
+{Embed}
+https://code4rena.com/audits/2023-12-revolution-protocol
+Revolution Protocol  | Code4rena
+$36,500 USDC
+13 December 8:00 PM—21 December 8:00 PM
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/c4-og-banner-3FAD0.png
+
+
+[12/14/2023 05:47] rocketman_21
+you want to run pnpm install
+
+{Reactions}
+👍 
+
+[12/14/2023 05:47] rocketman_21
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/Screenshot_2023-12-13_at_11.47.41_PM-132C0.png
+
+
+[12/14/2023 05:47] 0xciphky
+try FoundryUp
+
+
+[12/14/2023 05:56] benrai
+Worked, thanks
+
+{Reactions}
+🔥 
+
+[12/14/2023 06:16] 0xshaheen
+looks like this contest got started before the official start time, is this allowed in c4?
+
+
+[12/14/2023 06:16] 0xshaheen
+i see
+
+
+[12/14/2023 06:57] Message Wolf#0225 (pinned)
+**Automated Findings / Publicly Known Issues**
+
+Automated findings output for the audit can be found [here](https://gist.github.com/code423n4/172fdd8342981c9d0f72aa70a88c3f9d).
+
+*Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
+
+
+[12/14/2023 09:52] mahdirostami
+Maybe help you guys
+https://www.codecademy.com/article/max-heaps-conceptual
+
+{Embed}
+https://www.codecademy.com/article/max-heaps-conceptual
+Max-Heaps | Codecademy
+Learn about the max-heap data structure.
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/logo-codecademy-social-3F0C6.png
+
+{Reactions}
+chefskiss (8) 👍 (2) 
+
+[12/14/2023 14:08] rocketman_21
+I was told by the admins that I'd be able to share docs as long as I didn't share code
+
+"Hi @rocketman ▀▄▀ you can share your public docs to the wardens ahead of the audit. It will only be an issue if it exposes the contracts being used in this weeks audit. "
+
+{Reactions}
+👍 
+
+[12/14/2023 14:10] unclejeff4407
+there were just giving us some docs to check before it started
+
+{Reactions}
+👍 
+
+[12/14/2023 14:17] rocketman_21
+I'll be coming back every ~1-2h to answer questions here / in threads :noun_barchart:
+
+
+[12/14/2023 14:53] thebrittfactor
+Pinned a message.
+
+
+[12/14/2023 16:49] plamablocks
+Hello! I have a question about this invariant mentioned in the docs `The ERC20TokenEmitter and AuctionHouse should always pay creators (ETH or ERC20) in accordance with the creatorRateBps and entropyRateBps calculation.`.
+
+Does this mean that when an auction is being settled the `creatorRateBps` and `entropyRateBps` values should be the same between paying creators in eth/weth and any additional `NontransferableERC20Vote` tokens?
+
+
+[12/14/2023 18:14] albertwh1te
+Same question here.
+
+
+[12/14/2023 18:48] rocketman_21
+Common questions
+
+**Creators address on TokenEmitter**
+the `creatorsAddress` stored in the `ERC20TokenEmitter` is for all intents and purposes different than the creator(s) of art pieces that get paid as part of the auction. 
+
+the `creatorsAddress` could be the founding team, or a different splits contract that pays a bunch of builders etc.
+
+**Art piece lifecycle**
+art pieces stay forever, once an art piece meets the quorum assuming it has the most # of votes it can be dropped
+
+**Quorum on CultureIndex**
+the quorum on `CultureIndex` is meant to be a protection against flash attacks / voter apathy
+
+so eg: someone couldn't submit a piece that was the most voted, but didn't actually have broad community support right before the next auction
+
+**Always pay creators invariant (The ERC20TokenEmitter and AuctionHouse should always pay creators)**
+That invariant put another way just means that the creator(s) of the art piece and the creatorsAddress in the TokenEmitter should always be paid with:
+
+every auction settlement the creator(s) receive ETH + ERC20 in accordance with creatorRateBps and entropyRateBps
+every buyToken call on the TokenEmitter - creatorsAddress receives ETH + ERC20 in accordance with creatorRateBps and entropyRateBps
+
+basically that there's no way to settle an auction and not pay creators according to the rateBps values, or buyToken and do the same
+
+{Reactions}
+👍🏾 thankyou 
+
+[12/14/2023 18:51] tumelo_crypto
+Make sure foundry is installed first that sorted out my problem
+
+
+[12/14/2023 18:52] rocketman_21
+Can you expand what you mean here? That invariant put another way just means that the creator(s) of the art piece and the `creatorsAddress` in the TokenEmitter should always be paid with:
+
+1. every auction settlement the creator(s) receive ETH + ERC20 in accordance with `creatorRateBps` and `entropyRateBps`
+2. every buyToken call on the TokenEmitter - `creatorsAddress` receives ETH + ERC20 in accordance with `creatorRateBps` and `entropyRateBps`
+
+basically that there's no way to settle an auction and not pay creators *according to the rateBps* values, or `buyToken` and do the same
+
+
+[12/14/2023 19:00] plamablocks
+Thanks for the response! 
+
+My questions specifically is does this invariant mean that the `creatorRateBps` and `entropyRateBps` values used when calculating the amount of ETH to send to creator(s)/buyer(s) should be the same values used by the TokenEmitter to send ERC-20 to creator(s)/buyer(s)?
+
+
+[12/14/2023 19:43] rocketman_21
+no - the rates can be different between the `tokenemitter` and the `auctionhouse`
+
+{Reactions}
+👍🏾 
+
+[12/14/2023 20:12] benrai
+Thanks for the info
+
+
+[12/15/2023 06:03] 0xshaheen
+Understandable sir. Thanks for clarifying
+
+
+[12/15/2023 09:56] 0x11singh99
+every time I run single test after slight change in code it takes 1 min.+ to compile  how can I reduce this time ?
+
+
+[12/15/2023 10:35] tumelo_crypto
+They did say that it would take a while for everything to compile everytime you run tests but I think they also listed a faster way on the audit page
+
+{Reactions}
+👍 
+
+[12/15/2023 10:43] anthripoque
+Hi, you just have to run 'FOUNDRY_PROFILE=dev' before compiling 
+
+==> FOUNDRY_PROFILE=dev forge test --match-test "yourTest"
+
+
+[12/15/2023 10:49] th3l1ghtd3m0n
+`FOUNDRY_PROFILE` is a variable that you set to `dev` if you want compile `revolution` packages more quickly.
+If you use bash in your terminal, just run `export FOUNDRY_PROFILE=dev` and you can run forge tests normally.
+
+
+[12/15/2023 12:49] 0x11singh99
+On whcih chains it will be deployed on ?
+
+
+[12/15/2023 12:57] albertwh1te
+Base And OP
+
+
+[12/15/2023 12:58] albertwh1te
+Ethereum (targeting Base and Optimism L2s)
+
+
+[12/15/2023 13:26] 0x11singh99
+Ethereum Mainnet excluded or included ? I got confused by   `Ethereum (targeting Base and Optimism L2s)`
+
+
+[12/15/2023 13:31] rocketman_21
+Mainnet included
+
+{Reactions}
+👍 
+
+[12/15/2023 15:05] albertwh1te
+DMed you
+
+
+[12/15/2023 15:58] passteque
+where VRGDAC.sol come from? I have another version online : https://github.com/transmissions11/VRGDAs/blob/master/src/VRGDA.sol
+
+{Embed}
+https://github.com/transmissions11/VRGDAs/blob/master/src/VRGDA.sol
+VRGDAs/src/VRGDA.sol at master · transmissions11/VRGDAs
+Variable Rate Gradual Dutch Auctions. Contribute to transmissions11/VRGDAs development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/VRGDAs-5D107
+
+
+[12/15/2023 16:10] rocketman_21
+came from t11s too https://twitter.com/transmissions11/status/1726676403066925164
+
+
+[12/15/2023 18:16] kris_renzo
+I aimed to stay silent and concentrate on the audit throughout this contest, but I can't help but say how brilliantly structured your test suite is. It has been one of the best learning moments for me in my (short) time as a security researcher. My only hope is for an extension of the contest duration to allow one to fully explore the codebase.
+
+{Reactions}
+noun_heart (2) 
+
+[12/15/2023 18:47] rocketman_21
+gpt4 helped a ton @Kris_RenZo 🫡
+
+{Reactions}
+🫡 (4) 
+
+[12/15/2023 19:30] kris_renzo
+Gtp4 understands Foundry?
+
+
+[12/16/2023 09:03] plamkata
+How are past votes weights calculated. The weights are calculated here, but I cannot seem to find the actual math in the scope files
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-2BF6E.png
+
+
+[12/16/2023 10:22] takarez
+this seem to be getting the votes not calculating them
+
+
+[12/16/2023 14:27] zigtur
+So according to the scope section, `RevolutionProtocolRewards` is not in scope even if `RewardSplits` interact with it. Can you confirm @rocketman ▀▄▀?
+
+
+[12/16/2023 14:43] ac000123_97055_23095
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-B08CC.png
+
+
+[12/16/2023 14:43] ac000123_97055_23095
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-77FB3.png
+
+
+[12/16/2023 14:44] ac000123_97055_23095
+FOUNDRY_PROFILE variable couldn't be referred by revolution package. How can I do?
+
+
+[12/16/2023 15:18] shaka0x
+you can just edit `foundry.toml`
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-0CB9D.png
+
+
+[12/16/2023 17:26] rocketman_21
+Check out how the OpenZeppelin does their Votes class
+
+
+[12/16/2023 17:58] tumelo_crypto
+What will the reserve price be?
+
+
+[12/16/2023 19:06] aodkgkrogrogoovg2o3btivr
+Do you care about the vulnerabilities related with privileged functions ? like a privileged address can break something in a specific scenario
+
+
+[12/16/2023 19:56] osmanozdemir1
+According to the guidelines, these should be submitted as centralization risks in analysis report if the privileged address you mentioned is acting maliciously in your specific scenario
+
+{Reactions}
+❤️ 
+
+[12/17/2023 02:27] cu5t0mpeo
+@rocketman ▀▄▀ pls check dm
+
+
+[12/17/2023 07:31] mcryptohack
+Hi! You solve problem with this error?
+
+
+[12/17/2023 10:23] yotov721
+what is the `AuctionHouse::timeBuffer` value expected to be ? days/hours/minutes ?
+
+
+[12/17/2023 11:17] ihtishamsudo
+minutes according to tests cases
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-00A23.png
+
+{Reactions}
+👍 (3) 
+
+[12/17/2023 11:21] valkataaa
+Cultureindex
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-A5A4B.png
+
+
+[12/17/2023 14:12] oceansky
+@rocketman ▀▄▀ check dm thanks
+
+
+[12/17/2023 18:25] gladita
+Hey does the art that is sold through this protocol have to be in nouns style? I think my wife might be interested in participating (I'm also auditing but I really love what this protocol is doing)
+
+{Reactions}
+noun_heart (5) 
+
+[12/17/2023 19:41] rocketman_21
+not as much, we assume the DAO / parent contract (eg: auction is parent of token) is safe/good
+
+
+[12/17/2023 19:41] rocketman_21
+usually like 30s afaik that is what nouns.wtf uses
+
+
+[12/17/2023 19:42] rocketman_21
+for https://vrbs.wtf specifically it does, but we are going to be launching with a ton of communities so if she's into a specific type of art and wants to have impact in her community / start a revolution hit us up
+
+
+[12/18/2023 04:11] cu5t0mpeo
+Can’t view the finding in this competition?
+
+
+[12/18/2023 09:47] cu5t0mpeo
+sry, my message was sent to the wrong place
+
+
+[12/18/2023 13:34] danhapo
+@rocketman ▀▄▀  I created private thread for you.
+
+
+[12/18/2023 14:14] babs2833
+is `VRGDAC.sol` made from scratch? (Besides using `SignedWadMath.sol`?)
+
+
+[12/18/2023 14:28] rocketman_21
+made it based on work from t11s here: https://github.com/transmissions11/VRGDAs/tree/master/src
+
+and https://twitter.com/transmissions11/status/1726676403066925164
+
+
+[12/18/2023 14:31] babs2833
+ahh im totally blind, i even clicked that too before hah ty
+
+
+[12/18/2023 14:34] babs2833
+In `ERC20TokenEmitter.t.sol` we have `int256 priceDecayPercent = 1e18 / 10;`. Is this 10%?
+
+ And for example with `decayConstant = wadLn(1e18 - _priceDecayPercent);` from `VRGDAC.sol` 
+
+This is equated to `WadLn(0.9e18)` = Ln(0.9)*1e18 = -0.10536e18, or about -10.5%?
+
+
+[12/18/2023 14:38] babs2833
+*For others I see this in `AuctionHouse.t.sol` which explains more
+
+```
+        // //20% - how much the price decays per unit of time with no sales 
+        // int256 priceDecayPercent = 1e18 / 10; = 0.1e18
+        // // 1e11 or 0.0000001 is 2 cents per token even at $200k eth price
+        // int256 tokenTargetPrice = 1e11;
+```
+
+I'll have to dig a bit more
+
+
+[12/18/2023 16:01] rocketman_21
+yes that is 10% - I'd check out the OG VRGDA implementation as well
+
+
+[12/18/2023 16:02] rocketman_21
+decay constant is just ln(1-decayPercent) afaik, scaled by 1e18
+
+on the desmos it shows up a bunch
+
+https://www.desmos.com/calculator/im67z1tate
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/Screenshot_2023-12-18_at_11.02.17_AM-FEE8D.png
+
+{Embed}
+https://www.desmos.com/calculator/im67z1tate
+Continuous GDA
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/im67z1tate-22C36.png
+
+{Reactions}
+👍 
+
+[12/18/2023 17:20] passteque
+which address should I prank to pause the Auction contract? 
+Test call unpause which is onlyOwner but whenever I try to pause the contract it says i'm unautorized
+
+
+[12/18/2023 17:30] aamirusmani1552
+try `contract.owner()`
+
+
+[12/18/2023 18:32] osmanozdemir1
+You can also check the RevolutionBuilder contract. That one is out of scope but you can see who is initialized as the owner
+
+
+[12/18/2023 19:38] danhapo
+@rocketman ▀▄▀ Please check my old private thread again. I updated it with my new question.
+
+
+[12/19/2023 00:20] mrpotatomagic
+@rocketman ▀▄▀ dmed you
+
+
+[12/19/2023 00:54] racdev
+Ho @ac000123 Did you resolve this issue? I am getting same error.
+
+
+[12/19/2023 02:54] 0x11singh99
+@rocketman ▀▄▀  ` ERC20VotesUpgradeable public erc20VotingToken`  and
+` ERC721CheckpointableUpgradeable public erc721VotingToken;`  in `CultureIndex` are of the same token  contracts ie. of  `NonTransefrrableERC20Votes` and `VerbsToken` Or they are just deffernet ?
+
+
+[12/19/2023 04:39] babs2833
+If anyone had trouble running traditional foundry test with files never compiling, you can do:
+
+`pnpm run test --match-path ./test/auction/TestFileHereForExample.t.sol` Once inside `packages/revolution` for example.
+
+Trying traditional `forge test ...` just made everything compile forever for some reason, but this other way worked.
+
+
+[12/19/2023 07:35] duc6888
+it's not working on the turbo run test, how can I fix that?
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-FC4A1.png
+
+
+[12/19/2023 07:38] duc6888
+I've already installed npm from the previous step, install pnpm on wsl, and until this command, it raised that error. This is my very first contest
+
+
+[12/19/2023 10:07] kingx0001
+@here please dont click the link above‼️
+
+
+[12/19/2023 10:07] baice8614
+reported Spam
+
+{Reactions}
+thankyou 
+
+[12/19/2023 10:24] 0xtendency
+Please report this spam [here](https://discord.com/channels/810916927919620096/1098286515806810183) next time, also please tag me, thanks 🫡
+
+
+[12/19/2023 10:43] 0xg03.14
+@rocketman ▀▄▀ @Woj  check private thread
+
+
+[12/19/2023 11:18] ihtishamsudo
+had same error fixed by updating npm and node version to latest
+
+
+[12/19/2023 11:56] baice8614
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-28AAE.png
+
+
+[12/19/2023 13:05] thetechnofeak
+who is the coordinator here ?
+
+
+[12/19/2023 13:05] thetechnofeak
+i have a question
+
+
+[12/19/2023 13:05] thetechnofeak
+creator_share = (msg.value * creatorRateBps) / 10_000, on what thigns does the creatorRateBps depends and how it is calculated?
+
+
+[12/19/2023 13:09] nmirchev8
+Is it possible for a user to withdraw a vote?
+
+
+[12/19/2023 13:39] rocketman_21
+FYI 
+
+the `creatorsAddress` will likely be a contract built by the DAO, updated by the DAO, that quadratically funds the top builders in the community
+
+
+[12/19/2023 13:41] rocketman_21
+they're effectively the same, `VerbsToken` inherits `ERC721CheckpointableUpgradeable` and `NonTransefrrableERC20Votes` inherits `ERC20VotesUpgradeable`
+
+{Reactions}
+👍 
+
+[12/19/2023 13:42] rocketman_21
+have you run `pnpm install` yet?
+
+
+[12/19/2023 13:42] rocketman_21
+it is a value set by the owner/DAO
+
+
+[12/19/2023 13:42] rocketman_21
+do you mean remove a vote? no
+
+{Reactions}
+✅ 
+
+[12/19/2023 13:45] thetechnofeak
+ohh , so what does it depend on ??
+
+
+[12/19/2023 13:46] thetechnofeak
+any calculation sort of something that is in scope for this
+
+
+[12/19/2023 13:57] mrpotatomagic
+@rocketman ▀▄▀ dmed you
+
+
+[12/19/2023 14:01] nmirchev8
+Why do we have name and description on `culture index`? Is it supposed to support multiple indexes in a same time, or?
+
+
+[12/19/2023 14:29] rocketman_21
+the DAO can set it to any BPS value <= 10_000, what do you mean what does it depend on?
+
+
+[12/19/2023 14:29] rocketman_21
+the idea is the community might create a new index with new rules/name down the line
+
+{Reactions}
+✅ 
+
+[12/19/2023 14:46] rocketman_21
+FYI - we're aiming to sell ~1000 ERC20 tokens per day, meaning the `erc721VotingTokenWeight` in the cultureIndex will likely be set to 1000
+
+
+[12/19/2023 15:13] mrpotatomagic
+@rocketman ▀▄▀ when is this case true?
+https://github.com/code-423n4/2023-12-revolutionprotocol/blob/d42cc62b873a1b2b44f57310f9d4bbfdd875e8d6/packages/revolution/src/AuctionHouse.sol#L348
+
+
+[12/19/2023 15:41] 0x11singh99
+@rocketman ▀▄▀   dmed you
+
+
+[12/19/2023 15:52] lsaudit
+Hey, I have a trouble understending this line: https://github.com/code-423n4/2023-12-revolutionprotocol/blob/d42cc62b873a1b2b44f57310f9d4bbfdd875e8d6/packages/revolution/src/CultureIndex.sol#L313  . Does it mean, that when at the Piece creation block my voting power was X, and now, my voting power is Y - voting now will vote with X power?
+
+
+[12/19/2023 15:52] tychaios.
+Yes, it's snapshotted
+
+
+[12/19/2023 15:53] lsaudit
+So I can only vote with the power I had when Piece was created? It does not matter what power I have now?
+
+
+[12/19/2023 15:53] tychaios.
+Yeah
+
+
+[12/19/2023 15:53] lsaudit
+Thank you!
+
+{Reactions}
+10_10 (2) 
+
+[12/19/2023 16:10] funkornaut
+How is the first Auction started?
+
+
+[12/19/2023 17:47] nmirchev8
+If a `reservePrice` is changed during an Auction 🤔
+
+{Reactions}
+👀 👍 (2) 
+
+[12/19/2023 18:14] jacobmartin0406
+@rocketman ▀▄▀ create thread
+
+
+[12/19/2023 18:14] jacobmartin0406
+please check if you have some time
+
+
+[12/19/2023 19:05] rocketman_21
+the owner calls unpause
+
+{Reactions}
+✅ 
+
+[12/19/2023 19:06] funkornaut
+Who is the owner of the Auction contract?
+
+
+[12/19/2023 19:32] 0xsorrynotsorry
+Hi @rocketman ▀▄▀ , DM'ed.
+
+
+[12/19/2023 20:29] rocketman_21
+please check the code and docs to answer these questions - but the DAO - check out RevolutionBuilder file
+
+{Reactions}
+👍🏻 
+
+[12/19/2023 23:41] 0xthec0der
+@rocketman ▀▄▀ 
+Kindly sent you a DM
+
+
+[12/20/2023 00:34] 00xsev
+@rocketman ▀▄▀ check dm, please
+
+
+[12/20/2023 04:08] 0xg03.14
+@rocketman ▀▄▀ check private thread once
+
+
+[12/20/2023 06:03] coffiasd
+@rocketman ▀▄▀  send a dm
+
+
+[12/20/2023 07:31] zhaojie
+Why is it that every time I run forge test, Installing solc version 0.8.21 comes up and is slow? 
+Solidity compiler 0.8.21 seems to be redownloaded every time
+
+
+[12/20/2023 08:18] dimitar.mitev
+Can we execute turbo run test only on one specific test?
+
+
+[12/20/2023 11:31] nmirchev8
+`AuctionHouse` params as `entropyRateBps` and `entropyRateBps` are going to be set by governance, or single actor?
+
+
+[12/20/2023 11:52] plamkata
+one should be ``creatorRateBps``*
+
+{Reactions}
+✅ 
+
+[12/20/2023 11:53] nmirchev8
+Right, thanks!
+
+{Reactions}
+🫡 
+
+[12/20/2023 13:56] babs2833
+https://discord.com/channels/810916927919620096/1181678955590320149/1186528238156120084
+
+Ex for specific `pnpm run test --match-path ./test/auction/XYZ.t.sol --match-test testXYZ`
+
+{Reactions}
+👍 (2) 
+
+[12/20/2023 14:26] benrai
+@rocketman ▀▄▀, please check the private thread I opened for you 🙂
+
+
+[12/20/2023 14:42] mrudenko
+@rocketman ▀▄▀ please, check DM
+
+
+[12/20/2023 16:18] mrpotatomagic
+@rocketman ▀▄▀ pls check private thread
+
+
+[12/20/2023 16:20] valkataaa
+@rocketman ▀▄▀ check dms
+
+
+[12/20/2023 16:48] 0xg03.14
+How much time left
+
+
+[12/20/2023 16:48] 0xg03.14
+...?
+
+
+[12/20/2023 16:58] valkataaa
+1 day and 3 hours
+
+
+[12/20/2023 18:56] rocketman_21
+not sure - sorry about this. any ideas on how to alleviate this issue?
+
+
+[12/20/2023 18:56] rocketman_21
+i'd just use forge test directly for this
+
+{Reactions}
+👍 
+
+[12/20/2023 18:57] rocketman_21
+these rates will be set on initialization and then by the DAO / governance
+
+{Reactions}
+❤️ 
+
+[12/20/2023 18:57] rocketman_21
+have responded to all threads / dms, let me know if I missed you, checking threads more often than DMs
+
+
+[12/20/2023 19:12] kris_renzo
+Is anyone else unable to access the Code4rena website? 
+
+I've been all day, it won't open on any of my devices
+
+
+[12/20/2023 19:38] rocketman_21
+i'm able to access - do you need any info?
+
+
+[12/20/2023 20:08] lsaudit
+https://github.com/code-423n4/2023-12-revolutionprotocol/blob/d42cc62b873a1b2b44f57310f9d4bbfdd875e8d6/packages/revolution/src/CultureIndex.sol#L311  what's the point of this double negation? Shoudn't it be just `require((votes[pieceId][voter].voterAddress == address(0))`  ?
+
+
+[12/20/2023 20:23] rocketman_21
+yea it should, not sure why i have that double negation
+
+{Reactions}
+thankyou 
+
+[12/20/2023 20:35] babs2833
+does someone have the specific owner addy that I can use in testing? I tried a few logs, REVOLUTION_DAO, dao, etc. but foundry not liking any of them
+
+
+[12/20/2023 20:36] rocketman_21
+the address(dao) should work as the owner of all the functions to start, what test suite are you running though? check out the test suite setup to see if an alternative owner was set, and also check `RevolutionBuilder.t.sol`
+
+
+[12/20/2023 20:36] babs2833
+ahh beautiful that was it, `vm.startPrank(address(dao));` did the trick thanks
+
+
+[12/20/2023 20:50] dimulski
+in foundry.toml set via_ir to false
+
+
+[12/20/2023 21:15] kris_renzo
+Nothing specific to this contest
+
+
+[12/20/2023 23:57] zhaojie
+I found that setting up solc_version in foundry.toml will do, thank you.
+
+
+[12/21/2023 01:44] rocketman_21
+last day! will be around more often to help you all with questions!
+
+
+[12/21/2023 02:29] 0xdemonnn
+Is creatorAddress trusted?
+
+
+[12/21/2023 06:05] 0xg03.14
+How many submissions till now..?
+
+
+[12/21/2023 06:11] zhaojie
+It's not over yet. No one knows.
+
+
+[12/21/2023 08:50] benrai
+At least 2 😉
+
+{Reactions}
+🔥 (6) 
+
+[12/21/2023 08:50] 0xg03.14
+thousand..?
+
+{Reactions}
+🤣 (2) 
+
+[12/21/2023 11:46] pronobis4
+le
+
+
+[12/21/2023 13:08] mrpotatomagic
+@rocketman ▀▄▀ pls check private thread
+
+
+[12/21/2023 14:36] anjali_t
+@rocketman ▀▄▀ check private thread
+
+
+[12/21/2023 14:45] oceansky
+dmed u @rocketman ▀▄▀ tnx
+
+
+[12/21/2023 14:48] coffiasd
+Running out of time :code4rena:
+
+
+[12/21/2023 14:58] 7a4raf
+why is AuctionHouse.sol paused in the initializer?
+
+
+[12/21/2023 14:58] rocketman_21
+so the admin can manually start it when ready
+
+{Reactions}
+👍 (2) 
+
+[12/21/2023 18:09] oceansky
+Done with submission, gudluck folks! We are lucky, we are the first auditor of revolution :chefskiss:
+
+{Reactions}
+noun_heart (3) 
+
+[12/21/2023 18:10] whoismxuse
+
+
+{Stickers}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/796140656941989888-28529.json
+
+
+[12/21/2023 18:36] aamirusmani1552
+anybody knows where can i see my submitted findings?
+
+
+[12/21/2023 18:37] aamirusmani1552
+there was option in the previous UI. can't find on this one. Need to update my finding
+
+
+[12/21/2023 18:40] aamirusmani1552
+found it
+
+
+[12/21/2023 18:41] nmirchev8
+https://discord.com/channels/810916927919620096/810931711609143326/1186832855536513035
+
+{Reactions}
+👍 
+
+[12/21/2023 18:57] benrai
+I assume you found a lot of issues then? 🤔
+
+{Reactions}
+chefskiss 
+
+[12/21/2023 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺wardens The **Revolution Protocol** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the audit is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a Contest-Admin if you have questions along the way!
+
+{Reactions}
+C4Keycap 
+
+[12/21/2023 20:04] 0xhelium
+How many issues
+
+
+[12/21/2023 20:08] 0x11singh99
+Any backstage no. of issues please
+
+
+[12/21/2023 20:09] 0xstalin
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/image-E4E5F.png
+
+{Reactions}
+👍 (2) 💀 (4) 
+
+[12/21/2023 20:09] 0xstalin
+💀
+
+
+[12/21/2023 20:11] sovaslava9
+Is creator was truted? ERC20TokenEmitter.creatorsAddress
+
+
+[12/21/2023 20:33] rocketman_21
+wow is this a lot compared to normal?
+
+
+[12/21/2023 20:37] rocketman_21
+is there any way i can view the findings before triage?
+
+
+[12/21/2023 20:40] 0xthec0der
+Pretty normal considering the high participation rate troughout the last months.
+From experience, there are also many duplicates.
+
+Concerning access to the findings repo, please reach out to the C4 team.
+Usually it's handed over to the sponsor after pre-sorting, but imho it should be no problem for you to view it before.
+
+{Reactions}
+noun_heart (2) 
+
+[12/21/2023 22:33] plamkata
+@rocketman ▀▄▀ I would advice you to wait a day or two before the presort filters out the low qualities and dupes for a better overview
+
+
+[12/22/2023 05:34] 0xg03.14
+How many days until results..? Anyone..?
+
+
+[12/22/2023 07:15] nmirchev8
+Who is Contest-Admin?
+
+
+[12/22/2023 08:39] tx.origin
+could take a month
+
+
+[12/22/2023 12:40] benrai
+With the Christmas break included I guess it will take longer
+
+{Reactions}
+4739_Skeletor 
+
+[12/23/2023 15:43] rocketman_21
+ty everyone for auditing the revolution
+
+historic audit - legends all around :noun_heart: 
+
+happy holidays
+
+{Reactions}
+🔥 (18) 🎄 
+
+[12/23/2023 20:03] _killua69_
+Hello everyone. Now that the contest is over can someone please guide me on how I could have setup formal verification on this code base. I’m fairly new to auditing and I’m trying to level up by learning FV and I feel the maths in the codebase is straight forward enough for me to get started with. I tried setting it up SMT checker but I kept getting errors (mostly from the imported libraries) and it was starting to take up a lot of time.
+
+You don’t have to give away any findings or anything like that, just a list of instructions or packages I could use to setup FV for the reward distribution and Dutch auction part of codebase. 
+
+I’d really appreciate any help, Thanks🙏🏼
+
+
+[12/24/2023 03:31] babs2833
+I sent a friend request, check out halmos it seems to be picking up steam lately? I haven't used it but heard good things on twitter... https://github.com/a16z/halmos it's on my to-do list like many things 😅
+
+{Embed}
+https://github.com/a16z/halmos
+GitHub - a16z/halmos: A symbolic testing tool for EVM smart contracts
+A symbolic testing tool for EVM smart contracts. Contribute to a16z/halmos development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/halmos-EBEA7
+
+
+[12/24/2023 16:27] _killua69_
+Accepted. Thanks for replying chief
+
+
+[01/05/2024 02:52] 0xg03.14
+:4739_Skeletor: wen..?
+
+{Reactions}
+4739_Skeletor (2) 
+
+[01/05/2024 12:40] coffiasd
+take it ez:chefskiss:
+
+
+[01/05/2024 14:46] rocketman_21
+just finished my review
+
+{Reactions}
+💪 (13) 
+
+[01/07/2024 13:34] plamkata
+https://tenor.com/view/pewpewpewpew-ahmed-mohsin-%D8%A3%D8%AD%D9%85%D8%AF-%D9%85%D8%AD%D8%B3%D9%86-hedgehog-dancing-meme-gif-2754780489075620554
+
+{Embed}
+https://tenor.com/view/pewpewpewpew-ahmed-mohsin-%D8%A3%D8%AD%D9%85%D8%AF-%D9%85%D8%AD%D8%B3%D9%86-hedgehog-dancing-meme-gif-2754780489075620554
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/pewpewpewpew-ahmed-mohsin-7F0CD.png
+
+{Reactions}
+4739_Skeletor (4) 
+
+[01/09/2024 10:47] cu5t0mpeo
+when results?
+
+{Reactions}
+4739_Skeletor (12) 
+
+[01/12/2024 09:04] timenov
+Results are in profiles
+
+{Reactions}
+👍🏻 (4) 👀 (3) 
+
+[01/12/2024 10:19] _paperparachute
+🤑 🎉  Awards for **Revolution**:
+
+$2,947.97 USDC » @bart1e 
+$2,815.92 USDC » @KingNFT 
+$1,626.19 USDC » @0xDING99YA 
+$1,577.15 USDC » @MrPotatoMagic 
+$1,220.27 USDC » @zhaojie 
+$1,029.88 USDC » @ZanyBonzy 
+$974.01 USDC » @osmanozdemir1 
+$931.11 USDC » @cccz 
+$881.31 USDC » @ArmedGoose 
+$879.98 USDC » jerseyjoewalcott 
+$815.18 USDC » @rvierdiiev 
+$781.31 USDC » @hals 
+$776.52 USDC » SpicyMeatball 
+$577.42 USDC » ktg 
+$546.01 USDC » @0xG0P1 
+$509.45 USDC » @King_ 
+$453.21 USDC » @nmirchev8 
+$438.75 USDC » @Sathish9098 
+$359.25 USDC » @shaka 
+$329.01 USDC » @ICP 
+$304.35 USDC » Ward (@Natzuu, @0xpessimist) 
+$302.94 USDC » @sivanesh_808 
+$296.99 USDC » @BowTiedOriole 
+$276.12 USDC » @pep7siup 
+$257.89 USDC » @hunter_w3b 
+$238.23 USDC » 0xCiphky 
+$237.05 USDC » @ihtishamsudo 
+$228.29 USDC » DanielArmstrong 
+$227.72 USDC » @peanuts 
+$220.69 USDC » @SovaSlava 
+$207.58 USDC » @Aamir 
+$205.53 USDC » @00xSEV 
+$202.63 USDC » @KupiaSec 
+$201.70 USDC » @0x11singh99 
+$201.70 USDC » @0xAnah 
+$201.70 USDC » @c3phas 
+$180.85 USDC » @Tricko 
+$170.73 USDC » mojito_auditor 
+$158.12 USDC » 0xmystery 
+$154.91 USDC » @ast3ros 
+$148.46 USDC » @Ryonen 
+$148.46 USDC » wintermute 
+$140.83 USDC » @_eperezok 
+$125.61 USDC » @imare 
+$118.25 USDC » @Ocean_Sky 
+$116.91 USDC » @XDZIBECX 
+$113.04 USDC » @deth 
+$102.52 USDC » BARW (@BenRai, @albertwhite) 
+$83.85 USDC » @deepplus 
+$80.96 USDC » @Brenzee 
+$73.85 USDC » @AS 
+$68.51 USDC » @fnanni 
+$68.12 USDC » @0xAsen 
+$67.06 USDC » Pechenite (@bozho, @radev_sw) 
+$54.99 USDC » Inference 
+$54.99 USDC » @wangxx2026 
+$51.14 USDC » @dimulski 
+$51.14 USDC » @haxatron 
+$51.14 USDC » rouhsamad 
+$49.71 USDC » @ke1caM 
+$46.48 USDC » @Raihan 
+$45.99 USDC » @ayden 
+$45.36 USDC » @twcctop 
+$44.03 USDC » @0xlemon 
+$44.03 USDC » @0xluckhu 
+$44.03 USDC » Abdessam
+$44.03 USDC » hakymulla 
+$44.03 USDC » n1punp 
+$44.03 USDC » @plasmablocks
+
+{Reactions}
+✅ (7) ❤️ (7) 
+
+[01/12/2024 10:19] _paperparachute
+$42.48 USDC » Udsen 
+$40.21 USDC » @ABAIKUNANBAEV 
+$39.72 USDC » @mahdiRostami 
+$32.99 USDC » @kaveyjoe 
+$28.64 USDC » @jnforja 
+$28.20 USDC » @IllIllI 
+$26.50 USDC » Aymen0909
+$25.63 USDC » @Albahaca 
+$25.63 USDC » @unique 
+$25.63 USDC » @none 
+$25.16 USDC » SadeeqXmosh (@0xMosh, 0xsadeeq)
+$25.16 USDC » @adeolu 
+$25.16 USDC » @passteque 
+$21.24 USDC » @Timenov 
+$20.84 USDC » @JCK 
+$20.84 USDC » @SAQ 
+$20.84 USDC » @Donko Tonev 
+$20.84 USDC » @lsaudit 
+$20.84 USDC » @naman1778 
+$14.58 USDC » roland 
+$8.70 USDC » @Topmark 
+$8.70 USDC » @leegh 
+$8.56 USDC » @ptsanev 
+$7.36 USDC » @0xhitman 
+$7.36 USDC » @cheatc0d3 
+$7.36 USDC » @0xBitcoin 
+$7.36 USDC » @spacelord47 
+$7.22 USDC » @0xHelium 
+$7.22 USDC » @AkshaySrivastav 
+$7.22 USDC » @pontifex 
+$7.22 USDC » @y4y 
+$2.67 USDC » @0x175 
+$2.67 USDC » @McToady 
+$2.67 USDC » @TermoHash 
+$1.34 USDC » @Franklin 
+$1.34 USDC » @PNS 
+$1.34 USDC » @alexbabits 
+$1.34 USDC » jeff 
+$1.34 USDC » marqymarq10 
+$1.34 USDC » @neo.crao 
+$1.34 USDC » @zraxx 
+
+🏁 Findings summary
+--------------------------------------—
+High risk findings: 4 unique (34 total)
+Med risk findings: 14 unique (160 total)
+Gas reports: 17 (Best: MrPotatoMagic)
+QA reports: 34 (Best: 0xmystery)
+Advanced analysis reports: 13 (Best: ICP)
+
+Awards will be distributed on Polygon within the next week. Congratulations all!  💸 💸 💸
+
+*Note: If you participated in this audit and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+code4rena (2) 
+
+[01/12/2024 10:25] zhaojie
+My first top5🤣
+
+{Reactions}
+dance_vibe (13) ✅ (5) 
+
+[01/12/2024 10:28] zhaojie
+it's my tenth contest got reward.
+
+
+[01/12/2024 10:38] _killua69_
+Wow, my 2nd contest payout. I’m glad to be making good progress 🙇🏼
+
+{Reactions}
+👍🏻 dance_vibe ✅ 
+
+[01/12/2024 10:52] oceansky
+So i guess i can apply already for backstage?
+
+
+[01/12/2024 10:53] 0x11singh99
+me too✨
+
+{Reactions}
+10_10 (3) 
+
+[01/12/2024 11:18] stormreckson
+Congratulations guys! 🎉
+
+{Reactions}
+thankyou 
+
+[01/12/2024 11:29] 0x11singh99
+@PaperParachute | C4  for backstage do I need to create help desk request or I can ask here  ?
+
+
+[01/12/2024 11:36] _paperparachute
+Help desk please!
+
+
+[01/12/2024 11:36] 0x11singh99
+🫡
+
+
+[01/12/2024 12:29] rocketman_21
+What’s backstage?
+Congrats everyone !!
+
+{Reactions}
+chefskiss (5) 
+
+[01/12/2024 12:32] _paperparachute
+Once wardens have established themselves in the community and met certain criteria they get backstage access to the repo so they can discuss their issues during Post-Judging QA 🙂
+
+
+[01/12/2024 13:01] donkicha
+Congratulations to everyone!
+
+
+[01/12/2024 13:03] 0x11singh99
+Thanks to judges and sponsors for fast judging👏
+
+
+[01/12/2024 13:29] rouhsamad
+Nice, Congrats to everyone🫡
+
+
+[01/12/2024 13:46] the_first_elder
+Wow
+
+
+[01/12/2024 13:55] 0xhelium
+Did you push the results into profiles ? Can't find anything
+
+
+[01/12/2024 14:06] _paperparachute
+I did, it can take an hour or 2
+
+
+[01/12/2024 14:06] _paperparachute
+I'll check again in a little while
+
+
+[01/12/2024 15:12] _paperparachute
+Looks like it is showing now 🙂
+
+{Reactions}
+👍 
+
+[01/12/2024 15:23] 0xg03.14
+can i watch the findings repo now..?
+
+
+[01/12/2024 15:25] 0x11singh99
+no you need to be backstage or wait until report is made public
+
+
+[01/12/2024 15:25] 0xg03.14
+i think one of my finding got invalidated. is there anything i can do.
+
+
+[01/12/2024 15:35] 0x11singh99
+requested🙃
+
+
+[01/12/2024 15:39] 0x11singh99
+Unfortunately No. For now but you can see c4 docs disagree with judges , after report will be made public
+
+
+[01/12/2024 15:40] 0xg03.14
+anyone with backstage help me with this
+
+
+[01/12/2024 15:40] 0xg03.14
+i just wanted to know why my issue got invalidated
+
+
+[01/12/2024 15:41] 0x11singh99
+No it is not allowed in c4 currently
+
+
+[01/12/2024 15:43] 0x11singh99
+For this you need to be certified and got your +backstage role. Then you can participate in post judging QA. Apart from this I don't think there is any way possible.
+
+{Reactions}
+🫡 
+
+[01/12/2024 15:45] 0x11singh99
+For this you can't do much since escalations ended and reward also announced
+
+
+[01/12/2024 16:54] 0xpessimist
+Managed to spot a high severity bug in my first contest! :chefskiss: 🫡  Thanks to collective team for the opportunity.
+
+{Reactions}
+🔥 (6) 
+
+[01/12/2024 19:21] cheatc0d3
+GG
+
+
+[01/17/2024 13:18] aamirusmani1552
+Have the rewards been distributed?
+
+
+[01/17/2024 21:16] alphacipher7
+@PaperParachute | C4 || @🦖 eric (ninek) | C4 sorry for tag is this reward send?
+
+
+[01/17/2024 21:18] _paperparachute
+Seems they haven't been sent just yet. There will be an announcement when they are!
+
+
+[01/17/2024 21:22] _paperparachute
+I've just noticed you aren't actually in the awarding list? Are you expecting a payment for something? I'll take this to a private thread, one moment.
+
+
+[01/17/2024 22:15] nine_k
+not yet 🙂 coming soon
+
+
+[01/19/2024 08:49] donkicha
+Have the rewards been distributed?
+
+
+[01/19/2024 09:37] 0xsorrynotsorry
+https://discord.com/channels/810916927919620096/1181678955590320149/1197303209870499980
+
+
+[01/19/2024 09:53] benrai
+Check your wallet, I already got mine
+
+{Reactions}
+👍 
+
+[01/19/2024 09:56] donkicha
+This is my first reward. When is should be distributed, in my Metamask balance?
+
+
+[01/19/2024 09:57] benrai
+The rewards are send in USDC on the Polygon network
+
+
+[01/19/2024 10:00] donkicha
+Yes, but my account balance is 0
+
+
+[01/19/2024 10:27] osmanozdemir1
+Did you import usdc token in your metamask
+
+
+[01/19/2024 10:29] osmanozdemir1
+Mm wallet won’t show your tokens if you didn’t import the token, but you can check your balance via polygonscan in that case
+
+
+[01/19/2024 10:30] donkicha
+Yes, I think it is not imported
+
+
+[01/19/2024 10:30] donkicha
+I am trying to import it, but it says me this:
+
+This token does not appear to be supported. Please check your MetaMask network.
+
+
+[01/19/2024 10:44] jvorex
+still experiencing the issue?
+
+
+[01/19/2024 10:44] donkicha
+I didn't managed to import it...
+
+
+[01/19/2024 10:45] jvorex
+so the issue persists then
+
+
+[01/19/2024 10:46] jvorex
+go to Metamask > Make sure you're on the Polygon Network > Import tokens > Paste the USDC.e contract address > Click Next
+
+
+[01/19/2024 10:46] jvorex
+This is the USDC.e address: 0x2791bca1f2de4661ed88a30c99a7a9449aa84174
+
+
+[01/19/2024 10:47] jvorex
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/Screenshot_2024-01-19_at_02.45.16-7A6D8.png
+
+
+[01/19/2024 10:47] jvorex
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/Screenshot_2024-01-19_at_02.46.47-AAD29.png
+
+
+[01/19/2024 10:48] jvorex
+your network should be
+
+{Attachments}
+Code4rena - ARCHIVE-Q4-2023 - revolution-dec13 [1181678955590320149].txt_Files/Screenshot_2024-01-19_at_02.48.15-96FD8.png
+
+
+[01/19/2024 12:06] donkicha
+Perfect!
+
+
+[01/19/2024 12:06] donkicha
+Thank you so much!
+
+{Reactions}
+hi5 
+
+[02/01/2024 19:02] plamablocks
+Any updates on when the final report will be published?
+
+{Reactions}
+👍 
+
+[02/24/2024 02:52] itsmetechjay
+ℹ️ This channel is pending archive.  As a result, any private threads will be permanently deleted on Saturday, 02 March 2024. Please make sure to grab anything you might need from those before then.
+
+
+[02/29/2024 22:35] itsmetechjay
+ℹ️ Reminder: this channel will be deleted in 24 hours.
+
+
+==============================================================
+Exported 290 message(s)
+==============================================================
